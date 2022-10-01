@@ -1,3 +1,7 @@
 .App {
+  border: 2px solid #000000;
+  border-radius: 30px;
   text-align: center;
+  padding-bottom: 15px;
+  margin: 5% 30% 0% 30%;
 }

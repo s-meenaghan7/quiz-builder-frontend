@@ -1,0 +1,9 @@
+.answer {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+/* .answer > input[type=text] {
+    width: 75%;
+} */
