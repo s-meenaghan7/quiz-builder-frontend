@@ -3,63 +3,69 @@ import './styles/AnswerSection.css';
 import './styles/QuestionSection.css';
 import './styles/Answer.css';
 import './styles/Controls.css';
-
-// todo: learn more about forms
-// todo: build the entire form here and split parts of the form into components once complete. static version first!
-// you know how you want it to look, now need to implement it.
-
-// use a table to organize the answer section?
-    // column 1 (Starting from left) > Number
-    // column 2 > Textfield for the answer
-    // column 3 > radio button for if that answer is correct for this q
+import { useState } from 'react';
+import Answer from './components/Answer';
 
 function App() {
+
+  let [numberOfAnswers, setNumberOfAnswers] = useState(2);
+  const [answers, setAnswers] = useState(Array(numberOfAnswers).fill( <Answer /> ));
+
+  const addAnswer = () => {
+    setNumberOfAnswers(numberOfAnswers + 1);
+
+    answers.push( <Answer /> );
+  }
+
+  const subtractAnswer = () => {
+    if (numberOfAnswers > 2) {
+      setNumberOfAnswers(numberOfAnswers - 1);
+
+      answers.pop();
+    }
+  }
+
   return (
     <div className='App'>
       <form>
+
         <div className='question-section'>
-          <label>Question
-            <input />
+          <label>Question: 
+            <input type='text'/>
           </label>
         </div>
 
         <div className='answer-section'>
-
-          <label className='answer'>1
-            <input />
-            <input type='radio' name='isCorrect' />
-          </label>
-
-          <label className='answer'>2
-            <input />
-            <input type='radio' name='isCorrect' />
-          </label>
-
+          {/* TODO */}
         </div>
 
-        {/* table sample, probably won't need the header */}
         <table width='100%'>
-          <tr>
-            <th>Number</th>
-            <th>Answer</th>
-            <th>Is Correct?</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td><input type='text' /></td>
-            <td><input type='radio' name='isCorrect' /></td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Answer ID</th>
+              <th>Answer</th>
+              <th>Is Correct?</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            {
+              answers.map((a, i) => 
+                <Answer key={i + 1} id={i + 1} />
+              )
+            }
+          </tbody>
 
-          <tr>
-            <td>2</td>
-            <td><input type='text' /></td>
-            <td><input type='radio' name='isCorrect' /></td>
-          </tr>
         </table>
 
         <div className='controls'>
-          <button type='button'>-</button>
-          <button type='button'>+</button>
+          <button type='button' onClick={ () => subtractAnswer() }>-</button>
+          <button type='button' onClick={ () => addAnswer() }>+</button>
+        </div>
+
+        <div className='test-controls'>
+          <button type='button' onClick={ () => console.log(numberOfAnswers) }>Number of Answers</button>
+          <button type='button' onClick={ () => console.log(answers) }>Answers List</button>
         </div>
 
       </form>
