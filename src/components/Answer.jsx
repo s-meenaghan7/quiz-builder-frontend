@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/Answer.css';
 
 export default function Answer({ id }) {
     return (
@@ -9,4 +10,3 @@ export default function Answer({ id }) {
         </tr>
     );
 }
-
