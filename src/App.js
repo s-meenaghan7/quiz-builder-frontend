@@ -1,8 +1,8 @@
 import './styles/App.css';
 import './styles/AnswerSection.css';
 import './styles/QuestionSection.css';
-import './styles/Answer.css';
-import './styles/Controls.css';
+import './styles/AnswerControls.css';
+import './styles/QuestionControls.css';
 import { useState } from 'react';
 import Answer from './components/Answer';
 
@@ -10,6 +10,7 @@ function App() {
 
   let [numberOfAnswers, setNumberOfAnswers] = useState(2);
   const [answers, setAnswers] = useState(Array(numberOfAnswers).fill( <Answer /> ));
+  const [quizData, setQuizData] = useState([1]);
 
   const addAnswer = () => {
     setNumberOfAnswers(numberOfAnswers + 1);
@@ -27,19 +28,34 @@ function App() {
 
   return (
     <div className='App'>
+
+      <div className='question-controls'>
+        <button type='button'>Previous Question</button>
+        <button type='button'>New Question</button>
+        <button type='button'>Submit Quiz</button>
+      </div>
+
       <form>
 
         <div className='question-section'>
-          <label>Question: 
+          <h3>Question: {quizData.length}</h3>
+
+          <label>
             <input type='text'/>
           </label>
         </div>
 
-        <div className='answer-section'>
-          {/* TODO */}
+        <div className='answer-controls'>
+          <button type='button' onClick={ () => subtractAnswer() }>-</button>
+          <button type='button' onClick={ () => addAnswer() }>+</button>
         </div>
 
-        <table width='100%'>
+        <div className='test-controls'>
+          <button type='button' onClick={ () => console.log(numberOfAnswers) }>Number of Answers</button>
+          <button type='button' onClick={ () => console.log(answers) }>Answers List</button>
+        </div>
+
+        <table className='answer-section' width='100%'>
           <thead>
             <tr>
               <th>Answer ID</th>
@@ -55,18 +71,7 @@ function App() {
               )
             }
           </tbody>
-
         </table>
-
-        <div className='controls'>
-          <button type='button' onClick={ () => subtractAnswer() }>-</button>
-          <button type='button' onClick={ () => addAnswer() }>+</button>
-        </div>
-
-        <div className='test-controls'>
-          <button type='button' onClick={ () => console.log(numberOfAnswers) }>Number of Answers</button>
-          <button type='button' onClick={ () => console.log(answers) }>Answers List</button>
-        </div>
 
       </form>
     </div>
