@@ -1,30 +1,16 @@
 import './styles/App.css';
 import './styles/AnswerSection.css';
 import './styles/QuestionSection.css';
-import './styles/AnswerControls.css';
 import './styles/QuestionControls.css';
 import { useState } from 'react';
 import Answer from './components/Answer';
+import AnswerControls from './components/AnswerControls';
 
 function App() {
 
   let [numberOfAnswers, setNumberOfAnswers] = useState(2);
   const [answers, setAnswers] = useState(Array(numberOfAnswers).fill( <Answer /> ));
   const [quizData, setQuizData] = useState([1]);
-
-  const addAnswer = () => {
-    setNumberOfAnswers(numberOfAnswers + 1);
-
-    answers.push( <Answer /> );
-  }
-
-  const subtractAnswer = () => {
-    if (numberOfAnswers > 2) {
-      setNumberOfAnswers(numberOfAnswers - 1);
-
-      answers.pop();
-    }
-  }
 
   return (
     <div className='App'>
@@ -45,10 +31,11 @@ function App() {
           </label>
         </div>
 
-        <div className='answer-controls'>
-          <button type='button' onClick={ () => subtractAnswer() }>-</button>
-          <button type='button' onClick={ () => addAnswer() }>+</button>
-        </div>
+        <AnswerControls 
+          answers={answers}
+          numberOfAnswers={numberOfAnswers}
+          setNumberOfAnswers={setNumberOfAnswers}
+        />
 
         <div className='test-controls'>
           <button type='button' onClick={ () => console.log(numberOfAnswers) }>Number of Answers</button>
