@@ -1,5 +1,6 @@
 import React from 'react';
 import Answer from './Answer';
+import '../styles/AnswerSection.css';
 
 export default function AnswerSection({ answers }) {
     

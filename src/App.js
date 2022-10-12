@@ -1,52 +1,79 @@
 import './styles/App.css';
-import './styles/AnswerSection.css';
-import './styles/QuestionSection.css';
-import './styles/QuestionControls.css';
 import { useState } from 'react';
 import AnswerControls from './components/AnswerControls';
 import AnswerSection from './components/AnswerSection';
+import QuestionSection from './components/QuestionSection';
+import QuestionControls from './components/QuestionControls';
 
-function App() {
+export default function App() {
 
   let [numberOfAnswers, setNumberOfAnswers] = useState(2);
+  let [quizIndex, setQuizIndex] = useState(0);
   const [answers, setAnswers] = useState(Array(numberOfAnswers).fill( {} ));
   const [quizData, setQuizData] = useState(Array(1));
 
-  const createNewQuestion = () => {
-    // if (document.querySelector('#questionField').value === "") console.log('empty');
-
-    // create the question object
-    const question = {
-      question: document.querySelector('#questionField').value,
-      options: [
-        // TODO: Answer.jsx; figuring out how to create an answer object, and those objects will be held in the answers array (state)
-      ]
+  const formIsValid = () => {
+    if (document.querySelector('#questionField').value.trim() === "") {
+      alert("Please enter a question and provide at least 2 answers.");
+      return false;
     }
 
+    let answered = false;
+    for (let answer of answers) {
 
+      if (answer.answer.trim() === "") {
+        alert("Please provide an answer in each answer field added to this question.")
+        return false;
+      }
+
+      if (answer.isCorrect === true)
+        answered = true;
+    }
+
+    if (!answered) {
+      alert("A correct answer must be indicated. Please select the correct answer to this question.");
+      return false;
+    }
+
+    return true; // valid
+  }
+
+  const createNewQuestion = () => {
+    if (!formIsValid()) {
+      return;
+    }
+
+    const question = {
+      question: document.querySelector('#questionField').value.trim(),
+      options: [
+        ...answers
+      ]
+    };
+
+    quizData[quizIndex] = question;
+
+    console.log('question added to quizData');
+
+    // Cleanup form for next question to be entered
+    while (answers.length > 2) {
+      answers.pop();
+    }
+    
+    setQuizIndex(quizIndex => quizIndex + 1);
   }
 
   return (
     <div className='App'>
       <form>
+        <QuestionControls 
+          createNewQuestion={createNewQuestion}
+          quizData={quizData}
+        />
 
-        <div className='question-controls'>
-          <button type='button'>Previous Question</button>
-          <button type='button' onClick={ () => createNewQuestion() }>New Question</button>
-          <button type='button'>Submit Quiz</button>
-        </div>
-
-        <div className='question-test-controls'>
-          <button type='button' onClick={ () => console.log(quizData) }>Get Quiz Data</button>
-        </div>
-
-        <div className='question-section'>
-          <h3>Question: {quizData.length}</h3>
-
-          <label>
-            <input name='questionField' id='questionField' type='text' required/>
-          </label>
-        </div>
+        <QuestionSection 
+          key={quizIndex + 1}
+          questionNumber={quizIndex + 1}
+        />
 
         <AnswerControls 
           answers={answers}
@@ -55,12 +82,10 @@ function App() {
         />
 
         <AnswerSection 
+          key={quizIndex}
           answers={answers}
         />
-
       </form>
     </div>
   );
 }
-
-export default App;
