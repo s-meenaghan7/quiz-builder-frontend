@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Answer from './Answer';
 import '../styles/AnswerSection.css';
 
@@ -19,7 +19,7 @@ export default function AnswerSection({ answers, quizData, quizIndex }) {
             
                 <tbody>
                     {
-                        quizData[quizIndex].options.map((a) => 
+                        answers.map((a) => 
                             <Answer 
                                 key={a.id} id={a.id}
                                 answer={a.answer}

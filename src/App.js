@@ -7,7 +7,6 @@ import QuestionControls from './components/QuestionControls';
 
 export default function App() {
 
-  let [numberOfAnswers, setNumberOfAnswers] = useState(2);
   let [quizIndex, setQuizIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [quizData, setQuizData] = useState(
@@ -22,7 +21,7 @@ export default function App() {
   );
 
   useEffect(() => {
-    setAnswers(quizData.options)
+    setAnswers(quizData[quizIndex].options);
   }, []);
 
   return (
@@ -43,7 +42,7 @@ export default function App() {
         <AnswerControls
           quizData={quizData}
           answers={answers}
-          
+          setAnswers={setAnswers}
         />
 
         <AnswerSection 
