@@ -39,9 +39,7 @@ export default function App() {
   }
 
   const createNewQuestion = () => {
-    if (!formIsValid()) {
-      return;
-    }
+    if (!formIsValid()) return;
 
     const question = {
       question: document.querySelector('#questionField').value.trim(),
@@ -59,6 +57,7 @@ export default function App() {
       answers.pop();
     }
     
+    // This also forces the QuestionSection and AnswerSection to re-mount or update.
     setQuizIndex(quizIndex => quizIndex + 1);
   }
 
@@ -68,6 +67,9 @@ export default function App() {
         <QuestionControls 
           createNewQuestion={createNewQuestion}
           quizData={quizData}
+          quizIndex={quizIndex}
+          setAnswers={setAnswers}
+          setQuizIndex={setQuizIndex}
         />
 
         <QuestionSection 

@@ -10,7 +10,7 @@ export default function Answer({ id, setAnswerData, setCorrectAnswer }) {
 
     useEffect(() => {
         setAnswerData(answer);
-    }, []);
+    }, [answer]);
 
     const changeAnswerHandler = (event) => {
         answer.answer = event.target.value;
@@ -23,7 +23,7 @@ export default function Answer({ id, setAnswerData, setCorrectAnswer }) {
     }
 
     return (
-        <tr className='answer'>
+        <tr className='answer' id={`answer${id}`}>
             <td> {id} </td>
             <td> <input type='text' name='answerField' onChange={ (e) => changeAnswerHandler(e) } required/> </td>
             <td> <input type='radio' name='isCorrect' onChange={ (e) => radioButtonHandler(e) } /> </td>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Answer from './Answer';
 import '../styles/AnswerSection.css';
 
@@ -16,6 +16,16 @@ export default function AnswerSection({ answers }) {
             answers[i].isCorrect = radios[i].checked;
         }
     }
+
+    // possibly a useEffect for answers here? maybe for setCorrectAnswer??
+    // TODO: try a useEffect that runs for dependency answers
+    // useEffect(() => {
+        // loop through answer id using for loop with i to do id = answer${i}
+
+        // set answers.answer to children[1].children[0].value
+
+        // may also need to do the radio button in this (if the answer isCorrect value is true, set children[2].children[0].checekd = true)
+    // }, [answers]);
 
     return (
         <div className='answer-section'>

@@ -3,12 +3,12 @@ import '../styles/AnswerControls.css';
 
 export default function AnswerControls({answers, numberOfAnswers, setNumberOfAnswers}) {
 
-    const addAnswer = () => {
+    const addAnswerField = () => {
         setNumberOfAnswers(numberOfAnswers + 1);
         answers.push( {} );
     }
 
-    const subtractAnswer = () => {
+    const subtractAnswerField = () => {
         if (numberOfAnswers > 2) {
             setNumberOfAnswers(numberOfAnswers - 1);
             answers.pop();
@@ -18,8 +18,8 @@ export default function AnswerControls({answers, numberOfAnswers, setNumberOfAns
     return (
         <>
             <div className='answer-controls'>
-                <button type='button' onClick={ () => subtractAnswer() }>-</button>
-                <button type='button' onClick={ () => addAnswer() }>+</button>
+                <button type='button' onClick={ () => subtractAnswerField() }>-</button>
+                <button type='button' onClick={ () => addAnswerField() }>+</button>
             </div>
 
             <div className='test-controls'>
