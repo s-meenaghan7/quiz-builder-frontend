@@ -1,5 +1,5 @@
 import './styles/App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AnswerControls from './components/AnswerControls';
 import AnswerSection from './components/AnswerSection';
 import QuestionSection from './components/QuestionSection';
@@ -9,76 +9,29 @@ export default function App() {
 
   let [numberOfAnswers, setNumberOfAnswers] = useState(2);
   let [quizIndex, setQuizIndex] = useState(0);
-  const [answers, setAnswers] = useState(Array(numberOfAnswers).fill( {} ));
+  const [answers, setAnswers] = useState([]);
   const [quizData, setQuizData] = useState(
     [{
       question: "test",
       options: [
-        {id: 1, answer: "a", isCorrect: false},
-        {id: 2, answer: "b", isCorrect: false},
+        {id: 1, answer: "test1", isCorrect: false},
+        {id: 2, answer: "test2", isCorrect: false},
         // {id: 3, answer: "b", isCorrect: false}
       ]
     }]
   );
 
-  const formIsValid = () => {
-    if (document.querySelector('#questionField').value.trim() === "") {
-      alert("Please enter a question and provide at least 2 answers.");
-      return false;
-    }
-
-    let answered = false;
-    for (let answer of answers) {
-
-      if (answer.answer.trim() === "") {
-        alert("Please provide an answer in each answer field added to this question.")
-        return false;
-      }
-
-      if (answer.isCorrect === true)
-        answered = true;
-    }
-
-    if (!answered) {
-      alert("A correct answer must be indicated. Please select the correct answer to this question.");
-      return false;
-    }
-
-    return true; // valid
-  }
-
-  const createNewQuestion = () => {
-    if (!formIsValid()) return;
-
-    const question = {
-      question: document.querySelector('#questionField').value.trim(),
-      options: [
-        ...answers
-      ]
-    };
-
-    quizData[quizIndex] = question;
-
-    console.log('question added to quizData');
-
-    // Cleanup form for next question to be entered
-    while (answers.length > 2) {
-      answers.pop();
-    }
-    
-    // This also forces the QuestionSection and AnswerSection to re-mount or update.
-    setQuizIndex(quizIndex => quizIndex + 1);
-  }
+  useEffect(() => {
+    setAnswers(quizData.options)
+  }, []);
 
   return (
     <div className='App'>
       <form>
         <QuestionControls 
-          createNewQuestion={createNewQuestion}
           quizData={quizData}
           quizIndex={quizIndex}
-          setAnswers={setAnswers}
-          setQuizIndex={setQuizIndex}
+          
         />
 
         <QuestionSection 
@@ -87,16 +40,17 @@ export default function App() {
           question={quizData[quizIndex].question}
         />
 
-        <AnswerControls 
+        <AnswerControls
+          quizData={quizData}
           answers={answers}
-          numberOfAnswers={answers.length}
-          setNumberOfAnswers={setNumberOfAnswers}
+          
         />
 
         <AnswerSection 
           key={quizIndex}
           answers={answers}
-          options={quizData[quizIndex].options}
+          quizData={quizData}
+          quizIndex={quizIndex}
         />
       </form>
     </div>
