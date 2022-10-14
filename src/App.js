@@ -10,7 +10,16 @@ export default function App() {
   let [numberOfAnswers, setNumberOfAnswers] = useState(2);
   let [quizIndex, setQuizIndex] = useState(0);
   const [answers, setAnswers] = useState(Array(numberOfAnswers).fill( {} ));
-  const [quizData, setQuizData] = useState(Array(1));
+  const [quizData, setQuizData] = useState(
+    [{
+      question: "test",
+      options: [
+        {id: 1, answer: "a", isCorrect: false},
+        {id: 2, answer: "b", isCorrect: false},
+        // {id: 3, answer: "b", isCorrect: false}
+      ]
+    }]
+  );
 
   const formIsValid = () => {
     if (document.querySelector('#questionField').value.trim() === "") {
@@ -75,6 +84,7 @@ export default function App() {
         <QuestionSection 
           key={quizIndex + 1}
           questionNumber={quizIndex + 1}
+          question={quizData[quizIndex].question}
         />
 
         <AnswerControls 
@@ -86,6 +96,7 @@ export default function App() {
         <AnswerSection 
           key={quizIndex}
           answers={answers}
+          options={quizData[quizIndex].options}
         />
       </form>
     </div>
