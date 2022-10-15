@@ -14,7 +14,7 @@ export default function App() {
       question: "test",
       options: [
         {id: 1, answer: "test1", isCorrect: false},
-        {id: 2, answer: "test2", isCorrect: false},
+        {id: 2, answer: "test2", isCorrect: false}, // data in this object is dummy data
         // {id: 3, answer: "b", isCorrect: false}
       ]
     }]
@@ -30,7 +30,6 @@ export default function App() {
         <QuestionControls 
           quizData={quizData}
           quizIndex={quizIndex}
-          
         />
 
         <QuestionSection 
@@ -40,7 +39,6 @@ export default function App() {
         />
 
         <AnswerControls
-          quizData={quizData}
           answers={answers}
           setAnswers={setAnswers}
         />
@@ -48,8 +46,6 @@ export default function App() {
         <AnswerSection 
           key={quizIndex}
           answers={answers}
-          quizData={quizData}
-          quizIndex={quizIndex}
         />
       </form>
     </div>
