@@ -22,7 +22,7 @@ export default function App() {
   useEffect(() => {
     setAnswers(quizData[quizIndex].options);
     // eslint-disable-next-line
-  }, []); 
+  }, [quizIndex]); 
 
   const formIsValid = () => {
     if (document.querySelector('#questionField').value.trim() === "") {
