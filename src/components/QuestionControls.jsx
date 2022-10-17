@@ -1,16 +1,13 @@
 import React from 'react';
-import { flushSync } from 'react-dom';
 import '../styles/QuestionControls.css';
 
-export default function QuestionControls({ quizData, quizIndex }) {
-
-    
+export default function QuestionControls({ quizData, quizIndex, createNewQuestion }) {
 
     return (
         <>
             <div className='question-controls'>
                 <button type='button' >Previous Question</button>
-                <button type='button' >New Question</button>
+                <button type='button' onClick={ () => createNewQuestion() }>Save Question</button>
                 <button type='button'>Submit Quiz</button>
             </div>
 
