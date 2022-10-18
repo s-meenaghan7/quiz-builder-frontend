@@ -14,7 +14,6 @@ const blankQuestion = {
 };
 
 export default function App() {
-
   let [quizIndex, setQuizIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [quizData, setQuizData] = useState([blankQuestion]);
@@ -22,7 +21,7 @@ export default function App() {
   useEffect(() => {
     setAnswers(quizData[quizIndex].options);
     // eslint-disable-next-line
-  }, [quizIndex]); 
+  }, [quizIndex]); // TODO: navigating between questions (from a previous to a next) is bugged. Answer and radio button selection are always one state update behind. So the previous answers state shows, for radio buttons and answer themselves.
 
   const formIsValid = () => {
     if (document.querySelector('#questionField').value.trim() === "") {
@@ -31,11 +30,11 @@ export default function App() {
     }
 
     const radios = document.querySelectorAll('input[name="isCorrect"]');
-    const answers = document.querySelectorAll('input[name="answer"]');
+    const answerFields = document.querySelectorAll('input[name="answer"]');
     let answered = false;
 
-    for (let i = 0; i < answers.length; ++i) {
-      if (answers[i].value.trim() === "") {
+    for (let i = 0; i < answerFields.length; ++i) {
+      if (answerFields[i].value.trim() === "") {
         alert("Please provide an answer in each answer field added to this question.")
         return false;
       }
@@ -57,7 +56,7 @@ export default function App() {
         return {
           question: document.querySelector('#questionField').value,
           options: [
-            ...getAnswers()
+            ...getAnswersFromForm()
           ]
         };
       } else {
@@ -65,23 +64,25 @@ export default function App() {
       }
     });
 
-    // add the new, blank question to the quiz to navigate to
-    newQuizData.push(blankQuestion);
+    if (quizIndex === quizData.length - 1) {
+      newQuizData.push(blankQuestion);
+    } 
+
     setQuizData(newQuizData);
   }
 
-  const getAnswers = () => {
+  const getAnswersFromForm = () => {
     const newAnswers = [];
     const answersFormData = document.querySelectorAll('.answer');
-    let newAnswer = {};
 
     for (let i = 0; i < answers.length; ++i) {
+      let newAnswer = {};
+
       newAnswer.id = parseInt(answersFormData[i].children[0].innerHTML, 10);
       newAnswer.answer = answersFormData[i].children[1].children[0].value;
       newAnswer.isCorrect = answersFormData[i].children[2].children[0].checked;
 
       newAnswers.push(newAnswer);
-      newAnswer = {};
     }
 
     return newAnswers;
@@ -90,7 +91,7 @@ export default function App() {
   const createNewQuestion = () => {
     if (formIsValid()) {
       saveQuestion();
-      alert('Question Saved.'); // delete later
+      alert('Question Saved.'); // delete/change later
       setQuizIndex(quizIndex => quizIndex + 1);
     }
   }
@@ -98,13 +99,14 @@ export default function App() {
   return (
     <div className='App'>
       <form>
-        <QuestionControls // quiz data and quiz index props no longer needed after implementing previous question and submit quiz buttons. test controls no longer needed
+        <QuestionControls
           quizData={quizData}
           quizIndex={quizIndex}
+          setQuizIndex={setQuizIndex}
           createNewQuestion={createNewQuestion}
         />
 
-        <QuestionSection 
+        <QuestionSection
           key={quizIndex + 1}
           questionNumber={quizIndex + 1}
           question={quizData[quizIndex].question}
