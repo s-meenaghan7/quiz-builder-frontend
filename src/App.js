@@ -1,11 +1,12 @@
 import './styles/App.css';
-import { useEffect, useState } from 'react';
+import { useReducer, useState } from 'react';
 import AnswerControls from './components/AnswerControls';
 import AnswerSection from './components/AnswerSection';
 import QuestionSection from './components/QuestionSection';
 import QuestionControls from './components/QuestionControls';
 
 const blankQuestion = {
+  id: 1,
   question: "",
   options: [
     {id: 1, answer: "", isCorrect: false},
@@ -13,15 +14,59 @@ const blankQuestion = {
   ]
 };
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "SAVE_QUESTION":
+      const newQuizData = state.map((q, i) => {
+        if (i === action.index) {
+          return {
+            id: i + 1,
+            question: document.querySelector('#questionField').value,
+            options: [
+              ...action.setAnswers()
+            ]
+          };
+        } else {
+          return q;
+        }
+      });
+
+      if (action.index === newQuizData.length - 1) {
+        newQuizData.push({...blankQuestion, id: newQuizData.length + 1});
+      }
+
+      return newQuizData;
+
+    case "ADD_ANSWER":
+      return state.map((question) => {
+        if (question.id === action.id + 1) {
+          return { ...question, options: [...question.options, {id: question.options.length + 1, answer: "", isCorrect: false}] };
+        } else {
+          return question;
+        }
+      });
+
+    case "SUBTRACT_ANSWER":
+      if (state[action.id].options.length > 2) {
+        return state.map((question) => {
+          if (question.id === action.id + 1) {
+            return { ...question, options: question.options.slice(0, question.options.length - 1) };
+          } else {
+            return question;
+          }
+        });
+      } else {
+        return state;
+      }
+      
+    default:
+      return state;
+  }
+}
+
 export default function App() {
   let [quizIndex, setQuizIndex] = useState(0);
-  const [answers, setAnswers] = useState([]);
-  const [quizData, setQuizData] = useState([blankQuestion]);
-
-  useEffect(() => {
-    setAnswers(quizData[quizIndex].options);
-    // eslint-disable-next-line
-  }, [quizIndex]); // TODO: navigating between questions (from a previous to a next) is bugged. Answer and radio button selection are always one state update behind. So the previous answers state shows, for radio buttons and answer themselves.
+  const [quizData, quizDataDispatch] = useReducer(reducer, [blankQuestion]);
 
   const formIsValid = () => {
     if (document.querySelector('#questionField').value.trim() === "") {
@@ -50,32 +95,11 @@ export default function App() {
     return true; // valid form
   }
 
-  const saveQuestion = () => {
-    const newQuizData = quizData.map((q, i) => {
-      if (i === quizIndex) {
-        return {
-          question: document.querySelector('#questionField').value,
-          options: [
-            ...getAnswersFromForm()
-          ]
-        };
-      } else {
-        return q;
-      }
-    });
-
-    if (quizIndex === quizData.length - 1) {
-      newQuizData.push(blankQuestion);
-    } 
-
-    setQuizData(newQuizData);
-  }
-
   const getAnswersFromForm = () => {
     const newAnswers = [];
     const answersFormData = document.querySelectorAll('.answer');
 
-    for (let i = 0; i < answers.length; ++i) {
+    for (let i = 0; i < answersFormData.length; ++i) {
       let newAnswer = {};
 
       newAnswer.id = parseInt(answersFormData[i].children[0].innerHTML, 10);
@@ -86,6 +110,10 @@ export default function App() {
     }
 
     return newAnswers;
+  }
+
+  const saveQuestion = () => {
+    quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, setAnswers: getAnswersFromForm });
   }
 
   const createNewQuestion = () => {
@@ -103,23 +131,25 @@ export default function App() {
           quizData={quizData}
           quizIndex={quizIndex}
           setQuizIndex={setQuizIndex}
+          formIsValid={formIsValid}
           createNewQuestion={createNewQuestion}
         />
 
         <QuestionSection
           key={quizIndex + 1}
-          questionNumber={quizIndex + 1}
+          questionId={quizIndex + 1}
           question={quizData[quizIndex].question}
         />
 
         <AnswerControls
-          answers={answers}
-          setAnswers={setAnswers}
+          quizIndex={quizIndex}
+          quizDataDispatch={quizDataDispatch}
         />
 
-        <AnswerSection 
+        <AnswerSection
           key={quizIndex}
-          answers={answers}
+          quizData={quizData}
+          quizIndex={quizIndex}
         />
       </form>
     </div>

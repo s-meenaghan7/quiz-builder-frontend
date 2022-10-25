@@ -2,7 +2,7 @@ import React from 'react';
 import Answer from './Answer';
 import '../styles/AnswerSection.css';
 
-export default function AnswerSection({ answers }) {
+export default function AnswerSection({ quizData, quizIndex }) {
 
     return (
         <div className='answer-section'>
@@ -17,7 +17,7 @@ export default function AnswerSection({ answers }) {
             
                 <tbody>
                     {
-                        answers.map((a) => 
+                        quizData[quizIndex].options.map((a) => 
                             <Answer 
                                 key={a.id}
                                 id={a.id}

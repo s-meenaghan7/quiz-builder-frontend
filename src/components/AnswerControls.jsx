@@ -1,16 +1,13 @@
 import React from 'react';
 import '../styles/AnswerControls.css';
 
-export default function AnswerControls({ answers, setAnswers }) {
-
+export default function AnswerControls({ quizIndex, quizDataDispatch }) {
     const addAnswerField = () => {
-        setAnswers(answers => [...answers, {id: answers.length + 1, answer: "", isCorrect: false}]);
+        quizDataDispatch({ type: "ADD_ANSWER", id: quizIndex });
     }
 
     const subtractAnswerField = () => {
-        if (answers.length > 2) {
-            setAnswers(answers => answers.slice(0, answers.length - 1));
-        }
+        quizDataDispatch({ type: "SUBTRACT_ANSWER", id: quizIndex });
     }
 
     return (
@@ -18,10 +15,6 @@ export default function AnswerControls({ answers, setAnswers }) {
             <div className='answer-controls'>
                 <button type='button' onClick={ () => subtractAnswerField() }>-</button>
                 <button type='button' onClick={ () => addAnswerField() }>+</button>
-            </div>
-
-            <div className='test-controls'>
-                <button type='button' onClick={ () => console.log(answers) }>Answers Data</button>
             </div>
         </>
     );

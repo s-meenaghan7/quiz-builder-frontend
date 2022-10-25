@@ -1,14 +1,18 @@
 import React from 'react';
 import '../styles/QuestionControls.css';
 
-export default function QuestionControls({ quizData, quizIndex, setQuizIndex, createNewQuestion }) {
+export default function QuestionControls({ quizData, quizIndex, setQuizIndex, createNewQuestion, formIsValid }) {
 
     const previousQuestionHandler = () => {
+        // if (formIsValid()) {
         if (quizIndex > 0) setQuizIndex(quizIndex => quizIndex - 1);
+        // }
     }
     
     const nextQuestionHandler = () => {
+        // if (formIsValid()) {
         if (quizIndex !== quizData.length - 1) setQuizIndex(quizIndex => quizIndex + 1);
+        // }
     }
 
     return (
