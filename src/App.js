@@ -126,7 +126,7 @@ export default function App() {
 
   return (
     <div className='App'>
-      <form>
+      <form autoComplete='off'>
         <QuestionControls
           quizData={quizData}
           quizIndex={quizIndex}
