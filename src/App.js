@@ -4,6 +4,7 @@ import AnswerControls from './components/AnswerControls';
 import AnswerSection from './components/AnswerSection';
 import QuestionSection from './components/QuestionSection';
 import QuestionControls from './components/QuestionControls';
+import Navbar from './components/Navbar';
 
 const blankQuestion = {
   id: 1,
@@ -125,33 +126,38 @@ export default function App() {
   }
 
   return (
-    <div className='App'>
-      <form autoComplete='off'>
-        <QuestionControls
-          quizData={quizData}
-          quizIndex={quizIndex}
-          setQuizIndex={setQuizIndex}
-          formIsValid={formIsValid}
-          createNewQuestion={createNewQuestion}
-        />
+    <>
+      <Navbar />
+      
+      <div className='App'>
+        <form autoComplete='off'>
+          <QuestionControls
+            quizData={quizData}
+            quizIndex={quizIndex}
+            setQuizIndex={setQuizIndex}
+            formIsValid={formIsValid}
+            createNewQuestion={createNewQuestion}
+          />
 
-        <QuestionSection
-          key={quizIndex + 1}
-          questionId={quizIndex + 1}
-          question={quizData[quizIndex].question}
-        />
+          <QuestionSection
+            key={quizIndex + 1}
+            questionId={quizIndex + 1}
+            question={quizData[quizIndex].question}
+          />
 
-        <AnswerControls
-          quizIndex={quizIndex}
-          quizDataDispatch={quizDataDispatch}
-        />
+          <AnswerControls
+            quizIndex={quizIndex}
+            quizDataDispatch={quizDataDispatch}
+          />
 
-        <AnswerSection
-          key={quizIndex}
-          quizData={quizData}
-          quizIndex={quizIndex}
-        />
-      </form>
-    </div>
+          <AnswerSection
+            key={quizIndex}
+            quizData={quizData}
+            quizIndex={quizIndex}
+          />
+        </form>
+      </div>
+    </>
+    
   );
 }

@@ -18,18 +18,16 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, cr
     return (
         <>
             <div className='question-controls'>
-                <div>
+                {/* <div>
                     <button type='button'>Submit Quiz</button>
-                </div>
+                </div> */}
 
-                <div>
-                    <button type='button' onClick={ () => previousQuestionHandler() }>Previous Question</button>
-                    <button type='button' onClick={ () => createNewQuestion() }>Save Question</button>
-                    <button type='button' onClick={ () => nextQuestionHandler() }>Next Question</button>
-                </div>
+                <button type='button' onClick={ () => previousQuestionHandler() }>Previous Question</button>
+                <button type='button' onClick={ () => createNewQuestion() }>Save Question</button>
+                <button type='button' onClick={ () => nextQuestionHandler() }>Next Question</button>
             </div>
 
-            <div className='question-test-controls' >
+            <div className='question-test-controls' hidden>
                 <button type='button' onClick={ () => console.log(quizIndex) }>Quiz Index</button>
                 <button type='button' onClick={ () => console.log(quizData) }>Get Quiz Data</button>
             </div>

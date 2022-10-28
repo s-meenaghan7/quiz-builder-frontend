@@ -7,7 +7,7 @@ export default function Answer({ id, answer, isCorrect }) {
             <td style={{fontWeight: 'bold', fontSize: '1.2em'}}>{id}</td>
             <td><input type='text' name='answer' defaultValue={answer} required/></td>
             <td>
-                <input id={`radio${id}`} type='radio' name='isCorrect' defaultChecked={isCorrect}/>
+                <input className='radio' id={`radio${id}`} type='radio' name='isCorrect' defaultChecked={isCorrect}/>
                 <label htmlFor={`radio${id}`}></label>
             </td>
         </tr>

@@ -1,30 +1,35 @@
 .App {
-  color: #ffc700;
-  border: 4px solid #ffc700;
+  color: var(--detailOrange);
+  border: 4px solid var(--detailOrange);
+  background-color: var(--lightBlue);
   border-radius: 30px;
   text-align: center;
   padding-bottom: 15px;
-  margin: 5% 30% 0% 30%;
+  margin: 1% 15% 10% 15%;
 }
 
 input[type=text] {
   width: 100%;
-  border: 3px solid #ffc700;
+  border: 3px solid var(--detailOrange);
   border-radius: 5px;
   color: #fff;
   font-size: 1em;
   font-weight: bold;
-  background-color: #008fff;
+  background-color: var(--lightBlue);
   outline: none;
   padding: 8px;
   box-sizing: border-box;
   transition: .3s;
+  text-align: center;
 }
 
 input[type=text]:focus {
-  border-color: #ffc700;
-  box-shadow: 0 0 12px 0 #ffc700;
+  border-color: var(--detailOrange);
+  box-shadow: 0 0 12px 0 var(--detailOrange);
   background-color: #00b7ff;
 }
 
-/* probably style buttons here to apply styling to AnswerControls and QuestionControls */
+input[type=text]:hover {
+  border-color: var(--detailOrange);
+  box-shadow: 0 0 12px 0 var(--detailOrange);
+}

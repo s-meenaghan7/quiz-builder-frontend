@@ -1,4 +1,42 @@
 .question-controls {
-    /* margin: 5px; */
-    /* background-color: #00b7ff; */
+    display: flex;
+    justify-content: space-evenly;
+    padding: 17px;
+    background-color: var(--darkBlue);
+    border-top-left-radius: 27px;
+    border-top-right-radius: 27px;
+    border-bottom: 2.5px solid var(--detailOrange);
+}
+
+.question-controls button {
+    padding: 12px;
+    border-radius: 10px;
+    background-color: var(--detailOrange);
+    color: var(--darkBlue);
+    font-weight: bold;
+    font-size: 1em;
+    transition: .125s;
+    border: 2px solid #000;
+}
+
+.question-controls > button:active {
+    background-color: #ff7b00;
+}
+
+.question-controls > button:hover {
+    color: #f1f1f1;
+    cursor: pointer;
+}
+
+.question-controls > button:disabled {
+    opacity: 0.5;
+}
+
+.question-controls > button:disabled:hover {
+    color: var(--darkBlue);
+    cursor: default;
+}
+
+.question-controls > button:disabled:active {
+    background-color: var(--detailOrange);
 }
