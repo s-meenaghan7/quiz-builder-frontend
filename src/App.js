@@ -135,7 +135,6 @@ export default function App() {
             quizData={quizData}
             quizIndex={quizIndex}
             setQuizIndex={setQuizIndex}
-            formIsValid={formIsValid}
             createNewQuestion={createNewQuestion}
           />
 
