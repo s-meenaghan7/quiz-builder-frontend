@@ -8,24 +8,25 @@
     border-bottom: 2.5px solid var(--detailOrange);
 }
 
+/* QUESTION SECTION BUTTONS */
 .question-controls button {
     padding: 12px;
     border-radius: 10px;
+    border: 2px solid #000;
     background-color: var(--detailOrange);
     color: var(--darkBlue);
     font-weight: bold;
     font-size: 1em;
     transition: .125s;
-    border: 2px solid #000;
+}
+
+.question-controls > button:hover {
+    background-color: #ffe600;
+    cursor: pointer;
 }
 
 .question-controls > button:active {
     background-color: #ff7b00;
-}
-
-.question-controls > button:hover {
-    color: #f1f1f1;
-    cursor: pointer;
 }
 
 .question-controls > button:disabled {

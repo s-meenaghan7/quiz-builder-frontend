@@ -1,7 +1,7 @@
 .answer-controls > button {
     padding: 10px 20px;
     margin: 5px;
-    border-radius: 4px;
+    border-radius: 8px;
     background-color: var(--detailOrange);
     color: var(--darkBlue);
     font-weight: bold;
@@ -10,11 +10,11 @@
     border: 2px solid #000;
 }
 
-.answer-controls > button:active {
-    background-color: #ff7b00;
+.answer-controls > button:hover {
+    background-color: #ffe600;
+    cursor: pointer;
 }
 
-.answer-controls > button:hover {
-    color: #f1f1f1;
-    cursor: pointer;
+.answer-controls > button:active {
+    background-color: #ff7b00;
 }
