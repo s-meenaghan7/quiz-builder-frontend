@@ -5,6 +5,7 @@ import AnswerSection from './components/AnswerSection';
 import QuestionSection from './components/QuestionSection';
 import QuestionControls from './components/QuestionControls';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 const blankQuestion = {
   id: 1,
@@ -93,7 +94,7 @@ export default function App() {
       return false;
     }
 
-    return true; // valid form
+    return true; // form is valid
   }
 
   const getAnswersFromForm = () => {
@@ -156,6 +157,8 @@ export default function App() {
           />
         </form>
       </div>
+
+      <Footer />
     </>
     
   );
