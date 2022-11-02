@@ -36,10 +36,6 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, cr
     return (
         <>
             <div className='question-controls'>
-                {/* <div>
-                    <button type='button'>Submit Quiz</button>
-                </div> */}
-
                 <button type='button' id='prev' onClick={ () => previousQuestionHandler() }>Previous Question</button>
                 <button type='button' onClick={ () => createNewQuestion() }>Save Question</button>
                 <button type='button' id='next' onClick={ () => nextQuestionHandler() }>Next Question</button>

@@ -36,7 +36,7 @@
 .question-controls > button:disabled:hover {
     background-color: var(--detailOrange);
     color: var(--darkBlue);
-    cursor: default;
+    cursor: not-allowed;
 }
 
 .question-controls > button:disabled:active {
