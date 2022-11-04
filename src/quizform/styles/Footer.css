@@ -1,0 +1,85 @@
+.footer {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1.2%;
+  padding-bottom: 1.2%;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+/* ------------------- FOOTER BUTTONS ------------------- */
+.footer_button {
+  padding: 10px 30px 10px 30px;
+  font-size: 1em;
+  border: 2px solid #000;
+  border-radius: 0px;
+  color: #000;
+}
+
+.footer_button:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+.footer_button:disabled {
+  opacity: 0.5;
+}
+
+.footer_button:disabled:hover {
+  cursor: not-allowed;
+  color: inherit;
+}
+
+/* ------------------- SUBMIT BUTTON ------------------- */
+.submit {
+  background-color: #0e0;
+}
+
+.submit:hover {
+  background-color: #0f0;
+}
+
+.submit:active {
+  background-color: #0c0;
+}
+
+.submit:disabled:hover {
+  background-color: #0e0;
+}
+
+/* ------------------- DELETE BUTTON ------------------- */
+.delete {
+  background-color: #e00;
+}
+
+.delete:hover {
+  background-color: #f00;
+}
+
+.delete:active {
+  background-color: #c00;
+}
+
+.delete:disabled:hover {
+  background-color: #e00;
+}
+
+/* ------------------- CLEAR FORM BUTTON ------------------- */
+.clear {
+  background-color: #bbb;
+}
+
+.clear:hover {
+  background-color: #ccc;
+}
+
+.clear:active {
+  background-color: #999;
+}
+
+.clear:disabled:hover {
+  background-color: #bbb;
+}
