@@ -1,6 +1,6 @@
 import './App.css';
-import Navbar from './Navbar';
-import QuizForm from './quizform/QuizForm';
+import Navbar from '.navbar/Navbar';
+import QuizForm from '../quizform/QuizForm';
 
 export default function App() {
 
