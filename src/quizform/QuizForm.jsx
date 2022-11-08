@@ -145,6 +145,7 @@ export default function QuizForm() {
           <AnswerControls
             quizIndex={quizIndex}
             quizDataDispatch={quizDataDispatch}
+            answersCount={quizData[quizIndex].options.length}
           />
 
           <AnswerSection

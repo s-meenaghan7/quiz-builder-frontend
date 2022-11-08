@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/AnswerControls.css';
 
-export default function AnswerControls({ quizIndex, quizDataDispatch }) {
+export default function AnswerControls({ quizIndex, quizDataDispatch, answersCount }) {
+
+  useEffect(() => {
+    const minusButton = document.getElementById('subtract_answer');
+
+    if (answersCount <= 2) {
+      minusButton.setAttribute('disabled', true);
+    } else {
+      minusButton.removeAttribute('disabled');
+    }
+    
+  }, [answersCount]);
+
   const addAnswerField = () => {
     quizDataDispatch({ type: "ADD_ANSWER", id: quizIndex });
   }
@@ -13,8 +25,8 @@ export default function AnswerControls({ quizIndex, quizDataDispatch }) {
   return (
     <>
       <div className='answer-controls'>
-        <button type='button' onClick={() => subtractAnswerField()}>-</button>
-        <button type='button' onClick={() => addAnswerField()}>+</button>
+        <button type='button' id='subtract_answer' onClick={() => subtractAnswerField()}>-</button>
+        <button type='button' id='add_answer' onClick={() => addAnswerField()}>+</button>
       </div>
     </>
   );

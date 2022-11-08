@@ -18,3 +18,17 @@
 .answer-controls > button:active {
   background-color: #ff7b00;
 }
+
+.answer-controls > button:disabled {
+  opacity: 0.5;
+}
+
+.answer-controls > button:disabled:hover {
+  background-color: var(--detailOrange);
+  color: var(--darkBlue);
+  cursor: not-allowed;
+}
+
+.answer-controls > button:disabled:active {
+  background-color: var(--detailOrange);
+}
