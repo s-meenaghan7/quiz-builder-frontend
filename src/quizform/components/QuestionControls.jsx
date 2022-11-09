@@ -41,7 +41,7 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, cr
         <button type='button' id='next' onClick={() => nextQuestionHandler()}>Next Question</button>
       </div>
 
-      <div className='question-test-controls' hidden>
+      <div className='question-test-controls' >
         <button type='button' onClick={() => console.log(quizIndex)}>Quiz Index</button>
         <button type='button' onClick={() => console.log(quizData)}>Get Quiz Data</button>
       </div>

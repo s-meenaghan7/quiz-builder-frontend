@@ -67,19 +67,19 @@
   background-color: #e00;
 }
 
-/* ------------------- CLEAR FORM BUTTON ------------------- */
-.clear {
+/* ------------------- RESET FORM BUTTON ------------------- */
+.reset {
   background-color: #bbb;
 }
 
-.clear:hover {
+.reset:hover {
   background-color: #ccc;
 }
 
-.clear:active {
+.reset:active {
   background-color: #999;
 }
 
-.clear:disabled:hover {
+.reset:disabled:hover {
   background-color: #bbb;
 }

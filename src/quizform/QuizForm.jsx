@@ -59,6 +59,15 @@ const reducer = (state, action) => {
       } else {
         return state;
       }
+    
+    case "DEFAULT_ANSWERS_COUNT":
+      return state.map((question) => {
+        if (question.id === action.id + 1) {
+          return { ...question, options: question.options.slice(0, 2) };
+        } else {
+          return question;
+        }
+      });
 
     default:
       return state;
@@ -120,7 +129,7 @@ export default function QuizForm() {
   const createNewQuestion = () => {
     if (formIsValid()) {
       saveQuestion();
-      alert('Question Saved.'); // delete/change later
+      alert('Question Saved.'); // delete/change later; would prefer a notification that does not pause the browser and require the user to click OK.
       setQuizIndex(quizIndex => quizIndex + 1);
     }
   }
@@ -156,7 +165,10 @@ export default function QuizForm() {
         </form>
       </div>
       
-      <Footer />
+      <Footer
+        quizIndex={quizIndex}
+        quizDataDispatch={quizDataDispatch}
+      />
     </>
   );
 }
