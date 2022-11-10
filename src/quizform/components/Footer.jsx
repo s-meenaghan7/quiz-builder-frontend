@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ConfirmDialog from '../../app/dialog/ConfirmDialog';
 import '../styles/Footer.css';
 
 export default function Footer({ quizDataDispatch, quizIndex }) {
+  const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
-  const resetFormFields = () => {
-    // confirm user would like to do this; return and do not continue if the user says no
-    // TODO: learn how to implement a confirm dialog here, and elsewhere, and how to customize them into custom components that I can later reuse.
-
+  const resetForm = () => {
     // Reset current question answer count to default of 2
     quizDataDispatch({ type: "DEFAULT_ANSWERS_COUNT", id: quizIndex })
 
@@ -18,8 +17,14 @@ export default function Footer({ quizDataDispatch, quizIndex }) {
   // disable delete question button if we are on the last question in quizData (because the last question is always an unsaved question being created)
 
   return (
-    <footer className='footer'>
-      <button type='button' className='footer_button reset' onClick={() => resetFormFields()}>RESET FORM</button>
+    <footer className='quizform_footer'>
+      <button type='button' className='footer_button reset' onClick={() => setDialogIsOpen(true)}>RESET FORM</button>
+      <ConfirmDialog
+        open={dialogIsOpen}
+        openDialog={setDialogIsOpen}
+        resetForm={resetForm}
+      />
+
       <button type='button' className='footer_button submit'>SUBMIT QUIZ</button>
       <button type='button' className='footer_button delete'>DELETE QUESTION</button>
     </footer>
