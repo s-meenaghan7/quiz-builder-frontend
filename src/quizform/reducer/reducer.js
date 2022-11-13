@@ -45,7 +45,7 @@ const reducer = (state, action) => {
         return state;
       }
     
-    case "DEFAULT_ANSWERS_COUNT":
+    case "SET_ANSWERS_TO_DEFAULT":
       return state.map((question) => {
         if (question.id === action.id + 1) {
           return { ...question, options: question.options.slice(0, 2) };

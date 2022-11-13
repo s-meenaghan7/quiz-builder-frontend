@@ -17,7 +17,7 @@ export default function Footer({ quizDataDispatch, quizIndex }) {
 
   const resetForm = () => {
     // Reset current question answer count to default of 2
-    quizDataDispatch({ type: "DEFAULT_ANSWERS_COUNT", id: quizIndex });
+    quizDataDispatch({ type: "SET_ANSWERS_TO_DEFAULT", id: quizIndex });
 
     document.querySelectorAll('input[type=text]').forEach(input => input.value = '');
     document.querySelectorAll('input[type=radio]').forEach(input => input.checked = false);
