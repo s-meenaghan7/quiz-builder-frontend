@@ -11,8 +11,8 @@
 }
 
 .dialog_container {
-  width: 500px;
-  height: 500px;
+  width: 275px;
+  height: 275px;
   border-radius: 12px;
   background-color: #fff;
   box-shadow: rgba(0 0 0 0.35) 0px 5px 15px;
@@ -24,7 +24,6 @@
 .dialog_container .title {
   display: inline-block;
   text-align: center;
-  margin-top: 10px;
 }
 
 .title_close_btn {
@@ -40,7 +39,6 @@
 }
 
 .dialog_container .body {
-  flex: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,10 +57,10 @@
   height: 45px;
   margin: 10px;
   border: none;
-  background-color: cornflowerblue;
+  background-color: #0d0;
   color: #fff;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 1.1em;
   cursor: pointer;
 }
 

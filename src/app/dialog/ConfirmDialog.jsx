@@ -2,11 +2,11 @@ import React from 'react';
 import './ConfirmDialog.css';
 import ReactDom from 'react-dom';
 
-export default function ConfirmDialog({ open, openDialog, resetForm, data }) { // data will be object containing keys for title, description, function
+export default function ConfirmDialog({ open, openDialog, data }) {
   if (!open) return null;
 
   const functionBtnHandler = () => {
-    resetForm();
+    data.dialogFunction();
     openDialog(false);
   }
 
@@ -18,14 +18,14 @@ export default function ConfirmDialog({ open, openDialog, resetForm, data }) { /
           <button onClick={() => openDialog(false)}> &times; </button>
         </div>
         <div className='title'>
-          <h1>Example Title!</h1>
+          <h2>{data.title}</h2>
         </div>
         <div className='body'>
-          <p>Just another example to be edited later, probably through passed in props to make this component reusable!!!</p>
+          <p>{data.description}</p>
         </div>
         <div className='dialog_footer'>
           <button id='cancel_btn' onClick={() => openDialog(false)}>Cancel</button>
-          <button onClick={() => functionBtnHandler()}>Reset Form</button>
+          <button id='function_btn' onClick={() => functionBtnHandler()}>{data.functionBtnText}</button>
         </div>
       </div>
     </div>,
