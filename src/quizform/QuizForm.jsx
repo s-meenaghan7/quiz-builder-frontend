@@ -8,7 +8,7 @@ import reducer from './reducer/reducer';
 import { blankQuestion } from './reducer/blankQuestion';
 import './QuizForm.css';
 
-export default function QuizForm() {
+export default function QuizForm(props) {
   let [quizIndex, setQuizIndex] = useState(0);
   const [quizData, quizDataDispatch] = useReducer(reducer, [blankQuestion]);
 
@@ -36,7 +36,7 @@ export default function QuizForm() {
       return false;
     }
 
-    return true; // form is valid
+    return true;
   }
 
   const getAnswersFromForm = () => {
@@ -80,7 +80,7 @@ export default function QuizForm() {
           />
 
           <QuestionSection
-            key={quizIndex + 1}
+            key={'Q' + (quizIndex + 1)}
             questionId={quizIndex + 1}
             question={quizData[quizIndex].question}
           />
@@ -92,7 +92,7 @@ export default function QuizForm() {
           />
 
           <AnswerSection
-            key={quizIndex}
+            key={'A' + (quizIndex + 1)}
             quizData={quizData}
             quizIndex={quizIndex}
           />
@@ -100,7 +100,9 @@ export default function QuizForm() {
       </div>
       
       <Footer
+        quizData={quizData}
         quizIndex={quizIndex}
+        setQuizIndex={setQuizIndex}
         quizDataDispatch={quizDataDispatch}
       />
     </>

@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ConfirmDialog from '../../app/dialog/ConfirmDialog';
 import '../styles/Footer.css';
 
-export default function Footer({ quizDataDispatch, quizIndex }) {
+export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
   const [resetFormDialogIsOpen, setResetFormDialogIsOpen] = useState(false);
   const [deleteQuestionDialogIsOpen, setDeleteQuestionDialogIsOpen] = useState(false);
   const [submitQuizDialogIsOpen, setSubmitQuizDialogIsOpen] = useState(false);
 
-  /*
-    TODO: (likely in a useEffect)
-      disable submit quiz button if length of quizData < 2 (because at least 1 question must be saved to the quiz before it can be submitted!)
-        for this reason, the Footer needs the quizData as a prop, and also so it can delete questions from the quizData
-      disable delete question button if we are on the last question in quizData (because the last question is always an unsaved question being created)
-      quizData must also be a prop for submitting the quiz in submitQuiz()
-   */
+  useEffect(() => { // disable/enable the 'submit quiz'and 'delete question' buttons
+    const submitBtn = document.getElementById('submit');
+    const deleteBtn = document.getElementById('delete');
+
+    if (quizData.length < 2) {
+      submitBtn.setAttribute('disabled', true);
+    } else {
+      submitBtn.removeAttribute('disabled');
+    }
+
+    if (quizIndex === quizData.length - 1) {
+      deleteBtn.setAttribute('disabled', true);
+    } else {
+      deleteBtn.removeAttribute('disabled');
+    }
+  }, [quizIndex, quizData.length]);
 
   const resetForm = () => {
     // Reset current question answer count to default of 2
@@ -24,8 +33,9 @@ export default function Footer({ quizDataDispatch, quizIndex }) {
   }
 
   const deleteQuestion = () => {
-    console.log('deletes a question, yet to be implemented!');
-    // todo
+    quizDataDispatch({ type: "DELETE_QUESTION", id: quizIndex });
+    
+    // setQuizIndex(quizIndex => quizIndex); // no re-render: React compares prev state to new state, they are equal so, does not re-render
   }
 
   const submitQuiz = () => {
@@ -35,7 +45,7 @@ export default function Footer({ quizDataDispatch, quizIndex }) {
 
   return (
     <footer className='quizform_footer'>
-      <button type='button' className='footer_button reset' onClick={() => setResetFormDialogIsOpen(true)}>RESET FORM</button>
+      <button type='button' id='reset' className='footer_button reset' onClick={() => setResetFormDialogIsOpen(true)}>RESET FORM</button>
       <ConfirmDialog
         open={resetFormDialogIsOpen}
         openDialog={setResetFormDialogIsOpen}
@@ -45,7 +55,7 @@ export default function Footer({ quizDataDispatch, quizIndex }) {
                 functionBtnText: "Reset Form" }}
       />
 
-      <button type='button' className='footer_button submit' onClick={() => setSubmitQuizDialogIsOpen(true)}>SUBMIT QUIZ</button>
+      <button type='button' id='submit' className='footer_button submit' onClick={() => setSubmitQuizDialogIsOpen(true)}>SUBMIT QUIZ</button>
       <ConfirmDialog
         open={submitQuizDialogIsOpen}
         openDialog={setSubmitQuizDialogIsOpen}
@@ -55,7 +65,7 @@ export default function Footer({ quizDataDispatch, quizIndex }) {
                 functionBtnText: "Submit Quiz" }}
       />
 
-      <button type='button' className='footer_button delete' onClick={() => setDeleteQuestionDialogIsOpen(true)}>DELETE QUESTION</button>
+      <button type='button' id='delete' className='footer_button delete' onClick={() => setDeleteQuestionDialogIsOpen(true)}>DELETE QUESTION</button>
       <ConfirmDialog
         open={deleteQuestionDialogIsOpen}
         openDialog={setDeleteQuestionDialogIsOpen}

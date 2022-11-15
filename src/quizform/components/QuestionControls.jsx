@@ -22,15 +22,11 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, cr
   }, [quizIndex, quizData.length]);
 
   const previousQuestionHandler = () => {
-
     if (quizIndex > 0) setQuizIndex(quizIndex => quizIndex - 1);
-
   }
 
   const nextQuestionHandler = () => {
-
     if (quizIndex !== quizData.length - 1) setQuizIndex(quizIndex => quizIndex + 1);
-
   }
 
   return (
