@@ -48,7 +48,7 @@ export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
         open={resetFormDialogIsOpen}
         openDialog={setResetFormDialogIsOpen}
         data={{ title: "Reset Form?",
-                description: "Resetting the form clears all fields and resets the number of answers to the default of two.",
+                description: "Resetting the form clears all fields and resets the number of answers to the default of two (does not alter saved question data).",
                 dialogFunction: resetForm,
                 functionBtnText: "Reset Form" }}
       />

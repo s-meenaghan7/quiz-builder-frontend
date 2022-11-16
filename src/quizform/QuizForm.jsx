@@ -75,7 +75,7 @@ export default function QuizForm(props) {
 
   return (
     <>
-      <div className='quizform' key={`QF${quizData[quizIndex].id}:${quizData[quizIndex].question}`}>
+      <div className='quizform' key={quizData.length}> 
         <form autoComplete='off'>
           <QuestionControls
             quizData={quizData}
@@ -86,7 +86,7 @@ export default function QuizForm(props) {
           />
 
           <QuestionSection
-            key={'Q' + (quizIndex + 1)}
+            key={`Q${quizIndex + 1}`}
             questionId={quizIndex + 1}
             question={quizData[quizIndex].question}
           />
@@ -98,7 +98,7 @@ export default function QuizForm(props) {
           />
 
           <AnswerSection
-            key={'A' + (quizIndex + 1)}
+            key={`A${quizIndex + 1}`}
             quizData={quizData}
             quizIndex={quizIndex}
           />
