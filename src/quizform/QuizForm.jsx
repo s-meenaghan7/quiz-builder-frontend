@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import QuestionControls from './components/QuestionControls';
 import QuestionSection from './components/QuestionSection';
 import AnswerControls from './components/AnswerControls';
@@ -11,6 +11,11 @@ import './QuizForm.css';
 export default function QuizForm(props) {
   let [quizIndex, setQuizIndex] = useState(0);
   const [quizData, quizDataDispatch] = useReducer(reducer, [blankQuestion]);
+  const [currentQuestion, setCurrentQuestion] = useState(blankQuestion);
+
+  useEffect(() => {
+    setCurrentQuestion(() => quizData[quizIndex]);
+  }, [quizData, quizIndex]);
 
   const formIsValid = () => {
     if (document.querySelector('#questionField').value.trim() === "") {
@@ -77,6 +82,7 @@ export default function QuizForm(props) {
             quizIndex={quizIndex}
             setQuizIndex={setQuizIndex}
             createNewQuestion={createNewQuestion}
+            currentQuestion={currentQuestion} // only here for testing purposes/logging the value
           />
 
           <QuestionSection

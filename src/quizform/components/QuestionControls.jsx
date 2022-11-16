@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import '../styles/QuestionControls.css';
 
-export default function QuestionControls({ quizData, quizIndex, setQuizIndex, createNewQuestion }) {
+export default function QuestionControls({ quizData, quizIndex, setQuizIndex, createNewQuestion, currentQuestion }) {
 
   useEffect(() => { // Based on quizIndex, determine if Previous Question and Next Question buttons are disabled/enabled.
     const prev = document.getElementById('prev');
@@ -40,6 +40,7 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, cr
       <div className='question-test-controls' >
         <button type='button' onClick={() => console.log(quizIndex)}>Quiz Index</button>
         <button type='button' onClick={() => console.log(quizData)}>Get Quiz Data</button>
+        <button type='button' onClick={() => console.log(currentQuestion)}>Get Current Question</button>
       </div>
     </>
   );
