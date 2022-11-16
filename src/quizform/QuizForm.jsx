@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from 'react';
+import QuestionTestControls from './test_controls/QuestionTestControls';
 import QuestionControls from './components/QuestionControls';
 import QuestionSection from './components/QuestionSection';
 import AnswerControls from './components/AnswerControls';
@@ -75,6 +76,13 @@ export default function QuizForm(props) {
 
   return (
     <>
+      <QuestionTestControls
+        hidden={false}
+        quizIndex={quizIndex}
+        quizData={quizData}
+        currentQuestion={currentQuestion}
+      />
+
       <div className='quizform' key={quizData.length}> 
         <form autoComplete='off'>
           <QuestionControls
@@ -82,7 +90,6 @@ export default function QuizForm(props) {
             quizIndex={quizIndex}
             setQuizIndex={setQuizIndex}
             createNewQuestion={createNewQuestion}
-            currentQuestion={currentQuestion} // only here for testing purposes/logging the value
           />
 
           <QuestionSection

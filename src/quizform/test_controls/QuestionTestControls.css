@@ -1,0 +1,9 @@
+.hidden {
+  display: none;
+}
+
+.question-test-controls {
+  display: flex;
+  flex-direction: column;
+  float: left;
+}

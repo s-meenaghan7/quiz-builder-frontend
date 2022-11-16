@@ -37,8 +37,10 @@ export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
   }
 
   const submitQuiz = () => {
-    console.log('saves the quiz, yet to be implemented!');
-    // todo
+    // create a dialog asking to input a name for the quiz
+    // > should include a textfield for the naming of the quiz, and an OK button to confirm and close the dialog.
+
+    console.log(JSON.stringify(quizData.slice(0, quizData.length - 1), null, 2));
   }
 
   return (
