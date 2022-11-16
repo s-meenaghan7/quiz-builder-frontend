@@ -34,8 +34,6 @@ export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
 
   const deleteQuestion = () => {
     quizDataDispatch({ type: "DELETE_QUESTION", id: quizIndex });
-    
-    // setQuizIndex(quizIndex => quizIndex); // no re-render: React compares prev state to new state, they are equal so, does not re-render
   }
 
   const submitQuiz = () => {
