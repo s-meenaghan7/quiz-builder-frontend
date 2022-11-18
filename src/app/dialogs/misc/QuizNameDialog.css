@@ -1,0 +1,70 @@
+.dialog_background {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+}
+
+.dialog_container {
+  width: 275px;
+  height: 275px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: rgba(0 0 0 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.dialog_container .title {
+  display: inline-block;
+  text-align: center;
+}
+
+/* .title_close_btn {
+  display: flex;
+  justify-content: flex-end;
+} */
+
+/* .title_close_btn button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+} */
+
+.dialog_container .body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.dialog_container .dialog_footer {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog_container .dialog_footer button {
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: #0d0;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.dialog_container .dialog_footer button:disabled {
+  background-color: #777;
+  cursor: not-allowed;
+}

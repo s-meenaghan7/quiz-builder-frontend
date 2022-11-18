@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import ConfirmDialog from '../../app/dialog/ConfirmDialog';
+import ConfirmDialog from '../../app/dialogs/confirm/ConfirmDialog';
+import QuizNameDialog from '../../app/dialogs/misc/QuizNameDialog';
 import '../styles/Footer.css';
 
 export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
   const [resetFormDialogIsOpen, setResetFormDialogIsOpen] = useState(false);
   const [deleteQuestionDialogIsOpen, setDeleteQuestionDialogIsOpen] = useState(false);
   const [submitQuizDialogIsOpen, setSubmitQuizDialogIsOpen] = useState(false);
+  const [quizNameDialogIsOpen, setQuizNameDialogIsOpen] = useState(false);
 
   useEffect(() => { // disable/enable the 'submit quiz'and 'delete question' buttons
     const submitBtn = document.getElementById('submit');
@@ -37,10 +39,16 @@ export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
   }
 
   const submitQuiz = () => {
-    // create a dialog asking to input a name for the quiz
-    // > should include a textfield for the naming of the quiz, and an OK button to confirm and close the dialog.
+    const completeQuiz = [
+      { quizName: document.getElementById('quiz_name').value }, 
+      quizData.slice(0, quizData.length - 1)
+    ];
 
-    console.log(JSON.stringify(quizData.slice(0, quizData.length - 1), null, 2));
+    console.log(JSON.stringify(completeQuiz, null, 2)); // logs to console for now; will eventually be sent to backend DB service
+  }
+
+  const getQuizName = () => {
+    setQuizNameDialogIsOpen(true);
   }
 
   return (
@@ -61,8 +69,13 @@ export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
         openDialog={setSubmitQuizDialogIsOpen}
         data={{ title: "Submit Quiz?",
                 description: "Are you sure you're ready to save this quiz?",
-                dialogFunction: submitQuiz,
+                dialogFunction: getQuizName,
                 functionBtnText: "Submit Quiz" }}
+      />
+      <QuizNameDialog
+        open={quizNameDialogIsOpen}
+        openDialog={setQuizNameDialogIsOpen}
+        data={{ dialogFunction: submitQuiz }}
       />
 
       <button type='button' id='delete' className='footer_button delete' onClick={() => setDeleteQuestionDialogIsOpen(true)}>DELETE QUESTION</button>
