@@ -3,7 +3,7 @@ import './QuizNameDialog.css';
 import ReactDom from 'react-dom';
 
 export default function QuizNameDialog({ open, openDialog, data }) {
-  let [quizName, setQuizName] = useState(''); // may need/want to use useRef here... will see!
+  let [quizName, setQuizName] = useState('');
 
   if (!open) return null;
 
@@ -20,6 +20,9 @@ export default function QuizNameDialog({ open, openDialog, data }) {
 
     <div className='dialog_background'>
       <div className='dialog_container'>
+        <div className='title_close_btn'>
+          <button onClick={() => openDialog(false)}> &times; </button>
+        </div>
         <div className='title'>
           <h3>Please provide a name for your new quiz:</h3>
         </div>
