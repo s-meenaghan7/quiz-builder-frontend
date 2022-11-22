@@ -8,6 +8,7 @@
   margin: 1% 15% 10% 15%;
 }
 
+/* ------------------- TEXT INPUTS ------------------- */
 input[type=text] {
   width: 100%;
   border: 3px solid var(--detailOrange);

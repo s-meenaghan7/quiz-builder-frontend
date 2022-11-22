@@ -44,7 +44,7 @@ export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
       quizData.slice(0, quizData.length - 1)
     ];
 
-    console.log(JSON.stringify(completeQuiz, null, 2)); // logs to console for now; will eventually be sent to backend DB service
+    console.log(JSON.stringify(completeQuiz, null, 2)); // logs to console for now; will eventually be sent to backend DB
   }
 
   const getQuizName = () => {

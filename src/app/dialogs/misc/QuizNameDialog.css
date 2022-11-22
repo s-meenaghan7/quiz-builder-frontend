@@ -68,3 +68,20 @@
   background-color: #777;
   cursor: not-allowed;
 }
+
+/* ------------------- QUIZ NAME TEXT INPUT ------------------- */
+#quiz_name {
+  border: 3px solid var(--lightBlue);
+  color: #000;
+  background-color: #fff;
+}
+
+#quiz_name:focus {
+  border-color: var(--lightBlue);
+  box-shadow: 0 0 12px 0 var(--lightBlue);
+}
+
+#quiz_name:hover {
+  border-color: var(--lightBlue);
+  box-shadow: 0 0 12px 0 var(--lightBlue);
+}
