@@ -1,9 +1,15 @@
-.answer {
+.answerRow {
   animation: fadeIn 0.5s;
   -webkit-animation: fadeIn 0.5s;
   -moz-animation: fadeIn 0.5s;
   -o-animation: fadeIn 0.5s;
   -ms-animation: fadeIn 0.5s;
+}
+
+.answer::placeholder {
+  color: var(--darkBlue);
+  opacity: 0.6;
+  font-style: italic;
 }
 
 @keyframes fadeIn {
