@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ConfirmDialog from '../../app/dialogs/confirm/ConfirmDialog';
 import QuizNameDialog from '../../app/dialogs/misc/QuizNameDialog';
+import { blankQuestion } from '../reducer/blankQuestion';
 import '../styles/Footer.css';
 
-export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
+export default function Footer({ quizIndex, quizData, quizDataDispatch, setCurrentQuestion }) {
   const [resetFormDialogIsOpen, setResetFormDialogIsOpen] = useState(false);
   const [deleteQuestionDialogIsOpen, setDeleteQuestionDialogIsOpen] = useState(false);
   const [submitQuizDialogIsOpen, setSubmitQuizDialogIsOpen] = useState(false);
@@ -19,7 +20,7 @@ export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
       submitBtn.removeAttribute('disabled');
     }
 
-    if (quizIndex === quizData.length - 1) {
+    if (quizIndex === quizData.length) {
       deleteBtn.setAttribute('disabled', true);
     } else {
       deleteBtn.removeAttribute('disabled');
@@ -27,11 +28,10 @@ export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
   }, [quizIndex, quizData.length]);
 
   const resetForm = () => {
-    // Reset current question answer count to default of 2
-    quizDataDispatch({ type: "SET_ANSWERS_TO_DEFAULT", id: quizIndex });
-
-    document.querySelectorAll('input[type=text]').forEach(input => input.value = '');
-    document.querySelectorAll('input[type=radio]').forEach(input => input.checked = false);
+    // set currentQuestion to blankQuestion, but maintain the id
+    setCurrentQuestion((currentQuestion) => {
+      return { ...blankQuestion, id: currentQuestion.id }
+    });
   }
 
   const deleteQuestion = () => {
@@ -41,7 +41,7 @@ export default function Footer({ quizData, quizIndex, quizDataDispatch }) {
   const submitQuiz = () => {
     const completeQuiz = [
       { quizName: document.getElementById('quiz_name').value }, 
-      quizData.slice(0, quizData.length - 1)
+      quizData
     ];
 
     console.log(JSON.stringify(completeQuiz, null, 2)); // logs to console for now; will eventually be sent to backend DB

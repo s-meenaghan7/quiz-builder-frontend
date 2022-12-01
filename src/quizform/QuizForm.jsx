@@ -11,11 +11,17 @@ import './QuizForm.css';
 
 export default function QuizForm(props) {
   let [quizIndex, setQuizIndex] = useState(0);
-  const [quizData, quizDataDispatch] = useReducer(reducer, [blankQuestion]);
+  const [quizData, quizDataDispatch] = useReducer(reducer, []);
   const [currentQuestion, setCurrentQuestion] = useState(blankQuestion);
 
   useEffect(() => {
-    setCurrentQuestion(() => quizData[quizIndex]);
+    if (quizData[quizIndex] === undefined) {
+      setCurrentQuestion(() => {
+        return { ...blankQuestion, id: quizIndex + 1 };
+      });
+    } else {
+      setCurrentQuestion(() => quizData[quizIndex]);
+    }
   }, [quizData, quizIndex]);
 
   const formIsValid = () => {
@@ -45,33 +51,12 @@ export default function QuizForm(props) {
     return true;
   }
 
-  const getAnswersFromForm = () => {
-    const newAnswers = [];
-    const answersFormData = document.querySelectorAll('.answer');
-
-    for (let i = 0; i < answersFormData.length; ++i) {
-      let newAnswer = {};
-
-      newAnswer.id = parseInt(answersFormData[i].children[0].innerHTML, 10);
-      newAnswer.answer = answersFormData[i].children[1].children[0].value;
-      newAnswer.isCorrect = answersFormData[i].children[2].children[0].checked;
-
-      newAnswers.push(newAnswer);
-    }
-
-    return newAnswers;
-  }
-
   const saveQuestion = () => {
-    quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, setAnswers: getAnswersFromForm });
-  }
+    // save the currentQuestion to quizData[quizIndex]
+    quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, newQuestion: currentQuestion });
 
-  const createNewQuestion = () => {
-    if (formIsValid()) {
-      saveQuestion();
-      alert('Question Saved.'); // delete/change later; would prefer a notification that does not pause the browser and require the user to click OK.
-      setQuizIndex(quizIndex => quizIndex + 1);
-    }
+    alert('Question Saved.'); // delete/change later; would prefer a notification that does not pause the browser and require the user to click OK.
+    // setCurrentQuestion to blankQuestion with Id + 1 ????
   }
 
   return (
@@ -89,33 +74,34 @@ export default function QuizForm(props) {
             quizData={quizData}
             quizIndex={quizIndex}
             setQuizIndex={setQuizIndex}
-            createNewQuestion={createNewQuestion}
+            formIsValid={formIsValid}
+            saveQuestion={saveQuestion}
           />
 
           <QuestionSection
-            key={`Q${quizIndex + 1}`}
-            questionId={quizIndex + 1}
-            question={quizData[quizIndex].question}
+            key={`Q${currentQuestion.id}`}
+            currentQuestion={currentQuestion}
+            setCurrentQuestion={setCurrentQuestion}
           />
 
           <AnswerControls
-            quizIndex={quizIndex}
-            quizDataDispatch={quizDataDispatch}
-            answersCount={quizData[quizIndex].options.length}
+            currentQuestion={currentQuestion}
+            setCurrentQuestion={setCurrentQuestion}
           />
 
           <AnswerSection
-            key={`A${quizIndex + 1}`}
-            quizData={quizData}
-            quizIndex={quizIndex}
+            key={`A${currentQuestion.id}`}
+            currentQuestion={currentQuestion}
+            setCurrentQuestion={setCurrentQuestion}
           />
         </form>
       </div>
       
       <Footer
-        quizData={quizData}
         quizIndex={quizIndex}
+        quizData={quizData}
         quizDataDispatch={quizDataDispatch}
+        setCurrentQuestion={setCurrentQuestion}
       />
     </>
   );

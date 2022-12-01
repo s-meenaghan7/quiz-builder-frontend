@@ -1,25 +1,29 @@
 import React, { useEffect } from 'react';
 import '../styles/AnswerControls.css';
 
-export default function AnswerControls({ quizIndex, quizDataDispatch, answersCount }) {
+export default function AnswerControls({ currentQuestion, setCurrentQuestion }) {
 
   useEffect(() => {
     const minusButton = document.getElementById('subtract_answer');
 
-    if (answersCount <= 2) {
+    if (currentQuestion.options.length <= 2) {
       minusButton.setAttribute('disabled', true);
     } else {
       minusButton.removeAttribute('disabled');
     }
     
-  }, [answersCount]);
+  }, [currentQuestion.options.length]);
 
   const addAnswerField = () => {
-    quizDataDispatch({ type: "ADD_ANSWER", id: quizIndex });
+    setCurrentQuestion((currentQuestion) => {
+      return { ...currentQuestion, options: [...currentQuestion.options, { id: currentQuestion.options.length + 1, answer: "", isCorrect: false }] };
+    });
   }
 
   const subtractAnswerField = () => {
-    quizDataDispatch({ type: "SUBTRACT_ANSWER", id: quizIndex });
+    setCurrentQuestion((currentQuestion) => {
+      return { ...currentQuestion, options: currentQuestion.options.slice(0, currentQuestion.options.length - 1) };
+    });
   }
 
   return (
