@@ -14,13 +14,13 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch, setCurre
     const submitBtn = document.getElementById('submit');
     const deleteBtn = document.getElementById('delete');
 
-    if (quizData.length < 2) {
+    if (quizData.length < 1) {
       submitBtn.setAttribute('disabled', true);
     } else {
       submitBtn.removeAttribute('disabled');
     }
 
-    if (quizIndex === quizData.length) {
+    if (quizData.length === 0 || quizIndex === quizData.length) {
       deleteBtn.setAttribute('disabled', true);
     } else {
       deleteBtn.removeAttribute('disabled');
@@ -68,7 +68,7 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch, setCurre
         open={submitQuizDialogIsOpen}
         openDialog={setSubmitQuizDialogIsOpen}
         data={{ title: "Submit Quiz?",
-                description: "Are you sure you're ready to save this quiz?",
+                description: `Are you sure you're ready to save this quiz? (Questions: ${quizData.length})`,
                 dialogFunction: getQuizName,
                 functionBtnText: "Submit Quiz" }}
       />

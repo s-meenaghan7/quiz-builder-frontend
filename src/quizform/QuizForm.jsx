@@ -56,7 +56,7 @@ export default function QuizForm(props) {
     quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, newQuestion: currentQuestion });
 
     alert('Question Saved.'); // delete/change later; would prefer a notification that does not pause the browser and require the user to click OK.
-    // setCurrentQuestion to blankQuestion with Id + 1 ????
+    setCurrentQuestion(blankQuestion);
   }
 
   return (
