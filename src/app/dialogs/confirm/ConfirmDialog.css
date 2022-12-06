@@ -34,7 +34,6 @@
 .title_close_btn button {
   background-color: transparent;
   border: none;
-  font-size: 25px;
   cursor: pointer;
 }
 
@@ -65,5 +64,13 @@
 }
 
 #cancel_btn {
-  background-color: crimson;
+  background-color: #dc143c;
+}
+
+#cancel_btn:hover {
+  background-color: #f00;
+}
+
+#function_btn:hover {
+  background-color: #0f0;
 }

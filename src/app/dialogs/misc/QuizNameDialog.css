@@ -52,7 +52,7 @@
   align-items: center;
 }
 
-.dialog_container .dialog_footer button {
+#ok_btn {
   width: 150px;
   height: 45px;
   margin: 10px;
@@ -64,10 +64,21 @@
   cursor: pointer;
 }
 
-.dialog_container .dialog_footer button:disabled {
+#ok_btn:disabled {
   background-color: #777;
   cursor: not-allowed;
 }
+
+#ok_btn:disabled:hover {
+  background-color: #777;
+  cursor: not-allowed;
+}
+
+#ok_btn:hover {
+  background-color: #0f0;
+  cursor: pointer;
+}
+
 
 /* ------------------- QUIZ NAME TEXT INPUT ------------------- */
 #quiz_name {

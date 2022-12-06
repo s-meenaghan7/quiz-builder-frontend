@@ -15,10 +15,8 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, fo
   }, [quizIndex]);
 
   const previousQuestionHandler = () => {
-    // check if form is valid. Return if not, else continue
     if (!formIsValid()) return;
 
-    // save currentQuestion to quizData[quizIndex]
     saveQuestion();
 
     // navigate by decrementing quizIndex
@@ -26,10 +24,8 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, fo
   }
 
   const nextQuestionHandler = () => {
-    // check if form is valid. Return if not, else continue
     if (!formIsValid()) return;
     
-    // save currentQuestion to quizData[quizIndex]
     saveQuestion();
 
     // navigate by incrementing quizIndex

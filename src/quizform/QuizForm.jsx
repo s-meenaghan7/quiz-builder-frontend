@@ -53,7 +53,6 @@ export default function QuizForm(props) {
   }
 
   const saveQuestion = () => {
-    // save the currentQuestion to quizData[quizIndex]
     quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, newQuestion: currentQuestion });
 
     ToastService.success("Question saved!");

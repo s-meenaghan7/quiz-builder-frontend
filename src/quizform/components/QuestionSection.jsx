@@ -7,7 +7,7 @@ export default function QuestionSection({ currentQuestion, setCurrentQuestion })
     const currentQuestionUpdated = {
       ...currentQuestion,
       question: e.target.value
-    }
+    };
 
     setCurrentQuestion(currentQuestionUpdated);
   }

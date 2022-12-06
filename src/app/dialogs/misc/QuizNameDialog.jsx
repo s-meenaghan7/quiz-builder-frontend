@@ -38,7 +38,7 @@ export default function QuizNameDialog({ open, openDialog, data }) {
           />
         </div>
         <div className='dialog_footer'>
-          <button id='function_btn' onClick={() => functionBtnHandler()} disabled={quizName.trim() === ''}>OK</button>
+          <button id='ok_btn' onClick={() => functionBtnHandler()} disabled={quizName.trim() === ''}>OK</button>
         </div>
       </div>
     </div>,
