@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from 'react';
+import ToastService from '../app/toasts/ToastService';
 import QuestionTestControls from './test_controls/QuestionTestControls';
 import QuestionControls from './components/QuestionControls';
 import QuestionSection from './components/QuestionSection';
@@ -26,7 +27,7 @@ export default function QuizForm(props) {
 
   const formIsValid = () => {
     if (document.querySelector('#questionField').value.trim() === "") {
-      alert("Please enter a question and provide at least 2 answers.");
+      ToastService.warn("Question field is empty.");
       return false;
     }
 
@@ -36,7 +37,7 @@ export default function QuizForm(props) {
 
     for (let i = 0; i < answerFields.length; ++i) {
       if (answerFields[i].value.trim() === "") {
-        alert("Please provide an answer in each answer field added to this question.")
+        ToastService.warn("An answer field is empty.");
         return false;
       }
 
@@ -44,7 +45,7 @@ export default function QuizForm(props) {
     }
 
     if (!answered) {
-      alert("A correct answer must be indicated. Please select the correct answer to this question.");
+      ToastService.warn("A correct answer must be indicated.");
       return false;
     }
 
@@ -55,7 +56,8 @@ export default function QuizForm(props) {
     // save the currentQuestion to quizData[quizIndex]
     quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, newQuestion: currentQuestion });
 
-    alert('Question Saved.'); // delete/change later; would prefer a notification that does not pause the browser and require the user to click OK.
+    ToastService.success("Question saved!");
+
     setCurrentQuestion(blankQuestion);
   }
 
