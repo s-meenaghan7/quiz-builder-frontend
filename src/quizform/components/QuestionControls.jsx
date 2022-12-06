@@ -3,8 +3,9 @@ import '../styles/QuestionControls.css';
 
 export default function QuestionControls({ quizData, quizIndex, setQuizIndex, formIsValid, saveQuestion }) {
 
-  useEffect(() => { // Based on quizIndex, determine if Previous Question is disabled.
+  useEffect(() => { // Determine if Next and Previous question buttons are disabled/enabled.
     const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
 
     if (quizIndex === 0) {
       prev.setAttribute('disabled', true);
@@ -12,35 +13,39 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, fo
       prev.removeAttribute('disabled');
     }
 
-  }, [quizIndex]);
+    if (quizData.length === quizIndex) {
+      next.setAttribute('disabled', true);
+    } else {
+      next.removeAttribute('disabled');
+    }
+  }, [quizIndex, quizData.length]);
 
-  const previousQuestionHandler = () => {
-    if (!formIsValid()) return;
-
-    saveQuestion();
-
-    // navigate by decrementing quizIndex
+  const previousQuestionBtnHandler = () => {
     setQuizIndex(quizIndex => quizIndex - 1);
   }
 
-  const nextQuestionHandler = () => {
-    if (!formIsValid()) return;
-    
-    saveQuestion();
-
-    // navigate by incrementing quizIndex
+  const nextQuestionBtnHandler = () => {
     setQuizIndex(quizIndex => quizIndex + 1);
+  }
+
+  const saveQuestionBtnHandler = () => {
+    if (!formIsValid()) return;
+    saveQuestion();
   }
 
   return (
     <>
       <div className='question-controls'>
-        <button type='button' id='prev' onClick={() => previousQuestionHandler()}>
+        <button type='button' id='prev' onClick={() => previousQuestionBtnHandler()}>
           Previous Question
         </button>
 
-        <button type='button' id='next' onClick={() => nextQuestionHandler()}>
-          Next Question
+        <button type='button' id='save' onClick={() => saveQuestionBtnHandler()}>
+          Save Question
+        </button>
+
+        <button type='button' id='next' onClick={() => nextQuestionBtnHandler()}>
+          {(quizIndex === quizData.length) ? 'New' : 'Next'} Question
         </button>
       </div>
     </>
