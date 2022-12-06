@@ -3,8 +3,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 class ToastService {
 
-  success(msg) {
-    toast.success(msg, {
+  success(message) {
+    toast.success(message, {
       transition: Zoom,
       position: "top-center",
       autoClose: 2000,
@@ -17,8 +17,8 @@ class ToastService {
     });
   }
 
-  warn(msg) {
-    toast.warn(msg, {
+  warn(message) {
+    toast.warn(message, {
       position: "top-center",
       autoClose: 3000,
       hideProgressBar: false,
