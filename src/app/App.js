@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from './navbar/Navbar';
 import QuizForm from '../quizform/QuizForm';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, Flip } from 'react-toastify';
 
 export default function App() {
 
@@ -9,7 +9,8 @@ export default function App() {
     <div className='App'>
       <Navbar />
       <QuizForm />
-      <ToastContainer 
+      <ToastContainer
+        transition={Flip}
         position="top-center"
         autoClose={3000}
         hideProgressBar={false}

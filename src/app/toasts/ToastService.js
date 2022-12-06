@@ -1,10 +1,11 @@
-import { toast } from 'react-toastify';
+import { toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class ToastService {
 
   success(msg) {
     toast.success(msg, {
+      transition: Zoom,
       position: "top-center",
       autoClose: 2000,
       hideProgressBar: false,
