@@ -15,15 +15,17 @@ export default function QuizForm(props) {
   const [quizData, quizDataDispatch] = useReducer(reducer, []);
   const [currentQuestion, setCurrentQuestion] = useState(blankQuestion);
 
-  useEffect(() => {
-    if (quizData[quizIndex] === undefined) {
+  useEffect(() => { // determine currentQuestion value depending on quizIndex
+    if (quizIndex === quizData.length) {
       setCurrentQuestion(() => {
         return { ...blankQuestion, id: quizIndex + 1 };
       });
     } else {
-      setCurrentQuestion(() => quizData[quizIndex]);
+      setCurrentQuestion(() => {
+        return {  ...quizData[quizIndex] };
+      });
     }
-  }, [quizData, quizIndex]);
+  }, [quizIndex]);
 
   const formIsValid = () => {
     if (document.querySelector('#questionField').value.trim() === "") {
@@ -53,11 +55,9 @@ export default function QuizForm(props) {
   }
 
   const saveQuestion = () => {
-    quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, newQuestion: currentQuestion });
+    quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, newQuestion: {...currentQuestion} });
 
     ToastService.success("Question saved!");
-
-    setCurrentQuestion(blankQuestion);
   }
 
   return (
