@@ -4,19 +4,19 @@ import '../styles/QuestionControls.css';
 export default function QuestionControls({ quizData, quizIndex, setQuizIndex, formIsValid, saveQuestion }) {
 
   useEffect(() => { // Determine if Next and Previous question buttons are disabled/enabled.
-    const prev = document.getElementById('prev');
-    const next = document.getElementById('next');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
 
     if (quizIndex === 0) {
-      prev.setAttribute('disabled', true);
+      prevBtn.setAttribute('disabled', true);
     } else {
-      prev.removeAttribute('disabled');
+      prevBtn.removeAttribute('disabled');
     }
 
-    if (quizData.length === quizIndex) {
-      next.setAttribute('disabled', true);
+    if (quizIndex === (quizData.length - 1)) {
+      nextBtn.setAttribute('disabled', true);
     } else {
-      next.removeAttribute('disabled');
+      nextBtn.removeAttribute('disabled');
     }
   }, [quizIndex, quizData.length]);
 
@@ -45,7 +45,7 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, fo
         </button>
 
         <button type='button' id='next' onClick={() => nextQuestionBtnHandler()}>
-          {(quizIndex === quizData.length) ? 'New' : 'Next'} Question
+          {(quizIndex === (quizData.length - 1)) ? 'New' : 'Next'} Question
         </button>
       </div>
     </>

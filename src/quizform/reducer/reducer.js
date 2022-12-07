@@ -1,21 +1,17 @@
+import { blankQuestion } from "./blankQuestion";
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "SAVE_QUESTION":
-      // if action.index === state.length, then this is a new question to simply add to state and return
-      if (action.index === state.length) {
-        state.push(action.newQuestion);
-        return state;
-      }
-      // else, we are overwriting a saved question
-      const newQuizData = state.map((q, i) => {
-        if (i === action.index) {
-          return action.newQuestion;
-        } else {
-          return q;
-        }
+      const newState = state.map((question, i) => {
+        return (action.index === i) ? action.newQuestion : question;
       });
 
-      return newQuizData;
+      if (action.index === (state.length - 1)) {
+        newState.push({ ...blankQuestion, id: state.length + 1 });
+      }
+
+      return newState;
     
     case "DELETE_QUESTION":
       // remove the question whose index === quizIndex (action.id)

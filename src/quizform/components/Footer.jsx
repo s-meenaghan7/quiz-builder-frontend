@@ -5,6 +5,7 @@ import { blankQuestion } from '../reducer/blankQuestion';
 import '../styles/Footer.css';
 
 export default function Footer({ quizIndex, quizData, quizDataDispatch, setCurrentQuestion }) {
+  
   const [resetFormDialogIsOpen, setResetFormDialogIsOpen] = useState(false);
   const [deleteQuestionDialogIsOpen, setDeleteQuestionDialogIsOpen] = useState(false);
   const [submitQuizDialogIsOpen, setSubmitQuizDialogIsOpen] = useState(false);
@@ -14,13 +15,13 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch, setCurre
     const submitBtn = document.getElementById('submit');
     const deleteBtn = document.getElementById('delete');
 
-    if (quizData.length < 1) {
+    if (quizData.length < 2) {
       submitBtn.setAttribute('disabled', true);
     } else {
       submitBtn.removeAttribute('disabled');
     }
 
-    if (quizData.length === 0 || quizIndex === quizData.length) {
+    if (quizIndex === (quizData.length - 1)) {
       deleteBtn.setAttribute('disabled', true);
     } else {
       deleteBtn.removeAttribute('disabled');
@@ -41,7 +42,7 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch, setCurre
   const submitQuiz = () => {
     const completeQuiz = [
       { quizName: document.getElementById('quiz_name').value }, 
-      quizData
+      quizData.slice(0, quizData.length - 1)
     ];
 
     console.log(JSON.stringify(completeQuiz, null, 2)); // logs to console for now; will eventually be sent to backend DB
@@ -68,7 +69,7 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch, setCurre
         open={submitQuizDialogIsOpen}
         openDialog={setSubmitQuizDialogIsOpen}
         data={{ title: "Submit Quiz?",
-                description: `Are you sure you're ready to save this quiz? (Questions: ${quizData.length})`,
+                description: `Are you sure you're ready to save this quiz? (Questions: ${quizData.length - 1})`,
                 dialogFunction: getQuizName,
                 functionBtnText: "Submit Quiz" }}
       />

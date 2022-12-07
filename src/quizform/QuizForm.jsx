@@ -12,19 +12,13 @@ import './QuizForm.css';
 
 export default function QuizForm(props) {
   let [quizIndex, setQuizIndex] = useState(0);
-  const [quizData, quizDataDispatch] = useReducer(reducer, []);
+  const [quizData, quizDataDispatch] = useReducer(reducer, [blankQuestion]);
   const [currentQuestion, setCurrentQuestion] = useState(blankQuestion);
 
-  useEffect(() => { // determine currentQuestion value depending on quizIndex
-    if (quizIndex === quizData.length) {
-      setCurrentQuestion(() => {
-        return { ...blankQuestion, id: quizIndex + 1 };
-      });
-    } else {
-      setCurrentQuestion(() => {
-        return {  ...quizData[quizIndex] };
-      });
-    }
+  useEffect(() => { // setCurrentQuestion based on quizData[quizIndex];
+    setCurrentQuestion(() => {
+      return {  ...quizData[quizIndex] };
+    });
   }, [quizIndex]);
 
   const formIsValid = () => {
@@ -80,7 +74,7 @@ export default function QuizForm(props) {
           />
 
           <QuestionSection
-            key={`Q${currentQuestion.id}`}
+            key={`Q${quizIndex + 1}`}
             currentQuestion={currentQuestion}
             setCurrentQuestion={setCurrentQuestion}
           />
@@ -91,7 +85,7 @@ export default function QuizForm(props) {
           />
 
           <AnswerSection
-            key={`A${currentQuestion.id}`}
+            key={`A${quizIndex + 1}`}
             currentQuestion={currentQuestion}
             setCurrentQuestion={setCurrentQuestion}
           />
