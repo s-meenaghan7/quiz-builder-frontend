@@ -19,7 +19,8 @@ export default function QuizForm(props) {
     setCurrentQuestion(() => {
       return {  ...quizData[quizIndex] };
     });
-  }, [quizIndex]);
+
+  }, [quizData, quizIndex]);
 
   const formIsValid = () => {
     if (document.querySelector('#questionField').value.trim() === "") {

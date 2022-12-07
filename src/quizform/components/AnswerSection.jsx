@@ -47,7 +47,7 @@ export default function AnswerSection({ currentQuestion, setCurrentQuestion }) {
             currentQuestion.options.map((a) =>
               <Answer
                 key={a.id}
-                answerData={a}
+                answerData={{...a}}
                 answerTextChanged={answerTextChanged}
                 correctAnswerChanged={correctAnswerChanged}
               />
