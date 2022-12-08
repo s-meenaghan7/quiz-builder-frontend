@@ -1,9 +1,8 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useReducer, useState } from 'react';
 import ToastService from '../app/toasts/ToastService';
 import QuestionTestControls from './test_controls/QuestionTestControls';
 import QuestionControls from './components/QuestionControls';
 import QuestionSection from './components/QuestionSection';
-import AnswerControls from './components/AnswerControls';
 import AnswerSection from './components/AnswerSection';
 import Footer from './components/Footer';
 import reducer from './reducer/reducer';
@@ -13,14 +12,6 @@ import './QuizForm.css';
 export default function QuizForm(props) {
   let [quizIndex, setQuizIndex] = useState(0);
   const [quizData, quizDataDispatch] = useReducer(reducer, [blankQuestion]);
-  const [currentQuestion, setCurrentQuestion] = useState(blankQuestion);
-
-  useEffect(() => { // setCurrentQuestion based on quizData[quizIndex];
-    setCurrentQuestion(() => {
-      return {  ...quizData[quizIndex] };
-    });
-
-  }, [quizData, quizIndex]);
 
   const formIsValid = () => {
     if (document.querySelector('#questionField').value.trim() === "") {
@@ -49,9 +40,25 @@ export default function QuizForm(props) {
     return true;
   }
 
-  const saveQuestion = () => {
-    quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, newQuestion: {...currentQuestion} });
+  const getAnswersFromForm = () => {
+    const newAnswers = [];
+    const answersFormData = document.querySelectorAll('.answerRow');
 
+    for (let i = 0; i < answersFormData.length; ++i) {
+      let newAnswer = {};
+
+      newAnswer.id = parseInt(answersFormData[i].children[0].innerHTML, 10);
+      newAnswer.answer = answersFormData[i].children[1].children[0].value;
+      newAnswer.isCorrect = answersFormData[i].children[2].children[0].checked;
+
+      newAnswers.push(newAnswer);
+    }
+
+    return newAnswers;
+  }
+
+  const saveQuestion = () => {
+    quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, setAnswers: getAnswersFromForm });
     ToastService.success("Question saved!");
   }
 
@@ -61,7 +68,7 @@ export default function QuizForm(props) {
         hidden={false}
         quizIndex={quizIndex}
         quizData={quizData}
-        currentQuestion={currentQuestion}
+        currentQuestion={quizData[quizIndex]}
       />
 
       <div className='quizform' key={quizData.length}> 
@@ -76,19 +83,12 @@ export default function QuizForm(props) {
 
           <QuestionSection
             key={`Q${quizIndex + 1}`}
-            currentQuestion={currentQuestion}
-            setCurrentQuestion={setCurrentQuestion}
-          />
-
-          <AnswerControls
-            currentQuestion={currentQuestion}
-            setCurrentQuestion={setCurrentQuestion}
+            currentQuestion={quizData[quizIndex]}
           />
 
           <AnswerSection
             key={`A${quizIndex + 1}`}
-            currentQuestion={currentQuestion}
-            setCurrentQuestion={setCurrentQuestion}
+            currentQuestion={quizData[quizIndex]}
           />
         </form>
       </div>
@@ -97,7 +97,6 @@ export default function QuizForm(props) {
         quizIndex={quizIndex}
         quizData={quizData}
         quizDataDispatch={quizDataDispatch}
-        setCurrentQuestion={setCurrentQuestion}
       />
     </>
   );

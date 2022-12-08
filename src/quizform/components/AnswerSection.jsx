@@ -1,60 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Answer from './Answer';
 import '../styles/AnswerSection.css';
 
-export default function AnswerSection({ currentQuestion, setCurrentQuestion }) {
+export default function AnswerSection({ currentQuestion }) {
+  let [answers, setAnswers] = useState(currentQuestion.options);
 
-  const correctAnswerChanged = () => {
-    const radios = document.querySelectorAll('input[name=isCorrect]');
+  useEffect(() => {
+    const minusButton = document.getElementById('subtract_answer');
 
-    const newOptions = [...currentQuestion.options].map((option, i) => {
-      return { ...option, isCorrect: radios[i].checked };
-    });
+    if (answers.length <= 2) {
+      minusButton.setAttribute('disabled', true);
+    } else {
+      minusButton.removeAttribute('disabled');
+    }
+    
+  }, [answers.length]);
 
-    const currentQuestionUpdated = {
-      ...currentQuestion,
-      options: newOptions
-    };
-
-    setCurrentQuestion(currentQuestionUpdated);
+  const addAnswerField = () => {
+    setAnswers(answers => [ ...answers, { id: answers.length + 1, answer: "", isCorrect: false } ]);
   }
 
-  const answerTextChanged = (e, id) => {
-    const newOptions = [...currentQuestion.options];
-    newOptions[id - 1].answer = e.target.value;
-
-    const currentQuestionUpdated = {
-      ...currentQuestion,
-      options: newOptions
-    };
-
-    setCurrentQuestion(currentQuestionUpdated);
+  const subtractAnswerField = () => {
+    setAnswers(answers => answers.slice(0, answers.length - 1));
   }
 
   return (
-    <div className='answer-section'>
-      <table id='answer-table' width='100%'>
-        <thead>
-          <tr>
-            <th>Answer ID</th>
-            <th>Answer</th>
-            <th>Is Correct?</th>
-          </tr>
-        </thead>
+    <>
+      <div className='answer-controls'>
+        <button type='button' id='subtract_answer' onClick={() => subtractAnswerField()}>-</button>
+        <button type='button' id='add_answer' onClick={() => addAnswerField()}>+</button>
+      </div>
 
-        <tbody>
-          {
-            currentQuestion.options.map((a) =>
-              <Answer
-                key={a.id}
-                answerData={{...a}}
-                answerTextChanged={answerTextChanged}
-                correctAnswerChanged={correctAnswerChanged}
-              />
-            )
-          }
-        </tbody>
-      </table>
-    </div>
+      <div className='answer-section'>
+        <table id='answer-table' width='100%'>
+          <thead>
+            <tr>
+              <th>Answer ID</th>
+              <th>Answer</th>
+              <th>Is Correct?</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {
+              answers.map((a) =>
+                <Answer
+                  key={a.id}
+                  answerData={{...a}}
+                />
+              )
+            }
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }

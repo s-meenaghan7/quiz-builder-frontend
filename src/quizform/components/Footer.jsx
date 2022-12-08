@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ConfirmDialog from '../../app/dialogs/confirm/ConfirmDialog';
 import QuizNameDialog from '../../app/dialogs/misc/QuizNameDialog';
-import { blankQuestion } from '../reducer/blankQuestion';
 import '../styles/Footer.css';
 
-export default function Footer({ quizIndex, quizData, quizDataDispatch, setCurrentQuestion }) {
+export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
   
   const [resetFormDialogIsOpen, setResetFormDialogIsOpen] = useState(false);
   const [deleteQuestionDialogIsOpen, setDeleteQuestionDialogIsOpen] = useState(false);
@@ -30,9 +29,7 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch, setCurre
 
   const resetForm = () => {
     // set currentQuestion to blankQuestion, but maintain the id
-    setCurrentQuestion((currentQuestion) => {
-      return { ...blankQuestion, id: currentQuestion.id }
-    });
+    
   }
 
   const deleteQuestion = () => {

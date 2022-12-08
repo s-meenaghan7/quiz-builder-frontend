@@ -1,6 +1,6 @@
 import '../styles/Answer.css';
 
-export default function Answer({ answerData, answerTextChanged, correctAnswerChanged }) {
+export default function Answer({ answerData }) {
 
   return (
     <tr className='answerRow'>
@@ -16,7 +16,6 @@ export default function Answer({ answerData, answerTextChanged, correctAnswerCha
           id={`answer${answerData.id}`}
           placeholder={`Answer ${answerData.id}`}
           defaultValue={answerData.answer}
-          onChange={(e) => answerTextChanged(e, answerData.id)}
           required
         />
       </td>
@@ -28,7 +27,6 @@ export default function Answer({ answerData, answerTextChanged, correctAnswerCha
           className='radio'
           id={`radio${answerData.id}`}
           defaultChecked={answerData.isCorrect}
-          onChange={(e) => correctAnswerChanged(e)}
         />
         <label htmlFor={`radio${answerData.id}`}></label>
       </td>

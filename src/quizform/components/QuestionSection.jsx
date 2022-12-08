@@ -1,16 +1,7 @@
 import React from 'react';
 import '../styles/QuestionSection.css';
 
-export default function QuestionSection({ currentQuestion, setCurrentQuestion }) {
-
-  const questionChanged = (e) => {
-    const currentQuestionUpdated = {
-      ...currentQuestion,
-      question: e.target.value
-    };
-
-    setCurrentQuestion(currentQuestionUpdated);
-  }
+export default function QuestionSection({ currentQuestion }) {
 
   return (
     <div className='question-section'>
@@ -23,7 +14,6 @@ export default function QuestionSection({ currentQuestion, setCurrentQuestion })
           type='text'
           placeholder={`Question ${currentQuestion.id}`}
           defaultValue={currentQuestion.question}
-          onChange={(e) => questionChanged(e)}
           required
         />
       </label>

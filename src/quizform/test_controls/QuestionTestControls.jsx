@@ -17,7 +17,7 @@ export default function QuestionTestControls({ hidden, quizIndex, quizData, curr
     <div className='question-test-controls'>
         <button className='test_control' type='button' onClick={() => console.log(quizIndex)}>Quiz Index</button>
         <button className='test_control' type='button' onClick={() => console.log(quizData)}>Quiz Data</button>
-        <button className='test_control' type='button' onClick={() => console.log(currentQuestion)}>Current Question</button>
+        {/* <button className='test_control' type='button' onClick={() => console.log(currentQuestion)}>Current Question</button> */}
       </div>
   );
 }

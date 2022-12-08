@@ -3,15 +3,26 @@ import { blankQuestion } from "./blankQuestion";
 const reducer = (state, action) => {
   switch (action.type) {
     case "SAVE_QUESTION":
-      const newState = state.map((question, i) => {
-        return (action.index === i) ? action.newQuestion : question;
+      const newQuizData = state.map((q, i) => {
+        if (i === action.index) {
+          return {
+            id: i + 1,
+            question: document.querySelector('#questionField').value,
+            options: [
+              ...action.setAnswers()
+            ]
+          };
+        } else {
+          return q;
+        }
       });
 
-      if (action.index === (state.length - 1)) {
-        newState.push({ ...blankQuestion, id: state.length + 1 });
+      if (action.index === newQuizData.length - 1) {
+        // create new blank question if we are saving question at end of quizData array
+        newQuizData.push({ ...blankQuestion, id: newQuizData.length + 1 });
       }
 
-      return newState;
+      return newQuizData;
     
     case "DELETE_QUESTION":
       // remove the question whose index === quizIndex (action.id)
