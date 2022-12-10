@@ -28,8 +28,12 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
   }, [quizIndex, quizData.length]);
 
   const resetForm = () => {
-    // set currentQuestion to blankQuestion, but maintain the id
-    
+    document.querySelector('#questionField').value = '';
+    const answersFormData = document.querySelectorAll('.answerRow');
+
+    for (let i = answersFormData.length - 1; i >= 0; --i) {
+      answersFormData[i].children[1].children[0].value = '';
+    }
   }
 
   const deleteQuestion = () => {
@@ -56,7 +60,7 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
         open={resetFormDialogIsOpen}
         openDialog={setResetFormDialogIsOpen}
         data={{ title: "Reset Form?",
-                description: "Resetting the form clears all fields and resets the number of answers to the default of two (does not alter saved question data).",
+                description: "Resetting the form clears all question and answer fields of the form, but does not affect saved data.",
                 dialogFunction: resetForm,
                 functionBtnText: "Reset Form" }}
       />
