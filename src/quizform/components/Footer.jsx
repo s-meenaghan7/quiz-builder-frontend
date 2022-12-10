@@ -54,8 +54,36 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
   }
 
   return (
-    <footer className='quizform_footer'>
-      <button type='button' id='reset' className='footer_button reset' onClick={() => setResetFormDialogIsOpen(true)}>RESET FORM</button>
+    <>
+      <footer className='quizform_footer'>
+        <button
+          type='button'
+          id='reset'
+          className='footer_button reset'
+          onClick={() => setResetFormDialogIsOpen(true)}
+        >
+          RESET FORM
+        </button>
+
+        <button 
+          type='button'
+          id='submit'
+          className='footer_button submit'
+          onClick={() => setSubmitQuizDialogIsOpen(true)}
+        >
+          SUBMIT QUIZ
+        </button>
+
+        <button
+          type='button'
+          id='delete'
+          className='footer_button delete'
+          onClick={() => setDeleteQuestionDialogIsOpen(true)}
+        >
+          DELETE QUESTION
+        </button>
+      </footer>
+
       <ConfirmDialog
         open={resetFormDialogIsOpen}
         openDialog={setResetFormDialogIsOpen}
@@ -64,8 +92,6 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
                 dialogFunction: resetForm,
                 functionBtnText: "Reset Form" }}
       />
-
-      <button type='button' id='submit' className='footer_button submit' onClick={() => setSubmitQuizDialogIsOpen(true)}>SUBMIT QUIZ</button>
       <ConfirmDialog
         open={submitQuizDialogIsOpen}
         openDialog={setSubmitQuizDialogIsOpen}
@@ -79,8 +105,6 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
         openDialog={setQuizNameDialogIsOpen}
         data={{ dialogFunction: submitQuiz }}
       />
-
-      <button type='button' id='delete' className='footer_button delete' onClick={() => setDeleteQuestionDialogIsOpen(true)}>DELETE QUESTION</button>
       <ConfirmDialog
         open={deleteQuestionDialogIsOpen}
         openDialog={setDeleteQuestionDialogIsOpen}
@@ -89,6 +113,6 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
                 dialogFunction: deleteQuestion,
                 functionBtnText: "Delete Question" }}
       />
-    </footer>
+    </>
   );
 }
