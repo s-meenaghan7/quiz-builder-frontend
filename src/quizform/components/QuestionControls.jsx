@@ -34,7 +34,6 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, fo
   }
 
   return (
-    <>
       <div className='question-controls'>
         <button type='button' id='prev' onClick={() => previousQuestionBtnHandler()}>
           Previous Question
@@ -45,9 +44,8 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, fo
         </button>
 
         <button type='button' id='next' onClick={() => nextQuestionBtnHandler()}>
-          {(quizIndex === (quizData.length - 1)) ? 'New' : 'Next'} Question
+          {(quizIndex >= (quizData.length - 2)) ? 'New' : 'Next'} Question
         </button>
       </div>
-    </>
   );
 }
