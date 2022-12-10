@@ -40,7 +40,10 @@ export default function QuizForm(props) {
     return true;
   }
 
-  const getAnswersFromForm = () => {
+  const getQuestionFromForm = () => {
+    const newId = quizIndex + 1;
+    const newQuestion = document.querySelector('#questionField').value;
+
     const newAnswers = [];
     const answersFormData = document.querySelectorAll('.answerRow');
 
@@ -54,11 +57,11 @@ export default function QuizForm(props) {
       newAnswers.push(newAnswer);
     }
 
-    return newAnswers;
+    return { id: newId, question: newQuestion, options: newAnswers };
   }
 
   const saveQuestion = () => {
-    quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, setAnswers: getAnswersFromForm });
+    quizDataDispatch({ type: "SAVE_QUESTION", index: quizIndex, getNewQuestion: getQuestionFromForm });
     ToastService.success("Question saved!");
   }
 

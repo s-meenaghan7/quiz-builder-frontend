@@ -5,13 +5,7 @@ const reducer = (state, action) => {
     case "SAVE_QUESTION":
       const newQuizData = state.map((q, i) => {
         if (i === action.index) {
-          return {
-            id: i + 1,
-            question: document.querySelector('#questionField').value,
-            options: [
-              ...action.setAnswers()
-            ]
-          };
+          return action.getNewQuestion();
         } else {
           return q;
         }
