@@ -10,9 +10,15 @@ export default function ConfirmDialog({ open, openDialog, data }) {
     openDialog(false);
   }
 
+  const backgroundClickHandler = (e) => {
+    if (e.target.className === 'dialog_background') {
+      openDialog(false);
+    }
+  }
+
   return ReactDom.createPortal(
 
-    <div className='dialog_background'>
+    <div className='dialog_background' onClick={(e) => backgroundClickHandler(e)}>
       <div className='dialog_container'>
         <div className='title_close_btn'>
           <button onClick={() => openDialog(false)}> &times; </button>
