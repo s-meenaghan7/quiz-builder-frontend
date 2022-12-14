@@ -6,6 +6,20 @@
 
 html {
   overflow-y: scroll;
+  scrollbar-width: 1.1vw;
+  scrollbar-color: #af8a01 #00008b;
+}
+
+html::-webkit-scrollbar {
+  width: 1.1vw;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #af8a01;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: #00008b;
 }
 
 body {
