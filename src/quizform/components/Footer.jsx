@@ -40,7 +40,8 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
     quizDataDispatch({ type: "DELETE_QUESTION", id: quizIndex });
   }
 
-  const submitQuiz = () => {
+  const submitQuiz = (e) => {
+    // e.preventDefault();
     const completeQuiz = [
       { quizName: document.getElementById('quiz_name').value }, 
       quizData.slice(0, quizData.length - 1)

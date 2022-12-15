@@ -7,8 +7,8 @@ export default function QuizNameDialog({ open, openDialog, data }) {
 
   if (!open) return null;
 
-  const functionBtnHandler = () => {
-    data.dialogFunction();
+  const functionBtnHandler = (e) => {
+    data.dialogFunction(e);
     openDialog(false);
   }
 
@@ -44,7 +44,7 @@ export default function QuizNameDialog({ open, openDialog, data }) {
           />
         </div>
         <div className='dialog_footer'>
-          <button id='ok_btn' onClick={() => functionBtnHandler()} disabled={quizName.trim() === ''}>OK</button>
+          <button id='ok_btn' type='submit' onClick={(e) => functionBtnHandler(e)} disabled={quizName.trim() === ''}>OK</button>
         </div>
       </div>
     </div>,

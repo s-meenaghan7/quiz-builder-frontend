@@ -74,8 +74,8 @@ export default function QuizForm(props) {
         currentQuestion={quizData[quizIndex]}
       />
 
-      <div className='quizform' key={quizData.length}> 
-        <form autoComplete='off'>
+      <div className='quizform' key={quizData.length}>
+        <form action='' autoComplete='off' method='POST'>
           <QuestionControls
             quizData={quizData}
             quizIndex={quizIndex}
@@ -93,14 +93,14 @@ export default function QuizForm(props) {
             key={`A${quizIndex + 1}`}
             currentQuestion={quizData[quizIndex]}
           />
+
+          <Footer
+            quizIndex={quizIndex}
+            quizData={quizData}
+            quizDataDispatch={quizDataDispatch}
+          />
         </form>
       </div>
-      
-      <Footer
-        quizIndex={quizIndex}
-        quizData={quizData}
-        quizDataDispatch={quizDataDispatch}
-      />
     </>
   );
 }

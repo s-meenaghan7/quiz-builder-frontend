@@ -9,7 +9,7 @@ export default function QuestionSection({ currentQuestion }) {
 
       <label>
         <input
-          name='questionField'
+          name='question'
           id='questionField'
           type='text'
           placeholder={`Question ${currentQuestion.id}`}
