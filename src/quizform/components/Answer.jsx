@@ -4,7 +4,7 @@ export default function Answer({ answerData }) {
 
   return (
     <tr className='answerRow'>
-      <td style={{ fontWeight: 'bold', fontSize: '1.2em' }}>
+      <td id='answerRow_id'>
         {answerData.id}
       </td>
       

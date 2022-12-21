@@ -43,10 +43,10 @@ export default function AnswerSection({ currentQuestion }) {
 
           <tbody>
             {
-              answers.map((a) =>
+              answers.map((a, i) =>
                 <Answer
                   key={a.id}
-                  answerData={{...a}}
+                  answerData={{...a, id: i + 1}}
                 />
               )
             }

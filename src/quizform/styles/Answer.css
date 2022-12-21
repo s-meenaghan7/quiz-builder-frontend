@@ -6,6 +6,11 @@
   -ms-animation: fadeIn 0.5s;
 }
 
+#answerRow_id {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
 .answer::placeholder {
   color: var(--darkBlue);
   opacity: 0.6;
