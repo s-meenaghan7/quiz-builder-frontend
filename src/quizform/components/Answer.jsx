@@ -12,7 +12,7 @@ export default function Answer({ answerData }) {
         <input 
           type='text'
           name='answer'
-          className='answer'
+          className='quizform_input'
           id={`answer${answerData.id}`}
           placeholder={`Answer ${answerData.id}`}
           defaultValue={answerData.answer}

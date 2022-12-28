@@ -11,11 +11,11 @@
   font-size: 1.2em;
 }
 
-.answer::placeholder {
+/* .answer::placeholder {
   color: var(--darkBlue);
   opacity: 0.6;
   font-style: italic;
-}
+} */
 
 @keyframes fadeIn {
   0% { opacity: 0; }

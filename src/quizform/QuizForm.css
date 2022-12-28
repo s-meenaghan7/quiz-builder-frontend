@@ -9,7 +9,7 @@
 }
 
 /* ------------------- TEXT INPUTS ------------------- */
-input[type=text] {
+.quizform_input {
   width: 100%;
   border: 3px solid var(--detailOrange);
   border-radius: 5px;
@@ -24,13 +24,19 @@ input[type=text] {
   text-align: center;
 }
 
-input[type=text]:focus {
+.quizform_input:focus {
   border-color: var(--detailOrange);
   box-shadow: 0 0 12px 0 var(--detailOrange);
   background-color: #00b7ff;
 }
 
-input[type=text]:hover {
+.quizform_input:hover {
   border-color: var(--detailOrange);
   box-shadow: 0 0 12px 0 var(--detailOrange);
+}
+
+.quizform_input::placeholder {
+  color: var(--darkBlue);
+  opacity: 0.6;
+  font-style: italic;
 }

@@ -12,6 +12,7 @@ export default function QuestionSection({ currentQuestion }) {
           name='question'
           id='questionField'
           type='text'
+          className='quizform_input'
           placeholder={`Question ${currentQuestion.id}`}
           defaultValue={currentQuestion.question}
           required
