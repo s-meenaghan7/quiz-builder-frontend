@@ -1,12 +1,39 @@
 import React from 'react';
 import './LoginForm.css';
 
-function LoginForm(props) {
+export default function LoginForm(props) {
+
   return (
-    <div>
-      Hello, Login Form!
+    <div className='loginform'>
+      <form autoComplete='off'>
+        <h1 className='login_title'>Log in</h1>
+
+        <label htmlFor='email'>Email</label>
+        <input
+          className='loginform_input'
+          type="text"
+          placeholder="Email"
+          name="email"
+          required
+        />
+
+        <label htmlFor='password'>Password</label>
+        <input
+          className='loginform_input'
+          type="password"
+          placeholder="Password"
+          name="password"
+          required
+        />
+
+        <button
+          type='button'
+          className='login_btn'
+        >
+          LOG IN
+        </button>
+
+      </form>
     </div>
   );
 }
-
-export default LoginForm;
