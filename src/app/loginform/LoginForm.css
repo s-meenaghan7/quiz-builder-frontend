@@ -21,12 +21,16 @@ a {
 }
 
 .loginform {
+  display: flex;
+  flex-direction: column;
+
   padding: 2.5%;
   color: var(--detailOrange);
   border: 4px solid var(--detailOrange);
   background-color: var(--lightBlue);
   border-radius: 30px;
-  margin: 5% 30% 5% 30%;
+  /* margin: 5% 30% 5% 30%; */
+  width: 50%;
 }
 
 /* ------------------- INPUT FIELDS ------------------- */

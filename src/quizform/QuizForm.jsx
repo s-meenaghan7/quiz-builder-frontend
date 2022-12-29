@@ -1,6 +1,5 @@
 import { useReducer, useState } from 'react';
 import ToastService from '../app/toasts/ToastService';
-import QuestionTestControls from './test_controls/QuestionTestControls';
 import QuestionControls from './components/QuestionControls';
 import QuestionSection from './components/QuestionSection';
 import AnswerSection from './components/AnswerSection';
@@ -66,41 +65,34 @@ export default function QuizForm(props) {
   }
 
   return (
-    <>
-      <QuestionTestControls
-        hidden={false}
-        quizIndex={quizIndex}
-        quizData={quizData}
-        currentQuestion={quizData[quizIndex]}
-      />
+    // if QuestionTestControls are needed, they should go outside the quizform div
+    
+    <div className='quizform' key={quizData.length}>
+      <form action='' autoComplete='off' method='POST'>
+        <QuestionControls
+          quizData={quizData}
+          quizIndex={quizIndex}
+          setQuizIndex={setQuizIndex}
+          formIsValid={formIsValid}
+          saveQuestion={saveQuestion}
+        />
 
-      <div className='quizform' key={quizData.length}>
-        <form action='' autoComplete='off' method='POST'>
-          <QuestionControls
-            quizData={quizData}
-            quizIndex={quizIndex}
-            setQuizIndex={setQuizIndex}
-            formIsValid={formIsValid}
-            saveQuestion={saveQuestion}
-          />
+        <QuestionSection
+          key={`Q${quizIndex + 1}`}
+          currentQuestion={quizData[quizIndex]}
+        />
 
-          <QuestionSection
-            key={`Q${quizIndex + 1}`}
-            currentQuestion={quizData[quizIndex]}
-          />
+        <AnswerSection
+          key={`A${quizIndex + 1}`}
+          currentQuestion={quizData[quizIndex]}
+        />
 
-          <AnswerSection
-            key={`A${quizIndex + 1}`}
-            currentQuestion={quizData[quizIndex]}
-          />
-
-          <Footer
-            quizIndex={quizIndex}
-            quizData={quizData}
-            quizDataDispatch={quizDataDispatch}
-          />
-        </form>
-      </div>
-    </>
+        <Footer
+          quizIndex={quizIndex}
+          quizData={quizData}
+          quizDataDispatch={quizDataDispatch}
+        />
+      </form>
+    </div>
   );
 }
