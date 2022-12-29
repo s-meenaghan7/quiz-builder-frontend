@@ -1,5 +1,6 @@
 import { useReducer, useState } from 'react';
 import ToastService from '../app/toasts/ToastService';
+import QuestionTestControls from './test_controls/QuestionTestControls';
 import QuestionControls from './components/QuestionControls';
 import QuestionSection from './components/QuestionSection';
 import AnswerSection from './components/AnswerSection';
@@ -65,34 +66,40 @@ export default function QuizForm(props) {
   }
 
   return (
-    // if QuestionTestControls are needed, they should go outside the quizform div
-    
-    <div className='quizform' key={quizData.length}>
-      <form action='' autoComplete='off' method='POST'>
-        <QuestionControls
-          quizData={quizData}
-          quizIndex={quizIndex}
-          setQuizIndex={setQuizIndex}
-          formIsValid={formIsValid}
-          saveQuestion={saveQuestion}
-        />
+    <>
+      <QuestionTestControls 
+        hidden={true}
+        quizIndex={quizIndex}
+        quizData={quizData}
+      />
 
-        <QuestionSection
-          key={`Q${quizIndex + 1}`}
-          currentQuestion={quizData[quizIndex]}
-        />
+      <div className='quizform' key={quizData.length}>
+        <form action='' autoComplete='off' method='POST'>
+          <QuestionControls
+            quizData={quizData}
+            quizIndex={quizIndex}
+            setQuizIndex={setQuizIndex}
+            formIsValid={formIsValid}
+            saveQuestion={saveQuestion}
+          />
 
-        <AnswerSection
-          key={`A${quizIndex + 1}`}
-          currentQuestion={quizData[quizIndex]}
-        />
+          <QuestionSection
+            key={`Q${quizIndex + 1}`}
+            currentQuestion={quizData[quizIndex]}
+          />
 
-        <Footer
-          quizIndex={quizIndex}
-          quizData={quizData}
-          quizDataDispatch={quizDataDispatch}
-        />
-      </form>
-    </div>
+          <AnswerSection
+            key={`A${quizIndex + 1}`}
+            currentQuestion={quizData[quizIndex]}
+          />
+
+          <Footer
+            quizIndex={quizIndex}
+            quizData={quizData}
+            quizDataDispatch={quizDataDispatch}
+          />
+        </form>
+      </div>
+    </>
   );
 }
