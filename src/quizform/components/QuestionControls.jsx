@@ -34,18 +34,35 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, fo
   }
 
   return (
-      <div className='question-controls'>
-        <button type='button' id='prev' onClick={() => previousQuestionBtnHandler()}>
-          Previous Question
-        </button>
+    <div className='question-controls'>
 
-        <button type='button' id='save' onClick={() => saveQuestionBtnHandler()}>
-          Save Question
-        </button>
+      <button 
+        type='button'
+        className='qc-button'
+        id='prev'
+        onClick={() => previousQuestionBtnHandler()}
+      >
+        Previous Question
+      </button>
 
-        <button type='button' id='next' onClick={() => nextQuestionBtnHandler()}>
-          {(quizIndex >= (quizData.length - 2)) ? 'New' : 'Next'} Question
-        </button>
-      </div>
+      <button
+        type='button'
+        className='qc-button'
+        id='save'
+        onClick={() => saveQuestionBtnHandler()}
+      >
+        Save Question
+      </button>
+
+      <button
+        type='button'
+        className='qc-button'
+        id='next'
+        onClick={() => nextQuestionBtnHandler()}
+      >
+        {(quizIndex >= (quizData.length - 2)) ? 'New' : 'Next'} Question
+      </button>
+
+    </div>
   );
 }

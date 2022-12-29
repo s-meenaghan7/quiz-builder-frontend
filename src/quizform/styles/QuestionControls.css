@@ -9,7 +9,7 @@
 }
 
 /* QUESTION SECTION BUTTONS */
-.question-controls button {
+.qc-button {
   padding: 12px;
   border-radius: 10px;
   border: 2px solid #000;
@@ -20,25 +20,25 @@
   transition: .125s;
 }
 
-.question-controls > button:hover {
+.qc-button:hover {
   background-color: #ffe600;
   cursor: pointer;
 }
 
-.question-controls > button:active {
+.qc-button:active {
   background-color: #ff7b00;
 }
 
-.question-controls > button:disabled {
+.qc-button:disabled {
   opacity: 0.5;
 }
 
-.question-controls > button:disabled:hover {
+.qc-button:disabled:hover {
   background-color: var(--detailOrange);
   color: var(--darkBlue);
   cursor: not-allowed;
 }
 
-.question-controls > button:disabled:active {
+.qc-button:disabled:active {
   background-color: var(--detailOrange);
 }
