@@ -33,6 +33,12 @@ export default function LoginForm(props) {
           LOG IN
         </button>
 
+        <div className='links_container'>
+          <a href='#'>New? Create a free account!</a>
+          <p>OR</p>
+          <a href='#'>Continue as Guest!</a>
+        </div>
+ 
       </form>
     </div>
   );
