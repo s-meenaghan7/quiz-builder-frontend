@@ -11,7 +11,6 @@ p {
 }
 
 a {
-  /* color: #fff; */
   color: var(--detailOrange);
   font-weight: bold;
 }
@@ -23,14 +22,13 @@ a {
 .loginform {
   display: flex;
   flex-direction: column;
-
+  width: 350px;
+  margin-top: 1%;
   padding: 2.5%;
   color: var(--detailOrange);
   border: 4px solid var(--detailOrange);
   background-color: var(--lightBlue);
   border-radius: 30px;
-  /* margin: 5% 30% 5% 30%; */
-  width: 50%;
 }
 
 /* ------------------- INPUT FIELDS ------------------- */
@@ -76,7 +74,7 @@ a {
   color: #000;
   background-color: #0e0;
   width: 100%;
-  margin: 5% 0% 5% 0%;
+  margin: 5% 0% 10% 0%;
 }
 
 .login_btn:hover {
