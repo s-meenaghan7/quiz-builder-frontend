@@ -5,7 +5,7 @@ export default function RegisterForm(props) {
 
   return (
     <div className='registerform'>
-      <form autoComplete='off'>
+      <form>
         <h1 className='registerform_title'>Create Account!</h1>
 
         <label htmlFor='name'>Your Name</label>
@@ -20,7 +20,7 @@ export default function RegisterForm(props) {
         <label htmlFor='email'>Email</label>
         <input
           className='registerform_input'
-          type="text"
+          type="email"
           placeholder="Email"
           name="email"
           required
