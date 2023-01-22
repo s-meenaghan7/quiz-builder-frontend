@@ -116,7 +116,7 @@ a {
   border-radius: .3rem;
   text-align: center;
   width: max-content;
-  max-width: 100%;
+  max-width: 75%;
   background: var(--tooltip-color);
 }
 

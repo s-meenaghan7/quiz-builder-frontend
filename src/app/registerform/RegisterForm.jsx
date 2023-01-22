@@ -9,7 +9,7 @@ export default function RegisterForm(props) {
         <h1 className='registerform_title'>Create Your Account!</h1>
 
         <label htmlFor='name'>Your Name</label>
-        <div className='input_container' data-tooltip="message goes here">
+        <div className='input_container' data-tooltip="tooltip message goes here">
           <input
             className='registerform_input'
             type="text"
@@ -20,7 +20,7 @@ export default function RegisterForm(props) {
         </div>
 
         <label htmlFor='email'>Email</label>
-        <div className='input_container' data-tooltip="message goes here">
+        <div className='input_container' data-tooltip="tooltip message goes here">
           <input
             className='registerform_input'
             type="email"
@@ -31,7 +31,7 @@ export default function RegisterForm(props) {
         </div>
 
         <label htmlFor='password'>Password</label>
-        <div className='input_container' data-tooltip="message goes here">
+        <div className='input_container' data-tooltip="tooltip message goes here">
           <input
             className='registerform_input'
             type="password"
