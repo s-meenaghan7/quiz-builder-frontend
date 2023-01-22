@@ -9,40 +9,48 @@ export default function RegisterForm(props) {
         <h1 className='registerform_title'>Create Your Account!</h1>
 
         <label htmlFor='name'>Your Name</label>
-        <input
-          className='registerform_input'
-          type="text"
-          placeholder="Full Name"
-          name="name"
-          required
-        />
+        <div className='input_container' data-tooltip="message goes here">
+          <input
+            className='registerform_input'
+            type="text"
+            placeholder="Full Name"
+            name="name"
+            required
+          />
+        </div>
 
         <label htmlFor='email'>Email</label>
-        <input
-          className='registerform_input'
-          type="email"
-          placeholder="Email"
-          name="email"
-          required
-        />
+        <div className='input_container' data-tooltip="message goes here">
+          <input
+            className='registerform_input'
+            type="email"
+            placeholder="Email"
+            name="email"
+            required
+          />
+        </div>
 
         <label htmlFor='password'>Password</label>
-        <input
-          className='registerform_input'
-          type="password"
-          placeholder="Password"
-          name="password"
-          required
-        />
+        <div className='input_container' data-tooltip="message goes here">
+          <input
+            className='registerform_input'
+            type="password"
+            placeholder="Password"
+            name="password"
+            required
+          />
+        </div>
 
         <label htmlFor='confirm_password'>Confirm Password</label>
-        <input
-          className='registerform_input'
-          type="password"
-          placeholder="Confirm Password"
-          name="confirm_password"
-          required
-        />
+        <div>
+          <input
+            className='registerform_input'
+            type="password"
+            placeholder="Confirm Password"
+            name="confirm_password"
+            required
+          />
+        </div>
 
         <button
           type='button'
