@@ -4,9 +4,9 @@ import './RegisterForm.css';
 export default function RegisterForm(props) {
 
   return (
-    <div className='registerform'>
+    <div className='registerform_container'>
       <form>
-        <h1 className='registerform_title'>Create Account!</h1>
+        <h1 className='registerform_title'>Create Your Account!</h1>
 
         <label htmlFor='name'>Your Name</label>
         <input
