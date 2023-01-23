@@ -3,18 +3,6 @@ label {
   font-weight: bold;
 }
 
-p {
-  font-weight: bold;
-  font-style: italic;
-  font-size: 1.1em;
-  color: var(--darkBlue);
-}
-
-a {
-  color: var(--detailOrange);
-  font-weight: bold;
-}
-
 /* ------------------- REGISTER FORM ------------------- */
 .registerform_title {
   text-align: center;
@@ -104,13 +92,14 @@ a {
   right: -5%;
   transform: translateX(100%) scale(var(--scale));
   transition: 150ms transform;
-  transform-origin: left center;
+  transform-origin: left top;
 }
 
 .input_container::before {
   --translate-y: calc(-100% - var(--arrow-size));
 
   content: attr(data-tooltip);
+  white-space: pre-wrap;
   color: #fff;
   padding: .5rem;
   border-radius: .3rem;
@@ -132,7 +121,7 @@ a {
   content: '';
   border: var(--arrow-size) solid transparent;
   border-right-color: var(--tooltip-color);
-  transform-origin: right bottom;
+  transform-origin: right center;
 
   right: 0.5%;
 }
