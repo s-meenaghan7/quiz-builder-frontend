@@ -16,6 +16,7 @@ export default function RegisterForm(props) {
   let [name, setName] = useState('');
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
+  let [confirmPassword, setConfirmPassword] = useState('');
 
   const nameChangedHandler = (e) => {
     setName(e.target.value);
@@ -27,6 +28,26 @@ export default function RegisterForm(props) {
 
   const passwordChangedHandler = (e) => {
     setPassword(e.target.value);
+  }
+
+  const confirmPasswordChangedHandler = (e) => {
+    setConfirmPassword(e.target.value)
+  }
+
+  const nameOnBlurHandler = () => {
+    // TODO
+  }
+
+  const emailOnBlurHandler = () => {
+    // TODO
+  }
+
+  const passwordOnBlurHandler = () => {
+    // TODO
+  }
+
+  const confirmPasswordOnBlurHandler = () => {
+    // TODO
   }
 
   const getStateBtn = () => {
@@ -51,6 +72,7 @@ export default function RegisterForm(props) {
           <input
             className='registerform_input'
             onChange={(e) => nameChangedHandler(e)}
+            onBlur={() => nameOnBlurHandler()}
             type="text"
             value={name}
             placeholder="Your Name"
@@ -64,6 +86,7 @@ export default function RegisterForm(props) {
           <input
             className='registerform_input'
             onChange={(e) => emailChangedHandler(e)}
+            onBlur={() => emailOnBlurHandler()}
             type="email"
             value={email}
             placeholder="Email"
@@ -77,6 +100,7 @@ export default function RegisterForm(props) {
           <input
             className='registerform_input'
             onChange={(e) => passwordChangedHandler(e)}
+            onBlur={() => passwordOnBlurHandler()}
             type="password"
             value={password}
             placeholder="Password"
@@ -89,7 +113,10 @@ export default function RegisterForm(props) {
         <div>
           <input
             className='registerform_input'
+            onChange={(e) => confirmPasswordChangedHandler(e)}
+            onBlur={() => confirmPasswordOnBlurHandler()}
             type="password"
+            value={confirmPassword}
             placeholder="Confirm Password"
             name="confirm_password"
             required
