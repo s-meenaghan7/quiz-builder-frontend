@@ -31,7 +31,6 @@ label {
   background-color: var(--lightBlue);
   outline: none;
   padding: 8px;
-  margin-bottom: 20px;
   box-sizing: border-box;
   transition: .3s;
   text-align: center;
@@ -124,4 +123,13 @@ label {
   transform-origin: right center;
 
   right: 0.5%;
+}
+
+/* ------------------- ERROR MESSAGES ------------------- */
+.error_message {
+  color: red;
+  padding: 0;
+  margin: 0;
+  text-align: right;
+  min-height: 1.4em;
 }

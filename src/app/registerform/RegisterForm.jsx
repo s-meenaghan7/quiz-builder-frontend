@@ -79,6 +79,7 @@ export default function RegisterForm(props) {
             name="name"
             required
           />
+          <p className='error_message'></p>
         </div>
 
         <label htmlFor='email'>Email</label>
@@ -93,6 +94,7 @@ export default function RegisterForm(props) {
             name="email"
             required
           />
+          <p className='error_message'></p>
         </div>
 
         <label htmlFor='password'>Password</label>
@@ -107,6 +109,7 @@ export default function RegisterForm(props) {
             name="password"
             required
           />
+          <p className='error_message'></p>
         </div>
 
         <label htmlFor='confirm_password'>Confirm Password</label>
@@ -121,6 +124,7 @@ export default function RegisterForm(props) {
             name="confirm_password"
             required
           />
+          <p className='error_message'></p>
         </div>
 
         <button
