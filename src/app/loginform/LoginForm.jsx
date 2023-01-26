@@ -35,7 +35,7 @@ export default function LoginForm(props) {
 
         <div className='links_container'>
           <a href='localhost:3000/#'>New? Create a free account!</a>
-          <p>OR</p>
+          <p id='or'>OR</p>
           <a href='localhost:3000/#'>Continue as Guest!</a>
         </div>
  
