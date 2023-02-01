@@ -1,7 +1,7 @@
 .navbar {
     display: flex;
     width: 100%;
-    padding-top: 5%;
+    height: 75px;
     background-color: var(--darkBlue);
     border-bottom: 3px solid var(--detailOrange);
 }
