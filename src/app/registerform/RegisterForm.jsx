@@ -10,6 +10,7 @@ export default function RegisterForm(props) {
   let [password, setPassword] = useState('');
   let [confirmPassword, setConfirmPassword] = useState('');
   let [passwordTooltipMessage, setPasswordTooltipMessage] = useState();
+  let [formIsValid, setFormIsValid] = useState(false);
 
   // change passwordTooltipMessage based on password
   useEffect(() => {
@@ -32,7 +33,7 @@ export default function RegisterForm(props) {
     }
 
     if (!password.match(/[$@#&!]+/)) {
-      newPasswordTooltipMessage += '\n\u2022a symbol: $@#&!';
+      newPasswordTooltipMessage += '\n\u2022 a symbol: $@#&!';
     }
 
     if (newPasswordTooltipMessage === "Create a strong password that includes at least the following:") {
@@ -72,11 +73,13 @@ export default function RegisterForm(props) {
       for (let i = 0; i < inputs.length; ++i) {
         inputs[i].classList.add('validated');
       }
+      setFormIsValid(true);
     }
     else {
       for (let i = 0; i < inputs.length; ++i) {
         inputs[i].classList.remove('validated');
       }
+      setFormIsValid(false);
     }
   }
 
@@ -217,7 +220,7 @@ export default function RegisterForm(props) {
         </div>
 
         <label htmlFor='confirm_password'>Confirm Password</label>
-        <div className='input_container'>
+        <div>
           <input
             id='confirm_password_input'
             className='registerform_input'
@@ -236,6 +239,8 @@ export default function RegisterForm(props) {
           type='submit'
           className='register_btn'
           onClick={(e) => createAccount(e)}
+          disabled={!formIsValid}
+          title={'Complete all fields to create your account!'}
         >
           CREATE ACCOUNT
         </button>

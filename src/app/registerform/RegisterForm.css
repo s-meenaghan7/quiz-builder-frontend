@@ -53,7 +53,7 @@ label {
   font-style: italic;
 }
 
-/* ------------------- LOGIN BUTTON ------------------- */
+/* ------------------- CREATE ACCOUNT BUTTON ------------------- */
 .register_btn {
   padding: 10px 30px 10px 30px;
   font-size: 1em;
@@ -69,6 +69,16 @@ label {
   color: #fff;
   cursor: pointer;
   background-color: #0f0;
+}
+
+.register_btn:disabled {
+  opacity: 0.5;
+}
+
+.register_btn:disabled:hover {
+  cursor: not-allowed;
+  color: #000;
+  background-color: #0e0;
 }
 
 .register_btn:active {
@@ -141,4 +151,5 @@ label {
 
 .validated {
   border: 3px solid #0f0;
+  box-shadow: 0 0 12px 0 #0f0;
 }
