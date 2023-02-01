@@ -127,9 +127,18 @@ label {
 
 /* ------------------- ERROR MESSAGES ------------------- */
 .error_message {
-  color: red;
+  color: #ff0;
+  font-style: italic;
   padding: 0;
   margin: 0;
   text-align: right;
   min-height: 1.4em;
+}
+
+.input_error {
+  border: 3px solid #f00;
+}
+
+.validated {
+  border: 3px solid #0f0;
 }
