@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './LoginForm.css';
 
 export default function LoginForm(props) {
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
+
+  const emailChangedHandler = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const passwordChangedHandler = (e) => {
+    setPassword(e.target.value);
+  }
 
   return (
     <div className='loginform'>
@@ -12,6 +22,8 @@ export default function LoginForm(props) {
         <label htmlFor='email'>Email</label>
         <input
           className='loginform_input'
+          onChange={(e) => emailChangedHandler(e)}
+          value={email}
           type="text"
           placeholder="Email"
           name="email"
@@ -21,6 +33,8 @@ export default function LoginForm(props) {
         <label htmlFor='password'>Password</label>
         <input
           className='loginform_input'
+          onChange={(e) => passwordChangedHandler(e)}
+          value={password}
           type="password"
           placeholder="Password"
           name="password"
