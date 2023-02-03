@@ -13,6 +13,19 @@ export default function LoginForm(props) {
     setPassword(e.target.value);
   }
 
+  const loginButtonClickHandler = (e) => {
+    e.preventDefault();
+
+    console.log(JSON.stringify(
+      {
+        email: email,
+        password: password
+      },
+      null,
+      2
+    ))
+  }
+
   return (
     <div className='loginform'>
       <form>
@@ -42,7 +55,8 @@ export default function LoginForm(props) {
         />
 
         <button
-          type='button'
+          type='submit'
+          onClick={(e) => loginButtonClickHandler(e)}
           className='login_btn'
         >
           LOG IN
