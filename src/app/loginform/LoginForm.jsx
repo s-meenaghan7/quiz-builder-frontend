@@ -77,7 +77,7 @@ export default function LoginForm(props) {
             Continue as Guest!
           </a>
         </div>
- 
+
       </form>
     </div>
   );

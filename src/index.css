@@ -11,11 +11,15 @@ html {
 }
 
 html::-webkit-scrollbar {
-  width: 1.1vw;
+  width: 16px;
 }
 
 html::-webkit-scrollbar-thumb {
   background-color: #af8a01;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: var(--detailOrange);
 }
 
 html::-webkit-scrollbar-track {
