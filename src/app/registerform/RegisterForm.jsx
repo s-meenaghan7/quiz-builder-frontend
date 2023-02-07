@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './RegisterForm.css';
 
 const nameTooltipMsg = 'Your name is used to identify you amongst other users. Feel free to use any name you wish!';
@@ -122,7 +123,7 @@ export default function RegisterForm(props) {
       password.match(/[a-z]+/) &&
       password.match(/[A-Z]+/) &&
       password.match(/[0-9]+/) &&
-      password.match(/[$@#&!]+/) 
+      password.match(/[$@#&!]+/)
     ) {
       passwordError.innerHTML = '';
       passwordInput.classList.remove('input_error');
@@ -155,7 +156,7 @@ export default function RegisterForm(props) {
   }
 
   const createAccount = (e) => {
-    e.preventDefault();    
+    e.preventDefault();
     console.log(JSON.stringify(
       {
         name: name,
@@ -244,6 +245,15 @@ export default function RegisterForm(props) {
         >
           CREATE ACCOUNT
         </button>
+
+        <div className='links_container'>
+          <Link
+            to='/login'
+            title='Click here to login with your account!'
+          >
+            Already have an account? Click here!
+          </Link>
+        </div>
 
       </form>
     </div>
