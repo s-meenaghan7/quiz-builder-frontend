@@ -4,7 +4,7 @@ import QuizNameDialog from '../../app/dialogs/misc/QuizNameDialog';
 import '../styles/Footer.css';
 
 export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
-  
+
   const [resetFormDialogIsOpen, setResetFormDialogIsOpen] = useState(false);
   const [deleteQuestionDialogIsOpen, setDeleteQuestionDialogIsOpen] = useState(false);
   const [submitQuizDialogIsOpen, setSubmitQuizDialogIsOpen] = useState(false);
@@ -43,7 +43,7 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
   const submitQuiz = (e) => {
     // e.preventDefault();
     const completeQuiz = [
-      { quizName: document.getElementById('quiz_name').value }, 
+      { quizName: document.getElementById('quiz_name').value },
       quizData.slice(0, quizData.length - 1)
     ];
 
@@ -66,7 +66,7 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
           RESET FORM
         </button>
 
-        <button 
+        <button
           type='button'
           id='submit'
           className='footer_button submit'
@@ -88,18 +88,22 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
       <ConfirmDialog
         open={resetFormDialogIsOpen}
         openDialog={setResetFormDialogIsOpen}
-        data={{ title: "Reset Form?",
-                description: "Resetting the form clears all question and answer fields of the form, but does not affect saved data.",
-                dialogFunction: resetForm,
-                functionBtnText: "Reset Form" }}
+        data={{
+          title: "Reset Form?",
+          description: "Resetting the form clears all question and answer fields of the form, but does not affect saved data.",
+          dialogFunction: resetForm,
+          functionBtnText: "Reset Form"
+        }}
       />
       <ConfirmDialog
         open={submitQuizDialogIsOpen}
         openDialog={setSubmitQuizDialogIsOpen}
-        data={{ title: "Submit Quiz?",
-                description: `Are you sure you're ready to save this quiz? (Questions: ${quizData.length - 1})`,
-                dialogFunction: getQuizName,
-                functionBtnText: "Submit Quiz" }}
+        data={{
+          title: "Submit Quiz?",
+          description: `Are you sure you're ready to save this quiz? (Questions: ${quizData.length - 1})`,
+          dialogFunction: getQuizName,
+          functionBtnText: "Submit Quiz"
+        }}
       />
       <QuizNameDialog
         open={quizNameDialogIsOpen}
@@ -109,10 +113,12 @@ export default function Footer({ quizIndex, quizData, quizDataDispatch }) {
       <ConfirmDialog
         open={deleteQuestionDialogIsOpen}
         openDialog={setDeleteQuestionDialogIsOpen}
-        data={{ title: "Delete Question?",
-                description: "This action will permanently delete this question from the quiz. Are you sure you want to do this?",
-                dialogFunction: deleteQuestion,
-                functionBtnText: "Delete Question" }}
+        data={{
+          title: "Delete Question?",
+          description: "This action will permanently delete this question from the quiz. Are you sure you want to do this?",
+          dialogFunction: deleteQuestion,
+          functionBtnText: "Delete Question"
+        }}
       />
     </>
   );
