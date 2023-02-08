@@ -1,13 +1,23 @@
-.question-section {
+#question-section {
   margin-bottom: 15px;
+}
+
+#quiz_info_container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 10px 0px;
+  font-size: 1.05em;
+  font-weight: bold;
+}
+
+#saved_questions {
+  margin: 0;
+}
+
+#question_header {
+  margin: 0px 0px 15px;
 }
 
 #questionField {
   width: 60%;
 }
-
-/* #questionField::placeholder {
-  color: var(--darkBlue);
-  opacity: 0.6;
-  font-style: italic;
-} */

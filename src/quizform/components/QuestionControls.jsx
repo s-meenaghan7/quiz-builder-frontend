@@ -34,9 +34,8 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, fo
   }
 
   return (
-    <div className='question-controls'>
-
-      <button 
+    <div className='question_controls'>
+      <button
         type='button'
         className='qc-button'
         id='prev'
@@ -62,7 +61,6 @@ export default function QuestionControls({ quizData, quizIndex, setQuizIndex, fo
       >
         {(quizIndex >= (quizData.length - 2)) ? 'New' : 'Next'} Question
       </button>
-
     </div>
   );
 }

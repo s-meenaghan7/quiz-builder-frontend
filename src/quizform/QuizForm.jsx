@@ -85,6 +85,7 @@ export default function QuizForm(props) {
 
           <QuestionSection
             key={`Q${quizIndex + 1}`}
+            savedQuestions={quizData.length - 1}
             currentQuestion={quizData[quizIndex]}
           />
 

@@ -1,7 +1,7 @@
-.question-controls {
+.question_controls {
   display: flex;
   justify-content: space-evenly;
-  padding: 17px;
+  padding: 17px 0px 15px;
   background-color: var(--darkBlue);
   border-top-left-radius: 27px;
   border-top-right-radius: 27px;

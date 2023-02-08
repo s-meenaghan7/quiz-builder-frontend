@@ -1,11 +1,15 @@
 import React from 'react';
 import '../styles/QuestionSection.css';
 
-export default function QuestionSection({ currentQuestion }) {
+export default function QuestionSection({ currentQuestion, savedQuestions }) {
 
   return (
-    <div className='question-section'>
-      <h3>Question: {currentQuestion.id}</h3>
+    <div id='question-section'>
+      <div id='quiz_info_container'>
+        <p id='saved_questions'>Saved questions: {savedQuestions}</p>
+      </div>
+
+      <h2 id='question_header'>Question: {currentQuestion.id}</h2>
 
       <label>
         <input
@@ -18,6 +22,7 @@ export default function QuestionSection({ currentQuestion }) {
           required
         />
       </label>
+
     </div>
   );
 }
