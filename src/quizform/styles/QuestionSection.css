@@ -4,18 +4,21 @@
 
 #quiz_info_container {
   display: flex;
-  justify-content: flex-end;
-  padding: 5px 10px 0px;
-  font-size: 1.05em;
+  justify-content: space-around;
+  margin-left: 35%;
+  padding: 5px;
   font-weight: bold;
+  padding: 10px;
 }
 
 #saved_questions {
   margin: 0;
+  font-size: 1.2em;
 }
 
 #question_header {
-  margin: 0px 0px 15px;
+  margin: 0;
+  font-size: 1.4em;
 }
 
 #questionField {

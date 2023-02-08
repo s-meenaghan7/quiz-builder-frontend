@@ -6,10 +6,9 @@ export default function QuestionSection({ currentQuestion, savedQuestions }) {
   return (
     <div id='question-section'>
       <div id='quiz_info_container'>
+        <p id='question_header'>Question: {currentQuestion.id}</p>
         <p id='saved_questions'>Saved questions: {savedQuestions}</p>
       </div>
-
-      <h2 id='question_header'>Question: {currentQuestion.id}</h2>
 
       <label>
         <input
