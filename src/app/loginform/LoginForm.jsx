@@ -1,42 +1,51 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import LoginService from '../../service/LoginService';
 import './LoginForm.css';
 
 export default function LoginForm(props) {
+  const userRef = useRef();
+  const errRef = useRef();
+
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
+  const [errMsg, setErrMsg] = useState('');
 
-  const emailChangedHandler = (e) => {
-    setEmail(e.target.value);
-  }
+  const navigate = useNavigate();
 
-  const passwordChangedHandler = (e) => {
-    setPassword(e.target.value);
-  }
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    setErrMsg('');
+  }, [email, password]);
 
   const loginButtonClickHandler = (e) => {
     e.preventDefault();
 
-    console.log(JSON.stringify(
-      {
-        email: email,
-        password: password
-      },
-      null,
-      2
-    ));
+    let loginRequest = {
+      username: email,
+      password: password
+    };
+
+    LoginService.authenticateUser(loginRequest).then(() => {
+      // todo
+    });
+
   }
 
   return (
-    <div className='loginform'>
-      <form>
-        <h1 className='login_title'>Log in!</h1>
-        <p id='login_error'></p>
+    <section className='loginform'>
+      <h1 className='login_title'>Log in!</h1>
+      <p ref={errRef} id='login_error'>{errMsg}</p>
 
+      <form onSubmit={loginButtonClickHandler}>
         <label htmlFor='email'>Email</label>
         <input
           className='loginform_input'
-          onChange={(e) => emailChangedHandler(e)}
+          onChange={(e) => setEmail(e.target.value)}
+          ref={userRef}
           value={email}
           type="text"
           placeholder="Email"
@@ -47,7 +56,7 @@ export default function LoginForm(props) {
         <label htmlFor='password'>Password</label>
         <input
           className='loginform_input'
-          onChange={(e) => passwordChangedHandler(e)}
+          onChange={(e) => setPassword(e.target.value)}
           value={password}
           type="password"
           placeholder="Password"
@@ -56,8 +65,6 @@ export default function LoginForm(props) {
         />
 
         <button
-          type='submit'
-          onClick={(e) => loginButtonClickHandler(e)}
           className='login_btn'
         >
           LOG IN
@@ -82,6 +89,6 @@ export default function LoginForm(props) {
         </div>
 
       </form>
-    </div>
+    </section>
   );
 }
