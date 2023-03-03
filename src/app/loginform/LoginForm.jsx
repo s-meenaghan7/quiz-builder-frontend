@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginService from '../../service/LoginService';
+import AuthContext from '../../context/AuthProvider';
 import './LoginForm.css';
 
 export default function LoginForm(props) {
+  // const { setAuth } = useContext(AuthContext);
   const userRef = useRef();
   const errRef = useRef();
 
@@ -17,22 +19,19 @@ export default function LoginForm(props) {
     userRef.current.focus();
   }, []);
 
-  useEffect(() => {
-    setErrMsg('');
-  }, [email, password]);
+  // useEffect(() => {
+  //   setErrMsg('');
+  // }, [email, password]);
 
-  const loginButtonClickHandler = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    let loginRequest = {
+    const loginRequest = {
       username: email,
       password: password
     };
 
-    LoginService.authenticateUser(loginRequest).then(() => {
-      // todo
-    });
-
+    // todo
   }
 
   return (
@@ -40,7 +39,7 @@ export default function LoginForm(props) {
       <h1 className='login_title'>Log in!</h1>
       <p ref={errRef} id='login_error'>{errMsg}</p>
 
-      <form onSubmit={loginButtonClickHandler}>
+      <form onSubmit={handleSubmit} method='post'>
         <label htmlFor='email'>Email</label>
         <input
           className='loginform_input'
@@ -61,6 +60,7 @@ export default function LoginForm(props) {
           type="password"
           placeholder="Password"
           name="password"
+          minLength={8}
           required
         />
 
@@ -73,9 +73,9 @@ export default function LoginForm(props) {
         <div className='links_container'>
           <Link
             to='/register'
-            title='Create a free account!'
+            title='Create a free account here!'
           >
-            New? Create a free account!
+            New? Create a free account here!
           </Link>
 
           <p id='or'>OR</p>
