@@ -6,12 +6,12 @@ const nameTooltipMsg = 'Your name is used to identify you amongst other users. F
 const emailTooltipMsg = 'Your email address will be used to login to Quiz Builder and validate your account creation.  Any news from Quiz Builder will also be sent to your email.';
 
 export default function RegisterForm(props) {
-  let [name, setName] = useState('');
-  let [email, setEmail] = useState('');
-  let [password, setPassword] = useState('');
-  let [confirmPassword, setConfirmPassword] = useState('');
-  let [passwordTooltipMessage, setPasswordTooltipMessage] = useState();
-  let [formIsValid, setFormIsValid] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordTooltipMessage, setPasswordTooltipMessage] = useState();
+  const [formIsValid, setFormIsValid] = useState(false);
 
   // change passwordTooltipMessage based on password
   useEffect(() => {
@@ -251,7 +251,7 @@ export default function RegisterForm(props) {
             to='/login'
             title='Click here to login with your account!'
           >
-            Already have an account? Click here!
+            Already have an account? Login here!
           </Link>
         </div>
 
