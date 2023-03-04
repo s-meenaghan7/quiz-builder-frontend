@@ -1,39 +1,78 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './RegisterForm.css';
 
+const EMAIL_REGEX = /[A-Za-z]+@[A-Za-z]+\.[A-Za-z]{2,}/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@#&!]).{8,100}$/;
 const nameTooltipMsg = 'Your name is used to identify you amongst other users. Feel free to use any name you wish!';
 const emailTooltipMsg = 'Your email address will be used to login to Quiz Builder and validate your account creation.  Any news from Quiz Builder will also be sent to your email.';
 
 export default function RegisterForm(props) {
+  const nameRef = useRef();
+
   const [name, setName] = useState('');
+  const [validName, setValidName] = useState(false);
+  const [nameFocus, setNameFocus] = useState(false);
+
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+
+  const [pwd, setPwd] = useState('');
+  const [validPwd, setValidPwd] = useState(false);
+  const [pwdFocus, setPwdFocus] = useState(false);
+
+  const [matchPwd, setMatchPwd] = useState('');
+  const [validMatch, setValidMatch] = useState(false);
+  const [matchFocus, setMatchFocus] = useState(false);
+
+  const [errMsg, setErrMsg] = useState('');
   const [passwordTooltipMessage, setPasswordTooltipMessage] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
+
+  useEffect(() => {
+    nameRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    setValidName(name.trim().length > 0);
+  }, [name]);
+
+  useEffect(() => {
+    setValidEmail(EMAIL_REGEX.test(email));
+  }, [email]);
+
+  useEffect(() => {
+    setValidPwd(PWD_REGEX.test(pwd));
+    const match = pwd === matchPwd;
+    setValidMatch(match);
+  }, [pwd, matchPwd]);
+
+  useEffect(() => {
+    setErrMsg('');
+  }, [email, pwd, matchPwd]);
 
   // change passwordTooltipMessage based on password
   useEffect(() => {
     let newPasswordTooltipMessage = "Create a strong password that includes at least the following:"
 
-    if (password.length < 8) {
+    if (pwd.length < 8) {
       newPasswordTooltipMessage += '\n\u2022 8 characters long';
     }
 
-    if (!password.match(/[A-Z]/)) {
+    if (!pwd.match(/[A-Z]/)) {
       newPasswordTooltipMessage += '\n\u2022 one uppercase letter';
     }
 
-    if (!password.match(/[a-z]+/)) {
+    if (!pwd.match(/[a-z]+/)) {
       newPasswordTooltipMessage += '\n\u2022 one lowercase letter';
     }
 
-    if (!password.match(/[0-9]/)) {
+    if (!pwd.match(/[0-9]/)) {
       newPasswordTooltipMessage += '\n\u2022 a number';
     }
 
-    if (!password.match(/[$@#&!]+/)) {
+    if (!pwd.match(/[$@#&!]+/)) {
       newPasswordTooltipMessage += '\n\u2022 a symbol: $@#&!';
     }
 
@@ -43,60 +82,22 @@ export default function RegisterForm(props) {
 
     setPasswordTooltipMessage(newPasswordTooltipMessage);
 
-  }, [password]);
+  }, [pwd]);
 
-  const nameChangedHandler = (e) => {
-    setName(e.target.value);
-  }
-
-  const emailChangedHandler = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const passwordChangedHandler = (e) => {
-    setPassword(e.target.value);
-  }
-
-  const confirmPasswordChangedHandler = (e) => {
-    setConfirmPassword(e.target.value)
-  }
-
-  const validateForm = () => {
-    const inputs = document.getElementsByClassName('registerform_input');
-
-    if (
-      name.length > 0 &&
-      email.length > 0 &&
-      password.length > 0 &&
-      confirmPassword.length > 0 &&
-      document.getElementsByClassName('input_error').length === 0
-    ) {
-      for (let i = 0; i < inputs.length; ++i) {
-        inputs[i].classList.add('validated');
-      }
-      setFormIsValid(true);
-    }
-    else {
-      for (let i = 0; i < inputs.length; ++i) {
-        inputs[i].classList.remove('validated');
-      }
-      setFormIsValid(false);
-    }
-  }
+  // probably getting rid of the onBlur handlers as well!
+// validateForm was here
 
   const nameOnBlurHandler = () => {
     const nameError = document.getElementById('name_error_text');
     const nameInput = document.getElementById('name_input');
 
-    if (name.trim() === '') {
-      nameError.innerHTML = 'Please provide a name';
-      nameInput.classList.add('input_error');
-    } else {
+    if (validName) {
       nameError.innerHTML = '';
       nameInput.classList.remove('input_error');
+    } else {
+      nameError.innerHTML = 'Please provide a name';
+      nameInput.classList.add('input_error');
     }
-
-    validateForm();
   }
 
   const emailOnBlurHandler = () => {
@@ -111,7 +112,7 @@ export default function RegisterForm(props) {
       emailInput.classList.add('input_error');
     }
 
-    validateForm();
+    // validateForm();
   }
 
   const passwordOnBlurHandler = () => {
@@ -119,11 +120,11 @@ export default function RegisterForm(props) {
     const passwordInput = document.getElementById('password_input');
 
     if (
-      password.length >= 8 &&
-      password.match(/[a-z]+/) &&
-      password.match(/[A-Z]+/) &&
-      password.match(/[0-9]+/) &&
-      password.match(/[$@#&!]+/)
+      pwd.length >= 8 &&
+      pwd.match(/[a-z]+/) &&
+      pwd.match(/[A-Z]+/) &&
+      pwd.match(/[0-9]+/) &&
+      pwd.match(/[$@#&!]+/)
     ) {
       passwordError.innerHTML = '';
       passwordInput.classList.remove('input_error');
@@ -134,25 +135,24 @@ export default function RegisterForm(props) {
     }
 
     confirmPasswordOnBlurHandler();
-    validateForm();
   }
 
   const confirmPasswordOnBlurHandler = () => {
     const confirmPassError = document.getElementById('confirm_password_error_text');
     const confirmPassInput = document.getElementById('confirm_password_input');
 
-    if (password === confirmPassword && confirmPassInput.value !== '') {
+    if (pwd === matchPwd && confirmPassInput.value !== '') {
       confirmPassError.innerHTML = '';
       confirmPassInput.classList.remove('input_error');
     } else {
-      if (password !== confirmPassword) {
+      if (pwd !== matchPwd) {
         confirmPassError.innerHTML = 'Passwords do not match';
       }
 
       confirmPassInput.classList.add('input_error');
     }
 
-    validateForm();
+    // validateForm();
   }
 
   const createAccount = (e) => {
@@ -161,28 +161,33 @@ export default function RegisterForm(props) {
       {
         name: name,
         email: email,
-        password: password
+        password: pwd
       },
       null, 2)
     );
+
+    // call register API, and send user to page/component advising that they check their email for the validation link to confirm their account
   }
 
   return (
-    <div className='registerform_container'>
-      <form>
-        <h1 className='registerform_title'>Create Your Account!</h1>
+    <section className='registerform_container'>
+      <h1 className='registerform_title'>Create Your Account!</h1>
 
+      <form>
         <label htmlFor='full_name'>Your Name</label>
         <div className='input_container' data-tooltip={nameTooltipMsg}>
           <input
             id='name_input'
             className='registerform_input'
-            onChange={(e) => nameChangedHandler(e)}
+            onChange={(e) => setName(e.target.value)}
             onBlur={() => nameOnBlurHandler()}
+            autoComplete='off'
+            aria-invalid={validName ? "false" : "true"}
             type="text"
             value={name}
             placeholder="Your Name"
             name="full_name"
+            ref={nameRef}
             required
           />
           <p className='error_message' id='name_error_text'></p>
@@ -193,8 +198,10 @@ export default function RegisterForm(props) {
           <input
             id='email_input'
             className='registerform_input'
-            onChange={(e) => emailChangedHandler(e)}
+            onChange={(e) => setEmail(e.target.value)}
             onBlur={() => emailOnBlurHandler()}
+            autoComplete='off'
+            aria-invalid={validEmail ? "false" : "true"}
             type="email"
             value={email}
             placeholder="Email"
@@ -209,10 +216,10 @@ export default function RegisterForm(props) {
           <input
             id='password_input'
             className='registerform_input'
-            onChange={(e) => passwordChangedHandler(e)}
+            onChange={(e) => setPwd(e.target.value)}
             onBlur={() => passwordOnBlurHandler()}
             type="password"
-            value={password}
+            value={pwd}
             placeholder="Password"
             name="password"
             required
@@ -225,10 +232,10 @@ export default function RegisterForm(props) {
           <input
             id='confirm_password_input'
             className='registerform_input'
-            onChange={(e) => confirmPasswordChangedHandler(e)}
+            onChange={(e) => setMatchPwd(e.target.value)}
             onBlur={() => confirmPasswordOnBlurHandler()}
             type="password"
-            value={confirmPassword}
+            value={matchPwd}
             placeholder="Confirm Password"
             name="confirm_password"
             required
@@ -256,6 +263,6 @@ export default function RegisterForm(props) {
         </div>
 
       </form>
-    </div>
+    </section>
   );
 }
