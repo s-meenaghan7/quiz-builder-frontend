@@ -2,161 +2,88 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './RegisterForm.css';
 
-const EMAIL_REGEX = /[A-Za-z]+@[A-Za-z]+\.[A-Za-z]{2,}/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@#&!]).{8,100}$/;
 const nameTooltipMsg = 'Your name is used to identify you amongst other users. Feel free to use any name you wish!';
 const emailTooltipMsg = 'Your email address will be used to login to Quiz Builder and validate your account creation.  Any news from Quiz Builder will also be sent to your email.';
 
-export default function RegisterForm(props) {
-  const nameRef = useRef();
+export default function RegisterForm() {
+  const nameInput = useRef();
+  const emailInput = useRef();
+  const pwdInput = useRef();
+  const matchInput = useRef();
+
+  const [passwordTooltipMessage, setPasswordTooltipMessage] = useState();
 
   const [name, setName] = useState('');
   const [validName, setValidName] = useState(false);
-  const [nameFocus, setNameFocus] = useState(false);
 
   const [email, setEmail] = useState('');
   const [validEmail, setValidEmail] = useState(false);
-  const [emailFocus, setEmailFocus] = useState(false);
 
   const [pwd, setPwd] = useState('');
   const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
 
   const [matchPwd, setMatchPwd] = useState('');
   const [validMatch, setValidMatch] = useState(false);
-  const [matchFocus, setMatchFocus] = useState(false);
-
-  const [errMsg, setErrMsg] = useState('');
-  const [passwordTooltipMessage, setPasswordTooltipMessage] = useState();
-  const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
-    nameRef.current.focus();
+    nameInput.current.focus();
   }, []);
 
   useEffect(() => {
-    setValidName(name.trim().length > 0);
+    setValidName(nameInput.current.checkValidity());
   }, [name]);
 
   useEffect(() => {
-    setValidEmail(EMAIL_REGEX.test(email));
+    setValidEmail(emailInput.current.checkValidity());
   }, [email]);
 
   useEffect(() => {
-    setValidPwd(PWD_REGEX.test(pwd));
-    const match = pwd === matchPwd;
-    setValidMatch(match);
+    matchInput.current.setCustomValidity((matchPwd === pwd) && validPwd ? "" : "Invalid field");
+    setValidMatch((matchPwd === pwd) && validPwd);
   }, [pwd, matchPwd]);
 
+  // change passwordTooltipMessage based on password, and setValidPwd
   useEffect(() => {
-    setErrMsg('');
-  }, [email, pwd, matchPwd]);
-
-  // change passwordTooltipMessage based on password
-  useEffect(() => {
-    let newPasswordTooltipMessage = "Create a strong password that includes at least the following:"
+    let newPwdTooltipMsg = "Create a strong password that includes at least the following:";
+    let pwdIsValid = false;
 
     if (pwd.length < 8) {
-      newPasswordTooltipMessage += '\n\u2022 8 characters long';
+      newPwdTooltipMsg += '\n\u2022 8 characters long';
     }
 
     if (!pwd.match(/[A-Z]/)) {
-      newPasswordTooltipMessage += '\n\u2022 one uppercase letter';
+      newPwdTooltipMsg += '\n\u2022 one uppercase letter';
     }
 
     if (!pwd.match(/[a-z]+/)) {
-      newPasswordTooltipMessage += '\n\u2022 one lowercase letter';
+      newPwdTooltipMsg += '\n\u2022 one lowercase letter';
     }
 
     if (!pwd.match(/[0-9]/)) {
-      newPasswordTooltipMessage += '\n\u2022 a number';
+      newPwdTooltipMsg += '\n\u2022 a number';
     }
 
     if (!pwd.match(/[$@#&!]+/)) {
-      newPasswordTooltipMessage += '\n\u2022 a symbol: $@#&!';
+      newPwdTooltipMsg += '\n\u2022 a symbol: $@#&!';
     }
 
-    if (newPasswordTooltipMessage === "Create a strong password that includes at least the following:") {
-      newPasswordTooltipMessage = 'Great, your password meets the minimum complexity criteria!'
+    if (newPwdTooltipMsg === "Create a strong password that includes at least the following:") {
+      newPwdTooltipMsg = 'Great, your password meets the minimum complexity criteria!'
+      pwdIsValid = true;
     }
 
-    setPasswordTooltipMessage(newPasswordTooltipMessage);
-
+    pwdInput.current.setCustomValidity(pwdIsValid ? "" : "Invalid field");
+    setValidPwd(pwdIsValid);
+    setPasswordTooltipMessage(newPwdTooltipMsg);
   }, [pwd]);
-
-  // probably getting rid of the onBlur handlers as well!
-// validateForm was here
-
-  const nameOnBlurHandler = () => {
-    const nameError = document.getElementById('name_error_text');
-    const nameInput = document.getElementById('name_input');
-
-    if (validName) {
-      nameError.innerHTML = '';
-      nameInput.classList.remove('input_error');
-    } else {
-      nameError.innerHTML = 'Please provide a name';
-      nameInput.classList.add('input_error');
-    }
-  }
-
-  const emailOnBlurHandler = () => {
-    const emailError = document.getElementById('email_error_text');
-    const emailInput = document.getElementById('email_input');
-
-    if ((email.includes('@') && email.includes('.')) && (email.indexOf('.') - email.indexOf('@') > 1)) {
-      emailError.innerHTML = '';
-      emailInput.classList.remove('input_error');
-    } else {
-      emailError.innerHTML = 'Please provide a valid email address';
-      emailInput.classList.add('input_error');
-    }
-
-    // validateForm();
-  }
-
-  const passwordOnBlurHandler = () => {
-    const passwordError = document.getElementById('password_error_text');
-    const passwordInput = document.getElementById('password_input');
-
-    if (
-      pwd.length >= 8 &&
-      pwd.match(/[a-z]+/) &&
-      pwd.match(/[A-Z]+/) &&
-      pwd.match(/[0-9]+/) &&
-      pwd.match(/[$@#&!]+/)
-    ) {
-      passwordError.innerHTML = '';
-      passwordInput.classList.remove('input_error');
-    }
-    else {
-      passwordError.innerHTML = 'Invalid / weak password';
-      passwordInput.classList.add('input_error');
-    }
-
-    confirmPasswordOnBlurHandler();
-  }
-
-  const confirmPasswordOnBlurHandler = () => {
-    const confirmPassError = document.getElementById('confirm_password_error_text');
-    const confirmPassInput = document.getElementById('confirm_password_input');
-
-    if (pwd === matchPwd && confirmPassInput.value !== '') {
-      confirmPassError.innerHTML = '';
-      confirmPassInput.classList.remove('input_error');
-    } else {
-      if (pwd !== matchPwd) {
-        confirmPassError.innerHTML = 'Passwords do not match';
-      }
-
-      confirmPassInput.classList.add('input_error');
-    }
-
-    // validateForm();
-  }
-
+ 
   const createAccount = (e) => {
     e.preventDefault();
+
+    if (!validName || !validEmail || !validPwd || !validMatch) {
+      return;
+    }
+
     console.log(JSON.stringify(
       {
         name: name,
@@ -173,21 +100,20 @@ export default function RegisterForm(props) {
     <section className='registerform_container'>
       <h1 className='registerform_title'>Create Your Account!</h1>
 
-      <form>
+      <form onSubmit={createAccount}>
         <label htmlFor='full_name'>Your Name</label>
         <div className='input_container' data-tooltip={nameTooltipMsg}>
           <input
+            type="text"
+            value={name}
             id='name_input'
             className='registerform_input'
             onChange={(e) => setName(e.target.value)}
-            onBlur={() => nameOnBlurHandler()}
-            autoComplete='off'
             aria-invalid={validName ? "false" : "true"}
-            type="text"
-            value={name}
             placeholder="Your Name"
+            autoComplete='off'
             name="full_name"
-            ref={nameRef}
+            ref={nameInput}
             required
           />
           <p className='error_message' id='name_error_text'></p>
@@ -196,16 +122,16 @@ export default function RegisterForm(props) {
         <label htmlFor='email'>Email</label>
         <div className='input_container' data-tooltip={emailTooltipMsg}>
           <input
+            type="email"
+            value={email}
             id='email_input'
             className='registerform_input'
             onChange={(e) => setEmail(e.target.value)}
-            onBlur={() => emailOnBlurHandler()}
-            autoComplete='off'
             aria-invalid={validEmail ? "false" : "true"}
-            type="email"
-            value={email}
             placeholder="Email"
+            autoComplete='off'
             name="email"
+            ref={emailInput}
             required
           />
           <p className='error_message' id='email_error_text'></p>
@@ -214,14 +140,15 @@ export default function RegisterForm(props) {
         <label htmlFor='password'>Password</label>
         <div className='input_container' data-tooltip={passwordTooltipMessage}>
           <input
+            type="password"
+            value={pwd}
             id='password_input'
             className='registerform_input'
             onChange={(e) => setPwd(e.target.value)}
-            onBlur={() => passwordOnBlurHandler()}
-            type="password"
-            value={pwd}
+            aria-invalid={validPwd ? "false" : "true"}
             placeholder="Password"
             name="password"
+            ref={pwdInput}
             required
           />
           <p className='error_message' id='password_error_text'></p>
@@ -230,27 +157,26 @@ export default function RegisterForm(props) {
         <label htmlFor='confirm_password'>Confirm Password</label>
         <div>
           <input
+            type="password"
+            value={matchPwd}
             id='confirm_password_input'
             className='registerform_input'
             onChange={(e) => setMatchPwd(e.target.value)}
-            onBlur={() => confirmPasswordOnBlurHandler()}
-            type="password"
-            value={matchPwd}
+            aria-invalid={validMatch ? "false" : "true"}
             placeholder="Confirm Password"
             name="confirm_password"
+            ref={matchInput}
             required
           />
           <p className='error_message' id='confirm_password_error_text'></p>
         </div>
 
         <button
-          type='submit'
           className='register_btn'
-          onClick={(e) => createAccount(e)}
-          disabled={!formIsValid}
+          disabled={!validName || !validEmail || !validPwd || !validMatch}
           title={'Complete all fields to create your account!'}
         >
-          CREATE ACCOUNT
+          Register Account!
         </button>
 
         <div className='links_container'>
