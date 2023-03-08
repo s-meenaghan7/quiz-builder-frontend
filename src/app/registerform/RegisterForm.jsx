@@ -99,12 +99,15 @@ export default function RegisterForm() {
     );
 
     // call register API, and send user to page/component advising that they check their email for the validation link to confirm their account
+    // handle and setErrMsg in the try/catch here
+    // errors include: server unavailable, invalid request, invalid email, email already taken.
+    // if successful, it will navigate to a success component that notifies the user to check their email and click the link
   }
 
   return (
     <section className='registerform_container'>
       <h1 className='registerform_title'>Create Your QuizMe Account!</h1>
-      <span id='error_message'></span>
+      <span id='error_message'>{errMsg}</span>
 
       <form onSubmit={createAccount}>
         <label htmlFor='full_name'>Your Name</label>
@@ -122,7 +125,6 @@ export default function RegisterForm() {
             ref={nameInput}
             required
           />
-          {/* <p className='error_message' id='name_error_text'></p> */}
         </div>
 
         <label htmlFor='email'>Email</label>
@@ -140,7 +142,6 @@ export default function RegisterForm() {
             ref={emailInput}
             required
           />
-          {/* <p className='error_message' id='email_error_text'></p> */}
         </div>
 
         <label htmlFor='password'>Password</label>
@@ -157,7 +158,6 @@ export default function RegisterForm() {
             ref={pwdInput}
             required
           />
-          {/* <p className='error_message' id='password_error_text'></p> */}
         </div>
 
         <label htmlFor='confirm_password'>Confirm Password</label>
@@ -174,7 +174,6 @@ export default function RegisterForm() {
             ref={matchInput}
             required
           />
-          {/* <p className='error_message' id='confirm_password_error_text'></p> */}
         </div>
 
         <button
@@ -192,6 +191,9 @@ export default function RegisterForm() {
           >
             Already have an account? Login here!
           </Link>
+
+          {/* TODO: add link for sign in with guest account */}
+
         </div>
 
       </form>

@@ -6,7 +6,7 @@ label {
 /* ------------------- REGISTER FORM ------------------- */
 .registerform_title {
   margin-top: auto;
-  font-size: 2em;
+  font-size: 1.5em;
   text-align: center;
 }
 
@@ -76,7 +76,7 @@ label {
   color: #000;
   background-color: #0e0;
   width: 100%;
-  margin: 10% 0% 6% 0%;
+  margin: 6% 0%;
 }
 
 .register_btn:hover {
