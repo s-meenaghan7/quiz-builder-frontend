@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './RegisterForm.css';
 
 const nameTooltipMsg = 'Your name is used to identify you amongst other users. Feel free to use any name you wish!';
-const emailTooltipMsg = 'Your email address will be used to login to Quiz Builder and validate your account creation.  Any news from Quiz Builder will also be sent to your email.';
+const emailTooltipMsg = 'Your email address will be used to login to QuizMe and validate your account creation.  Any news from QuizMe will also be sent to your email.';
 
 export default function RegisterForm() {
   const nameInput = useRef();
@@ -11,6 +11,7 @@ export default function RegisterForm() {
   const pwdInput = useRef();
   const matchInput = useRef();
 
+  const [errMsg, setErrMsg] = useState('');
   const [passwordTooltipMessage, setPasswordTooltipMessage] = useState();
 
   const [name, setName] = useState('');
@@ -81,7 +82,7 @@ export default function RegisterForm() {
     setPasswordTooltipMessage(newPwdTooltipMsg);
   }, [pwd]);
  
-  const createAccount = (e) => {
+  const createAccount = async (e) => {
     e.preventDefault();
 
     if (!validName || !validEmail || !validPwd || !validMatch) {
@@ -102,7 +103,8 @@ export default function RegisterForm() {
 
   return (
     <section className='registerform_container'>
-      <h1 className='registerform_title'>Create Your Account!</h1>
+      <h1 className='registerform_title'>Create Your QuizMe Account!</h1>
+      <span id='error_message'></span>
 
       <form onSubmit={createAccount}>
         <label htmlFor='full_name'>Your Name</label>
@@ -120,7 +122,7 @@ export default function RegisterForm() {
             ref={nameInput}
             required
           />
-          <p className='error_message' id='name_error_text'></p>
+          {/* <p className='error_message' id='name_error_text'></p> */}
         </div>
 
         <label htmlFor='email'>Email</label>
@@ -138,7 +140,7 @@ export default function RegisterForm() {
             ref={emailInput}
             required
           />
-          <p className='error_message' id='email_error_text'></p>
+          {/* <p className='error_message' id='email_error_text'></p> */}
         </div>
 
         <label htmlFor='password'>Password</label>
@@ -155,7 +157,7 @@ export default function RegisterForm() {
             ref={pwdInput}
             required
           />
-          <p className='error_message' id='password_error_text'></p>
+          {/* <p className='error_message' id='password_error_text'></p> */}
         </div>
 
         <label htmlFor='confirm_password'>Confirm Password</label>
@@ -172,7 +174,7 @@ export default function RegisterForm() {
             ref={matchInput}
             required
           />
-          <p className='error_message' id='confirm_password_error_text'></p>
+          {/* <p className='error_message' id='confirm_password_error_text'></p> */}
         </div>
 
         <button
