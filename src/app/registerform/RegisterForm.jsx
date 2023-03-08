@@ -30,7 +30,11 @@ export default function RegisterForm() {
   }, []);
 
   useEffect(() => {
+    const nameIsValid = name.trim() !== "";
+    nameInput.current.setCustomValidity(nameIsValid ? "" : "Invalid name");
     setValidName(nameInput.current.checkValidity());
+
+    if (!nameIsValid) setName('');
   }, [name]);
 
   useEffect(() => {
