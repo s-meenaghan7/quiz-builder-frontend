@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import RegistrationService from '../../service/RegistrationService';
 import './RegisterForm.css';
 
 const nameTooltipMsg = 'Your name is used to identify you amongst other users. Feel free to use any name you wish!';
@@ -10,8 +11,10 @@ export default function RegisterForm() {
   const emailInput = useRef();
   const pwdInput = useRef();
   const matchInput = useRef();
+  const errRef = useRef();
 
   const [errMsg, setErrMsg] = useState('');
+  const [success, setSuccess] = useState('');
   const [passwordTooltipMessage, setPasswordTooltipMessage] = useState();
 
   const [name, setName] = useState('');
@@ -81,33 +84,53 @@ export default function RegisterForm() {
     setValidPwd(pwdIsValid);
     setPasswordTooltipMessage(newPwdTooltipMsg);
   }, [pwd]);
+
+  const clearFields = () => {
+    setErrMsg('');
+    setName('');
+    setEmail('');
+    setPwd('');
+    setMatchPwd('');
+  }
  
   const createAccount = async (e) => {
     e.preventDefault();
 
     if (!validName || !validEmail || !validPwd || !validMatch) {
+      setErrMsg('Invalid Request');
       return;
     }
+    // call register API, handle errors if they occur
+    // TODO: if successful, it will navigate to a success component that notifies the user to check their email and click the link
+    const request = {
+      name: name,
+      email: email,
+      password: pwd
+    }
 
-    console.log(JSON.stringify(
-      {
-        name: name,
-        email: email,
-        password: pwd
-      },
-      null, 2)
-    );
+    try {
+      await RegistrationService.registerUser(request);
+      clearFields();
+      
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg('Error: Server unavailable');
+      } else if (err.response?.status === 409) {
+        setErrMsg('Error: Email already taken');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Error: Invalid email format');
+      } else {
+        setErrMsg('Error: Something went wrong, please try again later');
+      }
+      errRef.current.focus();
+    }
 
-    // call register API, and send user to page/component advising that they check their email for the validation link to confirm their account
-    // handle and setErrMsg in the try/catch here
-    // errors include: server unavailable, invalid request, invalid email, email already taken.
-    // if successful, it will navigate to a success component that notifies the user to check their email and click the link
   }
 
   return (
     <section className='registerform_container'>
       <h1 className='registerform_title'>Create Your QuizMe Account!</h1>
-      <span id='error_message'>{errMsg}</span>
+      <span id='error_message' ref={errRef}>{errMsg}</span>
 
       <form onSubmit={createAccount}>
         <label htmlFor='full_name'>Your Name</label>
