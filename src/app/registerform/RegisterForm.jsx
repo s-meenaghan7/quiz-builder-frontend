@@ -14,7 +14,7 @@ export default function RegisterForm() {
   const errRef = useRef();
 
   const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState('');
+  const [success, setSuccess] = useState(false);
   const [passwordTooltipMessage, setPasswordTooltipMessage] = useState();
 
   const [name, setName] = useState('');
@@ -100,8 +100,7 @@ export default function RegisterForm() {
       setErrMsg('Invalid Request');
       return;
     }
-    // call register API, handle errors if they occur
-    // TODO: if successful, it will navigate to a success component that notifies the user to check their email and click the link
+    
     const request = {
       name: name,
       email: email,
@@ -111,20 +110,20 @@ export default function RegisterForm() {
     try {
       await RegistrationService.registerUser(request);
       clearFields();
+      setSuccess(true);
       
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('Error: Server unavailable');
+        setErrMsg('Error: Server unavailable, please try again later.');
       } else if (err.response?.status === 409) {
-        setErrMsg('Error: Email already taken');
+        setErrMsg('Error: That email is already registered.');
       } else if (err.response?.status === 400) {
-        setErrMsg('Error: Invalid email format');
+        setErrMsg('Error: Invalid email format.');
       } else {
-        setErrMsg('Error: Something went wrong, please try again later');
+        setErrMsg('Error: Something went wrong, please try again later.');
       }
       errRef.current.focus();
     }
-
   }
 
   return (
