@@ -67,38 +67,6 @@ label {
   box-shadow: 0 0 12px 0 #0f0;
 }
 
-/* ------------------- CREATE ACCOUNT BUTTON ------------------- */
-.register_btn {
-  padding: 10px 30px 10px 30px;
-  font-size: 1.1em;
-  border: 2px solid #000;
-  border-radius: 20px;
-  color: #000;
-  background-color: #0e0;
-  width: 100%;
-  margin: 6% 0%;
-}
-
-.register_btn:hover {
-  color: #fff;
-  cursor: pointer;
-  background-color: #0f0;
-}
-
-.register_btn:disabled {
-  opacity: 0.5;
-}
-
-.register_btn:disabled:hover {
-  cursor: not-allowed;
-  color: #000;
-  background-color: #0e0;
-}
-
-.register_btn:active {
-  background-color: #0c0;
-}
-
 /* ------------------- TOOLTIPS ------------------- */
 .input_container {
   position: relative;

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RegistrationService from '../../service/RegistrationService';
 import LoadingSpinner from './components/LoadingSpinner';
+import RegisterButton from './components/RegisterButton';
 import './RegisterForm.css';
 
 const nameTooltipMsg = 'Your name is used to identify you amongst other users. Feel free to use any name you wish!';
@@ -203,18 +204,11 @@ export default function RegisterForm() {
             required
           />
         </div>
-
-          {
-            loading ? <LoadingSpinner loading={loading} />
-              :
-              <button
-                className='register_btn'
-                disabled={!validName || !validEmail || !validPwd || !validMatch}
-                title={'Complete all fields to create your account!'}
-              >
-                Register Account!
-              </button>
-          }
+        
+        <RegisterButton
+          loading={loading}
+          disabled={!validName || !validEmail || !validPwd || !validMatch}
+        />
 
         <div className='links_container'>
           <Link
