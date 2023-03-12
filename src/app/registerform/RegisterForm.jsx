@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RegistrationService from '../../service/RegistrationService';
 import RegisterButton from './components/RegisterButton';
+import VerificationPage from './components/VerificationPage';
 import './RegisterForm.css';
 
 const nameTooltipMsg = 'Your name is used to identify you amongst other users. Feel free to use any name you wish!';
@@ -133,95 +134,98 @@ export default function RegisterForm() {
   }
 
   return (
-    <section className='registerform_container'>
-      <h1 className='registerform_title'>Create Your QuizMe Account!</h1>
-      <span id='error_message' ref={errRef}>{errMsg}</span>
+    // success ?
+    //   <VerificationPage />
+    //   :
+      <section className='registerform_container'>
+        <h1 className='registerform_title'>Create Your QuizMe Account!</h1>
+        <span id='error_message' ref={errRef}>{errMsg}</span>
 
-      <form onSubmit={createAccount}>
-        <label htmlFor='full_name'>Your Name</label>
-        <div className='input_container' data-tooltip={nameTooltipMsg}>
-          <input
-            type="text"
-            value={name}
-            id='name_input'
-            className='registerform_input'
-            onChange={(e) => setName(e.target.value)}
-            aria-invalid={validName ? "false" : "true"}
-            placeholder="Your Name"
-            autoComplete='off'
-            name="full_name"
-            ref={nameInput}
-            required
+        <form onSubmit={createAccount}>
+          <label htmlFor='full_name'>Your Name</label>
+          <div className='input_container' data-tooltip={nameTooltipMsg}>
+            <input
+              type="text"
+              value={name}
+              id='name_input'
+              className='registerform_input'
+              onChange={(e) => setName(e.target.value)}
+              aria-invalid={validName ? "false" : "true"}
+              placeholder="Your Name"
+              autoComplete='off'
+              name="full_name"
+              ref={nameInput}
+              required
+            />
+          </div>
+
+          <label htmlFor='email'>Email</label>
+          <div className='input_container' data-tooltip={emailTooltipMsg}>
+            <input
+              type="email"
+              value={email}
+              id='email_input'
+              className='registerform_input'
+              onChange={(e) => setEmail(e.target.value)}
+              aria-invalid={validEmail ? "false" : "true"}
+              placeholder="Email"
+              autoComplete='off'
+              name="email"
+              ref={emailInput}
+              required
+            />
+          </div>
+
+          <label htmlFor='password'>Password</label>
+          <div className='input_container' data-tooltip={passwordTooltipMessage}>
+            <input
+              type="password"
+              value={pwd}
+              id='password_input'
+              className='registerform_input'
+              onChange={(e) => setPwd(e.target.value)}
+              aria-invalid={validPwd ? "false" : "true"}
+              placeholder="Password"
+              name="password"
+              ref={pwdInput}
+              required
+            />
+          </div>
+
+          <label htmlFor='confirm_password'>Confirm Password</label>
+          <div>
+            <input
+              type="password"
+              value={matchPwd}
+              id='confirm_password_input'
+              className='registerform_input'
+              onChange={(e) => setMatchPwd(e.target.value)}
+              aria-invalid={validMatch ? "false" : "true"}
+              placeholder="Confirm Password"
+              name="confirm_password"
+              ref={matchInput}
+              required
+            />
+          </div>
+
+          <RegisterButton
+            loading={loading}
+            disabled={!validName || !validEmail || !validPwd || !validMatch}
           />
-        </div>
 
-        <label htmlFor='email'>Email</label>
-        <div className='input_container' data-tooltip={emailTooltipMsg}>
-          <input
-            type="email"
-            value={email}
-            id='email_input'
-            className='registerform_input'
-            onChange={(e) => setEmail(e.target.value)}
-            aria-invalid={validEmail ? "false" : "true"}
-            placeholder="Email"
-            autoComplete='off'
-            name="email"
-            ref={emailInput}
-            required
-          />
-        </div>
+          <div className='links_container'>
+            <Link
+              to='/login'
+              title='Click here to login with your account!'
+            >
+              Already have an account? Login here!
+            </Link>
 
-        <label htmlFor='password'>Password</label>
-        <div className='input_container' data-tooltip={passwordTooltipMessage}>
-          <input
-            type="password"
-            value={pwd}
-            id='password_input'
-            className='registerform_input'
-            onChange={(e) => setPwd(e.target.value)}
-            aria-invalid={validPwd ? "false" : "true"}
-            placeholder="Password"
-            name="password"
-            ref={pwdInput}
-            required
-          />
-        </div>
+            {/* TODO: add link for sign in with guest account */}
 
-        <label htmlFor='confirm_password'>Confirm Password</label>
-        <div>
-          <input
-            type="password"
-            value={matchPwd}
-            id='confirm_password_input'
-            className='registerform_input'
-            onChange={(e) => setMatchPwd(e.target.value)}
-            aria-invalid={validMatch ? "false" : "true"}
-            placeholder="Confirm Password"
-            name="confirm_password"
-            ref={matchInput}
-            required
-          />
-        </div>
-        
-        <RegisterButton
-          loading={loading}
-          disabled={!validName || !validEmail || !validPwd || !validMatch}
-        />
+          </div>
 
-        <div className='links_container'>
-          <Link
-            to='/login'
-            title='Click here to login with your account!'
-          >
-            Already have an account? Login here!
-          </Link>
-
-          {/* TODO: add link for sign in with guest account */}
-
-        </div>
-
-      </form>
-    </section>
+        </form>
+      </section>
   );
 }
