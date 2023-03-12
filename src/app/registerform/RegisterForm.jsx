@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RegistrationService from '../../service/RegistrationService';
+import LoadingSpinner from './components/LoadingSpinner';
 import './RegisterForm.css';
 
 const nameTooltipMsg = 'Your name is used to identify you amongst other users. Feel free to use any name you wish!';
@@ -14,6 +15,7 @@ export default function RegisterForm() {
   const errRef = useRef();
 
   const [errMsg, setErrMsg] = useState('');
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [passwordTooltipMessage, setPasswordTooltipMessage] = useState();
 
@@ -92,15 +94,17 @@ export default function RegisterForm() {
     setPwd('');
     setMatchPwd('');
   }
- 
+
   const createAccount = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!validName || !validEmail || !validPwd || !validMatch) {
       setErrMsg('Invalid Request');
+      setLoading(false);
       return;
     }
-    
+
     const request = {
       name: name,
       email: email,
@@ -110,8 +114,8 @@ export default function RegisterForm() {
     try {
       await RegistrationService.registerUser(request);
       clearFields();
-      setSuccess(true);
-      
+      setSuccess(!success);
+
     } catch (err) {
       if (!err?.response) {
         setErrMsg('Error: Server unavailable, please try again later.');
@@ -124,6 +128,8 @@ export default function RegisterForm() {
       }
       errRef.current.focus();
     }
+
+    setLoading(false);
   }
 
   return (
@@ -198,13 +204,17 @@ export default function RegisterForm() {
           />
         </div>
 
-        <button
-          className='register_btn'
-          disabled={!validName || !validEmail || !validPwd || !validMatch}
-          title={'Complete all fields to create your account!'}
-        >
-          Register Account!
-        </button>
+          {
+            loading ? <LoadingSpinner loading={loading} />
+              :
+              <button
+                className='register_btn'
+                disabled={!validName || !validEmail || !validPwd || !validMatch}
+                title={'Complete all fields to create your account!'}
+              >
+                Register Account!
+              </button>
+          }
 
         <div className='links_container'>
           <Link
