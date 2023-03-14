@@ -1,6 +1,7 @@
 hr {
   width: 100%;
   border-top: 4px solid var(--detailOrange);
+  border-radius: 5px;
 }
 
 p {
@@ -24,7 +25,7 @@ p {
 .resend_btn {
   align-self: center;
   font-size: 1.1em;
-  margin-top: 15px;
+  margin: 25px 0 20px;
   padding: 10px 30px 10px 30px;
   width: 100%;
   max-width: 300px;
@@ -41,4 +42,17 @@ p {
 
 .resend_btn:active {
   background-color: #ffaa00;
+}
+
+/* ------------------- SPINNER CONTAINER ------------------- */
+.spinner_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5%;
+}
+
+#mail_icon {
+  font-size: 80px;
 }
