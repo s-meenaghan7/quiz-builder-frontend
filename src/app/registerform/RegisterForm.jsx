@@ -18,7 +18,8 @@ export default function RegisterForm() {
   const [errMsg, setErrMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [passwordTooltipMessage, setPasswordTooltipMessage] = useState();
+  const [passwordTooltipMsg, setPasswordTooltipMsg] = useState();
+  const [matchPwdTooltipMsg, setMatchPwdTooltipMsg] = useState();
 
   const [name, setName] = useState('');
   const [validName, setValidName] = useState(false);
@@ -48,9 +49,14 @@ export default function RegisterForm() {
     setValidEmail(emailInput.current.checkValidity());
   }, [email]);
 
+  // change setMatchPwdTooltipMsg based on matchPwd === pwd, and setValidMatch
   useEffect(() => {
-    matchInput.current.setCustomValidity((matchPwd === pwd) && validPwd ? "" : "Invalid field");
+    const match = (matchPwd === pwd) && (matchPwd.trim() !== '');
+    const newMatchPwdTooltipMsg = (match) ? 'Passwords match! ✅' : 'Passwords do not match ❌';
+
+    matchInput.current.setCustomValidity((match && validPwd) ? "" : "Invalid field");
     setValidMatch((matchPwd === pwd) && validPwd);
+    setMatchPwdTooltipMsg(newMatchPwdTooltipMsg);
   }, [pwd, matchPwd]);
 
   // change passwordTooltipMessage based on password, and setValidPwd
@@ -85,7 +91,7 @@ export default function RegisterForm() {
 
     pwdInput.current.setCustomValidity(pwdIsValid ? "" : "Invalid field");
     setValidPwd(pwdIsValid);
-    setPasswordTooltipMessage(newPwdTooltipMsg);
+    setPasswordTooltipMsg(newPwdTooltipMsg);
   }, [pwd]);
 
   const clearFields = () => {
@@ -116,6 +122,7 @@ export default function RegisterForm() {
       await RegistrationService.registerUser(request);
       clearFields();
       setSuccess(!success);
+      // window.history.pushState("", "", "/register/success");
 
     } catch (err) {
       if (!err?.response) {
@@ -134,9 +141,11 @@ export default function RegisterForm() {
   }
 
   return (
-    // success ?
-    //   <VerificationPage />
-    //   :
+    success ?
+      <VerificationPage
+        email={email}
+      />
+      :
       <section className='registerform_container'>
         <h1 className='registerform_title'>Create Your QuizMe Account!</h1>
         <span id='error_message' ref={errRef}>{errMsg}</span>
@@ -177,7 +186,7 @@ export default function RegisterForm() {
           </div>
 
           <label htmlFor='password'>Password</label>
-          <div className='input_container' data-tooltip={passwordTooltipMessage}>
+          <div className='input_container' data-tooltip={passwordTooltipMsg}>
             <input
               type="password"
               value={pwd}
@@ -193,7 +202,7 @@ export default function RegisterForm() {
           </div>
 
           <label htmlFor='confirm_password'>Confirm Password</label>
-          <div>
+          <div className='input_container' data-tooltip={matchPwdTooltipMsg}>
             <input
               type="password"
               value={matchPwd}
