@@ -94,14 +94,6 @@ export default function RegisterForm() {
     setPasswordTooltipMsg(newPwdTooltipMsg);
   }, [pwd]);
 
-  const clearFields = () => {
-    setErrMsg('');
-    setName('');
-    setEmail('');
-    setPwd('');
-    setMatchPwd('');
-  }
-
   const createAccount = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -120,9 +112,8 @@ export default function RegisterForm() {
 
     try {
       await RegistrationService.registerUser(request);
-      clearFields();
       setSuccess(!success);
-      // window.history.pushState("", "", "/register/success");
+      window.history.pushState("", "", "/register/verification");
 
     } catch (err) {
       if (!err?.response) {
