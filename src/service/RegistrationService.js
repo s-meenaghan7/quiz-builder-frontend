@@ -15,6 +15,17 @@ class RegistrationService {
     );
   }
 
+  resendEmail(email) {
+    return axios.post(
+      REGISTRATION_API_BASE_URL + '/resend-email',
+      email,
+      {
+        headers: { 'Content-Type' : 'application/json' },
+        withCredentials: true
+      }
+    );
+  }
+
 }
 
 export default new RegistrationService();
