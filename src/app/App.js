@@ -5,6 +5,7 @@ import LoginForm from './loginform/LoginForm';
 import RegisterForm from './registerform/RegisterForm';
 import { Route, Routes } from 'react-router-dom';
 import Home from './home/Home';
+import NotFound from './misc/NotFound';
 
 export default function App() {
 
@@ -13,9 +14,12 @@ export default function App() {
       <Navbar />
 
       <Routes>
-        <Route path='/login' element={ <LoginForm /> } />
-        <Route path='/register' element={ <RegisterForm /> } />
-        <Route path='/home' element={ <Home /> } />
+        <Route exact path='/' element={<Home />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/login' element={<LoginForm />} />
+        <Route path='/register' element={<RegisterForm />} />
+
+        <Route path='/*' element={<NotFound />} />
       </Routes>
 
       <ToastContainer
