@@ -11,7 +11,7 @@ export default function VerificationPage({ email }) {
     setLoading(true);
 
     try {
-      await RegistrationService.resendEmail(email);
+      await RegistrationService.resendEmail({ email: email });
       ToastService.success(`Email to ${email} resent successfully.`);
 
     } catch (err) {
@@ -39,6 +39,7 @@ export default function VerificationPage({ email }) {
 
       <p>
         Your account must be activated before you can login to QuizMe.
+        You have 30 minutes to confirm your account creation before the link expires.
       </p>
 
       <hr />
