@@ -26,6 +26,10 @@ class RegistrationService {
     );
   }
 
+  confirmToken() {
+    // TODO
+  }
+
 }
 
 export default new RegistrationService();

@@ -6,6 +6,7 @@ import RegisterForm from './registerform/RegisterForm';
 import { Route, Routes } from 'react-router-dom';
 import Home from './home/Home';
 import NotFound from './misc/NotFound';
+import ConfirmationPage from './registerform/components/ConfirmationPage';
 
 export default function App() {
 
@@ -17,7 +18,10 @@ export default function App() {
         <Route exact path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/login' element={<LoginForm />} />
-        <Route path='/register' element={<RegisterForm />} />
+        <Route path='/register'>
+          <Route index element={<RegisterForm />} />
+          <Route path='/confirm' element={<ConfirmationPage />} />
+        </Route>
 
         <Route path='/*' element={<NotFound />} />
       </Routes>
