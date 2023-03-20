@@ -26,8 +26,14 @@ class RegistrationService {
     );
   }
 
-  confirmToken() {
-    // TODO
+  confirmToken(token) {
+    return axios.get(
+      REGISTRATION_API_BASE_URL + `/confirm?token=${token}`,
+      {
+        headers: { 'Content-Type' : 'application/json' },
+        withCredentials: true
+      }
+    );
   }
 
 }
