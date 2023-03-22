@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './home/Home';
 import NotFound from './misc/NotFound';
 import ConfirmationPage from './registerform/components/ConfirmationPage';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 export default function App() {
 
@@ -20,11 +21,13 @@ export default function App() {
         <Route path='/login' element={<LoginForm />} />
         <Route path='/register'>
           <Route index element={<RegisterForm />} />
-          <Route path='/confirm' element={<ConfirmationPage />} />
+          <Route path='/register/confirm/:token' element={<ConfirmationPage />} />
         </Route>
 
         <Route path='/*' element={<NotFound />} />
       </Routes>
+
+      <ReactQueryDevtools />
 
       <ToastContainer
         transition={Flip}
