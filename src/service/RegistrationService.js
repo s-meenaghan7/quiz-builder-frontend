@@ -27,7 +27,7 @@ class RegistrationService {
   }
 
   confirmToken(token) {
-    return axios.get(
+    return axios.patch(
       REGISTRATION_API_BASE_URL + `/confirm?token=${token}`,
       {
         headers: { 'Content-Type' : 'application/json' },
