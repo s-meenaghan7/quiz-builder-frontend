@@ -96,6 +96,7 @@ export default function RegisterForm() {
 
   const createAccount = async (e) => {
     e.preventDefault();
+    setErrMsg('');
     setLoading(true);
 
     if (!validName || !validEmail || !validPwd || !validMatch) {
