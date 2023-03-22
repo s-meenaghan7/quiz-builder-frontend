@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/VerificationPage.css';
 import { ClipLoader } from 'react-spinners';
 import RegistrationService from '../../../service/RegistrationService';
@@ -6,6 +6,10 @@ import ToastService from '../../toasts/ToastService';
 
 export default function VerificationPage({ email }) {
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    document.title = 'QuizMe | Account Verification';
+  }, []);
 
   const resendEmail = async () => {
     setLoading(true);
@@ -26,7 +30,7 @@ export default function VerificationPage({ email }) {
   }
 
   return (
-    <section className='container'>
+    <section className='verification_section'>
       <h1>Email Verification</h1>
 
       <p>

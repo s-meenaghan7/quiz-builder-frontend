@@ -9,7 +9,7 @@ p {
   font-size: 1.4em;
 }
 
-.container {
+.verification_section {
   display: flex;
   flex-direction: column;
   text-align: center;
