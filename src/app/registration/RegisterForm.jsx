@@ -36,7 +36,7 @@ export default function RegisterForm() {
 
   useGiveInputFocus(nameInput);
 
-  const nameChangedHandler = (e) => {
+  const nameChangeHandler = (e) => {
     console.log('nameChangedHandler');
     let newName = e.target.value;
     const nameIsValid = newName.trim() !== "";
@@ -47,9 +47,10 @@ export default function RegisterForm() {
     setName(nameIsValid ? newName : '');
   }
 
-  useEffect(() => {
+  const emailChangeHandler = (e) => {
+    setEmail(e.target.value);
     setValidEmail(emailInput.current.checkValidity());
-  }, [email]);
+  }
 
   // change setMatchPwdTooltipMsg based on matchPwd === pwd, and setValidMatch
   useEffect(() => {
@@ -152,7 +153,7 @@ export default function RegisterForm() {
               value={name}
               id='name_input'
               className='registerform_input'
-              onChange={(e) => nameChangedHandler(e)}
+              onChange={(e) => nameChangeHandler(e)}
               aria-invalid={validName ? "false" : "true"}
               placeholder="Your Name"
               autoComplete='off'
@@ -169,7 +170,7 @@ export default function RegisterForm() {
               value={email}
               id='email_input'
               className='registerform_input'
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => emailChangeHandler(e)}
               aria-invalid={validEmail ? "false" : "true"}
               placeholder="Email"
               autoComplete='off'
