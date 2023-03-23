@@ -36,13 +36,16 @@ export default function RegisterForm() {
 
   useGiveInputFocus(nameInput);
 
-  useEffect(() => {
-    const nameIsValid = name.trim() !== "";
+  const nameChangedHandler = (e) => {
+    console.log('nameChangedHandler');
+    let newName = e.target.value;
+    const nameIsValid = newName.trim() !== "";
+
     nameInput.current.setCustomValidity(nameIsValid ? "" : "Invalid name");
     setValidName(nameInput.current.checkValidity());
 
-    if (!nameIsValid) setName('');
-  }, [name]);
+    setName(nameIsValid ? newName : '');
+  }
 
   useEffect(() => {
     setValidEmail(emailInput.current.checkValidity());
@@ -149,7 +152,7 @@ export default function RegisterForm() {
               value={name}
               id='name_input'
               className='registerform_input'
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => nameChangedHandler(e)}
               aria-invalid={validName ? "false" : "true"}
               placeholder="Your Name"
               autoComplete='off'
