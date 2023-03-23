@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useGiveInputFocus from '../../hooks/useGiveInputFocus';
 import RegistrationService from '../../service/RegistrationService';
 import RegisterButton from './components/RegisterButton';
 import VerificationPage from './components/VerificationPage';
@@ -33,9 +34,7 @@ export default function RegisterForm() {
   const [matchPwd, setMatchPwd] = useState('');
   const [validMatch, setValidMatch] = useState(false);
 
-  useEffect(() => {
-    nameInput.current.focus();
-  }, []);
+  useGiveInputFocus(nameInput);
 
   useEffect(() => {
     const nameIsValid = name.trim() !== "";

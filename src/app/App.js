@@ -2,11 +2,11 @@ import './App.css';
 import Navbar from './navbar/Navbar';
 import { ToastContainer, Flip } from 'react-toastify';
 import LoginForm from './loginform/LoginForm';
-import RegisterForm from './registerform/RegisterForm';
+import RegisterForm from './registration/RegisterForm';
 import { Route, Routes } from 'react-router-dom';
 import Home from './home/Home';
 import NotFound from './misc/NotFound';
-import ConfirmationPage from './registerform/components/ConfirmationPage';
+import ConfirmationPage from './registration/components/ConfirmationPage';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 export default function App() {
