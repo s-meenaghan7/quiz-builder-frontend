@@ -37,7 +37,6 @@ export default function RegisterForm() {
   useGiveInputFocus(nameInput);
 
   const nameChangeHandler = (e) => {
-    console.log('nameChangedHandler');
     let newName = e.target.value;
     const nameIsValid = newName.trim() !== "";
 
@@ -88,7 +87,7 @@ export default function RegisterForm() {
     }
 
     if (newPwdTooltipMsg === "Create a strong password that includes at least the following:") {
-      newPwdTooltipMsg = 'Great, your password meets the minimum complexity criteria!'
+      newPwdTooltipMsg = 'Great, your password meets the minimum complexity criteria! ✅'
       pwdIsValid = true;
     }
 
