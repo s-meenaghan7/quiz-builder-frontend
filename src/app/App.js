@@ -8,6 +8,7 @@ import Home from './home/Home';
 import NotFound from './misc/NotFound';
 import ConfirmationPage from './registration/components/ConfirmationPage';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import QuizForm from '../quizform/QuizForm';
 
 export default function App() {
 
@@ -23,6 +24,7 @@ export default function App() {
           <Route index element={<RegisterForm />} />
           <Route path='/register/confirm/:token' element={<ConfirmationPage />} />
         </Route>
+        <Route path='/quiz' element={<QuizForm />} />
 
         <Route path='/*' element={<NotFound />} />
       </Routes>
